@@ -5,7 +5,7 @@
 set -e
 cd "$(dirname "$0")/.."
 ROOT=$(pwd)
-export PATH="${EMSDK:-/home/user/emsdk}/upstream/emscripten:$PATH"
+[ -n "$EMSDK" ] && export PATH="$EMSDK/upstream/emscripten:$PATH"
 EXT=web/ext
 OBJ=web/obj${ASAN:+-asan}
 mkdir -p "$EXT" "$OBJ" web/dist
