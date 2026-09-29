@@ -38,7 +38,7 @@
   normal command (filter keys `[|{}'=!?"\%]$X` still filter).
   Explore: ambient messages via `msgwin.AddAmbient()` (corpse smell/decay,
   `item/xcorpse.cpp`); explore compares `msgwin.Important()`.
-- **Stage 4 (tiles): done.** Next: stage 5 (web page and windows).
+- **Stage 4 (tiles): done.**
   Set: **DawnLike** only (fallback set; Avanor ships no tiles, upstream/
   SourceForge have none; fantasy theme so no need to ask). Credit
   DragonDePlatino + DawnBringer (CC BY 4.0; README done, Help in stage 6).
@@ -75,6 +75,42 @@
   loads. Tested in the pane: new game, tiles, explore, remembered dim, i
   menu text-only, None sticks over reload, uppercase D drinks / lowercase
   e drops. IDBFS db deleted after.
+- **Stage 5 (web page and windows): done.** Next: stage 6 (docs and sound).
+  Live: https://ruzzoli.de/roguelikes/avanor/ (`web/deploy.sh`, guard; branch
+  `main-rvip` pushed as `memmaker/main`). Page: `web/index.html` +
+  `web/avanor.js` (loads `../rvip-wm.js`, `../rvip-app.js`; Emscripten output
+  is `avanor-core.*`). Windows: Map (canvas), Messages, Status, Inventory,
+  Visible (HTML text); pop-up `#pop` via `RvipWM.popup`; prompt line =
+  message rows 0-1. Top bar: Help, File, Windows, Tiles (DawnLike/None),
+  Font; no Audio yet (stage 6). Layout, cell size, tile set, fonts in
+  `/avanor/web-layout.json`.
+  C side (`port/be_web.cpp`, all to `Module.av`): `XMap::Put` walks the
+  whole level under `__EMSCRIPTEN__` (only the viewport goes to the stc
+  screen) and sends it via `be_map_begin/be_mapcell/be_map_end` (packed
+  bg|fg<<12|dim<<24, -1 = glyph+rgb) with the hero cell; the page centres
+  it (`RvipWM.center`), A−/A+ on Map = cell size 8..64. Pop-up: `map_live`
+  (set by Put, cleared by `vClrScr`) + a vStore stack (`be_store`/
+  `be_restore` push/pop map_live; snapshot at the outermost vStore): no map
+  = whole screen's non-blank bbox, menu over map = bbox of cells differing
+  from the snapshot; nested menus no longer break tiles (map is its own
+  pane). Status = rows marked by `XCreature::PutStatus` (`be_status_rows`).
+  Messages = `XMsgWin::Add` sentence lines (`be_msg`, colour runs from the
+  markup escapes). Inventory/Visible = `RvipSidePanes` (`port/rvip_tiles.cpp`)
+  from `contain` / visible cells, with item/creature colours and tile slots.
+  `be_at_cmd` around the command `vGetch` in `NewMove` (prompt hide; clears
+  the vStore stack). Text lines: colour runs `\x05#rrggbb`.
+  Saves: `HOME_DIR` = `/avanor/` under Emscripten = `RvipApp.dir` (IDBFS
+  `RvipApp.mount`); `XArchive::StoreGame` writes `.tmp` + rename, then
+  `be_saved()` → sync. Autosave: quiet `StoreGame()` before `>` on stairs
+  down (web only). Death deletes the save (web only, `XGame::Run`). Game end:
+  `vFinit` → `av.exit` → sync → reload after 1 s. Sync also every 15 s,
+  on hide/pagehide.
+  Tested in the pane: title/birth pop-ups, map with tiles following the
+  hero (zoomed), all windows filled, Enter menu, `i` + nested item menu,
+  explore, `>` walk + descend (autosave file written), `S`, reload + `r`
+  restores, Q → Goodbye → reload, A+ on Messages only changes it, layout
+  survives reload, Tiles None/DawnLike, resize 760x500/1440x900/1200x750,
+  divider to both ends, Reset windows, no console errors.
 - Folder `/home/user/avanor` (cloud), repo `memmaker/avanor`, branch
   `claude/loving-hawking-5x9q75`. Pristine upstream = `20a0f59` "Two more random
   mines" (jaydg/avanor revival, v0.6.0; only `main` upstream).
@@ -108,5 +144,5 @@
   no reports. Build removed.
 - **Browser:** headless Chromium (Playwright): title → New game → birth → walks
   in the Valley, no console errors.
-- **Open:** stage 5 must move the map canvas into an rvip-wm window (map scrolls with the hero; now the canvas is 80 cells wide and the page scrolls) and menus into pop-ups; nested vStore menus re-enable tiles on the inner vRestore. Item prompts can't switch pack/equipment/floor with 4/6 (only `i` → equipment); examine is a one-line message (no item description in the game); no mouse yet (page is the stage-1 `<pre>`, stage 5). Hostile in view blocks explore by design (Valley bandits). Save persistence/exit path untested in browser; birth screens need
+- **Open:** shop and death not tested in the browser this stage (death path: save removed, end screen, reload); no help.html yet (stage 6); no mouse. Item prompts can't switch pack/equipment/floor with 4/6 (only `i` → equipment); examine is a one-line message (no item description in the game); Hostile in view blocks explore by design (Valley bandits). Birth screens need
   ~150 ms between keys in tests.

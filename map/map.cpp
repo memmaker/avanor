@@ -573,26 +573,41 @@ void XMap::Put(XCreature * cr) const
     unsigned trgb = xBLACK;
     int tbg = -1, tfg = -1;
     bool tdim = false;
+    // The Map window shows the whole level (the page scrolls it with the
+    // hero), so every cell is worked out; only the viewport goes to screen.
+    bool in = true;
     auto put = [&](int sx, int sy, char c, unsigned rgb) {
-        vPutCh(sx, sy, c, rgb);
+        if (in) {
+            vPutCh(sx, sy, c, rgb);
+        }
         tch = c;
         trgb = rgb;
     };
+    be_map_begin(len, hgt, wx, wy, cr->x, cr->y);
+    const int i0 = -wy, i1 = hgt - wy, j0 = -wx, j1 = len - wx;
 #else
+    const bool in = true;
     auto put = [](int sx, int sy, char c, unsigned rgb) { vPutCh(sx, sy, c, rgb); };
+    const int i0 = 0, i1 = SCR_HGT, j0 = 0, j1 = SCR_LEN;
 #endif
-    for (int i = 0; i < SCR_HGT && wy + i < hgt; i++) {
-        for (int j = 0; j < SCR_LEN && wx + j < len; j++) {
+    for (int i = i0; i < i1 && wy + i < hgt; i++) {
+        const bool rowin = i >= 0 && i < SCR_HGT;
+        for (int j = j0; j < j1 && wx + j < len; j++) {
             XMapTile* tmap = Cell(wx + j, wy + i);
 #ifdef __EMSCRIPTEN__
+            in = rowin && j >= 0 && j < SCR_LEN;
             tbg = tfg = -1;
             tdim = false;
+            tch = ' ';
+            trgb = xBLACK;
 #endif
 
             if (!tmap) {
-                vPutCh(j + SCR_X, i + SCR_Y, ' ', xBLACK);
+                if (in) {
+                    vPutCh(j + SCR_X, i + SCR_Y, ' ', xBLACK);
+                }
 #ifdef __EMSCRIPTEN__
-                be_tile(j + SCR_X, i + SCR_Y, -1, -1, false, ' ', xBLACK);
+                be_mapcell(wx + j, wy + i, -1, -1, false, ' ', xBLACK);
 #endif
                 continue;
             }
@@ -678,8 +693,12 @@ void XMap::Put(XCreature * cr) const
 #endif
             }
 #ifdef __EMSCRIPTEN__
-            be_tile(j + SCR_X, i + SCR_Y, tbg, tfg, tdim, tch, trgb);
+            be_mapcell(wx + j, wy + i, tbg, tfg, tdim, tch, trgb);
 #endif
+        }
+
+        if (!rowin) {
+            continue;
         }
 
         // A map narrower than the screen reaches only part of the way
@@ -699,6 +718,11 @@ void XMap::Put(XCreature * cr) const
             vPutCh(j + SCR_X, i + SCR_Y, ' ', xBLACK);
         }
     }
+
+#ifdef __EMSCRIPTEN__
+    be_map_end();
+    RvipSidePanes(cr, this);
+#endif
 }
 
 void XMap::Center(const int x, const int y)

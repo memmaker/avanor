@@ -19,6 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
+#include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -31,6 +32,9 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include <cereal/types/polymorphic.hpp>
 
 #include "engine/xarchive.h"
+#ifdef __EMSCRIPTEN__
+#include "port/be_web.h"
+#endif
 #include "map/map.h"
 #include "game/game.h"
 #include "game/location.h"
@@ -179,10 +183,13 @@ bool XArchive::StoreGame(const char* slot)
     }
 
     const std::string path = vMakePath(HOME_DIR, std::string(slot) + ".svg.zst");
-    std::ofstream file(path, std::ios::binary);
+    // Written to a temp file and renamed over the old save, so a failed
+    // write never leaves a broken save behind.
+    const std::string tmp = path + ".tmp";
+    std::ofstream file(tmp, std::ios::binary);
 
     if (!file.is_open()) {
-        std::cerr << "save: could not open " << path << std::endl;
+        std::cerr << "save: could not open " << tmp << std::endl;
 
         return false;
     }
@@ -190,12 +197,25 @@ bool XArchive::StoreGame(const char* slot)
     file.write(compressed.data(), compressed.size());
     file.close();
 
+    std::error_code ec;
     if (!file) {
-        std::cerr << "save: could not write " << path << std::endl;
+        std::cerr << "save: could not write " << tmp << std::endl;
+        std::filesystem::remove(tmp, ec);
 
         return false;
     }
 
+    std::filesystem::rename(tmp, path, ec);
+    if (ec) {
+        std::cerr << "save: could not rename " << tmp << std::endl;
+        std::filesystem::remove(tmp, ec);
+
+        return false;
+    }
+
+#ifdef __EMSCRIPTEN__
+    be_saved();
+#endif
     return true;
 }
 

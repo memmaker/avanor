@@ -324,6 +324,9 @@ void vUpdateScreenSize()
 void vClrScr()
 {
     std::fill(stc_screen.begin(), stc_screen.end(), STCCell{});
+#ifdef __EMSCRIPTEN__
+    be_cleared();
+#endif
 }
 
 void vFinit()
@@ -1524,7 +1527,16 @@ V_BUFFER::~V_BUFFER()
 void vStore(const V_BUFFER* buf)
 {
 #ifdef __EMSCRIPTEN__
-    be_tiles_suspend(true); // a menu or screen goes over the map: text
+    {
+        // a menu or screen goes over the map: the page's pop-up
+        std::vector<char> ch(stc_screen.size());
+        std::vector<unsigned> rgb(stc_screen.size());
+        for (size_t i = 0; i < stc_screen.size(); i++) {
+            ch[i] = stc_screen[i].ch;
+            rgb[i] = stc_screen[i].rgb;
+        }
+        be_store(ch.data(), rgb.data(), static_cast<int>(ch.size()));
+    }
 #endif
     delete static_cast<std::vector<STCCell>*>(buf->saved);
     const_cast<V_BUFFER*>(buf)->saved = new std::vector<STCCell>(stc_screen);
@@ -1533,7 +1545,7 @@ void vStore(const V_BUFFER* buf)
 void vRestore(const V_BUFFER* buf)
 {
 #ifdef __EMSCRIPTEN__
-    be_tiles_suspend(false);
+    be_restore();
 #endif
     const auto* saved = static_cast<std::vector<STCCell>*>(buf->saved);
 

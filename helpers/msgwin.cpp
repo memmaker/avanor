@@ -26,6 +26,9 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #include <fmt/format.h>
 
+#ifdef __EMSCRIPTEN__
+#include "port/be_web.h"
+#endif
 #include "helpers/msgwin.h"
 #include "helpers/xgui.h"
 
@@ -68,6 +71,9 @@ void XMsgWin::Add(std::string_view tstr)
         end_sent = true;
         sent_buf[0] = static_cast<char>(toupper(static_cast<unsigned char>(sent_buf[0])));
         history_list->AddItem(new XGuiItem_Text(sent_buf), 1);
+#ifdef __EMSCRIPTEN__
+        be_msg(sent_buf); // RVIP: the Messages window
+#endif
         sent_buf.clear();
     }
 

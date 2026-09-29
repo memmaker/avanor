@@ -29,6 +29,10 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include <fmt/format.h>
 
 #include "engine/xarchive.h"
+#ifdef __EMSCRIPTEN__
+#include <cstdio>
+#include "port/be_web.h"
+#endif
 #include <sol/sol.hpp>
 #include "engine/xlua.h"
 #include <iostream>
@@ -390,6 +394,15 @@ void XGame::Run()
     }
 
     XObject::InvalidateAllObjects();
+
+#ifdef __EMSCRIPTEN__
+    // RVIP: the web build autosaves before stairs down; a dead hero's
+    // save goes, or reloading the page would bring the dead back.
+    if (XQuest::quest.hero_die == 1) {
+        std::remove(vMakePath(HOME_DIR, std::string(XArchive::PLAYER_SLOT) + ".svg.zst").c_str());
+        be_saved();
+    }
+#endif
 
     vClrScr();
 

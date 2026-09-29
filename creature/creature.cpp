@@ -19,6 +19,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
+#ifdef __EMSCRIPTEN__
+#include "port/be_web.h"
+#endif
 #include "item/xmoney.h"
 #include "item/xbook.h"
 #include "item/xscroll.h"
@@ -660,6 +663,9 @@ void XCreature::ShowNewView()
 
 void XCreature::PutStatus()
 {
+#ifdef __EMSCRIPTEN__
+    be_status_rows(size_y - 3, 3); // RVIP: the Status window
+#endif
     vSetAttr(xLIGHTGRAY);
 
     for (int row = size_y - 3; row < size_y; row++) {

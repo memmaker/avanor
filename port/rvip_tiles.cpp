@@ -200,3 +200,99 @@ int RvipCreatureTile(XCreature* cr)
 
     return Slot("cc:other");
 }
+
+// ---- Inventory and Visible windows (RVIP stage 5) ----
+// Lines for the page, from the hero's own data: names, colours (the
+// game's rgb), sprite slots. Sent only when they change.
+#include "helpers/xgui.h"
+#include <cstdio>
+#include "map/map.h"
+
+void RvipSendSide(int which, const std::string& s); // be_web.cpp
+
+namespace {
+std::string Css(unsigned rgb)
+{
+    char b[8];
+    snprintf(b, sizeof b, "#%06x", rgb & 0xFFFFFF);
+    return b;
+}
+std::string Plain(const std::string& s) // markup and escapes out
+{
+    std::string out;
+    const std::string e = ExpandMarkup(s);
+    for (size_t i = 0; i < e.size(); i++) {
+        const unsigned char c = static_cast<unsigned char>(e[i]);
+        if (c == 31) {
+            i++;
+        } else if (c == static_cast<unsigned char>(RGB_ESCAPE)) {
+            i += 6;
+        } else if (c >= ' ' && c != '\t' && c != '\n') {
+            out += static_cast<char>(c);
+        }
+    }
+    return out;
+}
+}
+
+extern ItemKind output_items_mask[];
+extern const char* output_items_name[];
+
+void RvipSidePanes(XCreature* cr, const XMap* map)
+{
+    auto* hero = dynamic_cast<XHero*>(cr);
+    if (!hero || !map) {
+        return;
+    }
+
+    // Inventory: the pack in the game's own order (as `i` lists it), a
+    // header per kind. Line: "<letter>\t<glyph>\t<name>\t<css>\t<tile>",
+    // "=<header>" for a section.
+    std::string inv;
+    int n = 0;
+    ItemKind last = ItemKind::UNKNOWN;
+    for (const auto& it : hero->contain) {
+        if (it->kind != last) {
+            last = it->kind;
+            for (int oi = 0; oi < 19; oi++) {
+                if (output_items_mask[oi] & last) {
+                    inv += std::string("=") + output_items_name[oi] + "\n";
+                    break;
+                }
+            }
+        }
+        std::string name = Plain(it->toString());
+        if (hero->IsWorn(it.get())) {
+            name += " (worn)";
+        }
+        const int k = n++;
+        inv += std::string(1, static_cast<char>('A' + k >= 'Z' ? 'A' + k + 1 : 'A' + k)) + "\t" + std::string(1, it->view) + "\t" + name + "\t"
+             + Css(it->color) + "\t" + std::to_string(RvipItemTile(it.get())) + "\n";
+    }
+    if (inv.empty()) {
+        inv = "=You carry nothing.\n";
+    }
+    RvipSendSide(4, inv);
+
+    // Visible: monsters and items in the hero's sight (RvipWM.visible lines).
+    std::string mon, itm;
+    for (int y = 0; y < map->hgt; y++) {
+        for (int x = 0; x < map->len; x++) {
+            if (!map->GetVisible(x, y)) {
+                continue;
+            }
+            XCreature* m = map->GetMonster(x, y);
+            if (m && m != hero && hero->isCreatureVisible(m)) {
+                mon += "M" + std::string(1, m->view) + Plain(m->GetNameEx(CRN_T1)) + "\t" + Css(m->color) + "\t"
+                     + std::to_string(RvipCreatureTile(m)) + "\n";
+            }
+            if (XItemList* l = map->GetItemList(x, y)) {
+                for (const auto& it : *l) {
+                    itm += "I" + std::string(1, it->view) + Plain(it->toString()) + "\t" + Css(it->color) + "\t"
+                         + std::to_string(RvipItemTile(it.get())) + "\n";
+                }
+            }
+        }
+    }
+    RvipSendSide(5, mon + itm);
+}

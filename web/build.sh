@@ -8,6 +8,7 @@ ROOT=$(pwd)
 [ -n "$EMSDK" ] && export PATH="$EMSDK/upstream/emscripten:$PATH"
 EXT=web/ext
 OBJ=web/obj${ASAN:+-asan}
+rm -rf web/dist
 mkdir -p "$EXT" "$OBJ" web/dist
 
 # Third-party sources, pinned; fetched once into web/ext (gitignored).
@@ -76,14 +77,14 @@ while IFS= read -r cmd; do
 done < "$OBJ/.all"
 tr '\n' '\0' < "$OBJ/.todo" | xargs -0 -P "$NP" -n 1 sh -c 'echo "  ${0##* -c }"; $0'
 
-em++ $OPT $SAN -fexceptions -o web/dist/avanor.js $OBJS $ZOBJS \
+em++ $OPT $SAN -fexceptions -o web/dist/avanor-core.js $OBJS $ZOBJS \
   -sASYNCIFY -sASYNCIFY_STACK_SIZE=262144 -sSTACK_SIZE=8388608 \
   -sALLOW_MEMORY_GROWTH -sINITIAL_MEMORY=128MB \
   -sEXPORTED_FUNCTIONS=_main,_be_pushkey \
-  -sEXPORTED_RUNTIME_METHODS=FS,IDBFS,HEAPU8,HEAPU32,HEAP32,callMain \
+  -sEXPORTED_RUNTIME_METHODS=FS,IDBFS,ENV,HEAPU8,HEAPU32,HEAP32,UTF8ToString,addRunDependency,removeRunDependency \
   -sFORCE_FILESYSTEM -lidbfs.js -sENVIRONMENT=web \
   --preload-file world@/world --preload-file manual@/manual
 cp web/index.html web/dist/index.html
-cp web/page.js web/dist/page.js
+cp web/avanor.js web/dist/avanor.js
 cp web/tiles-dawn.png web/dist/tiles-dawn.png
 echo "built web/dist"

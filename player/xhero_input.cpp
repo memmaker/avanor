@@ -29,9 +29,13 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include <memory>
 #include <fmt/format.h>
 
+#ifdef __EMSCRIPTEN__
+#include "port/be_web.h"
+#endif
 #include "creature/skeep_ai.h"
 #include "creature/xhero.h"
 #include "engine/xapi.h"
+#include "engine/xarchive.h"
 #include "game/game.h"
 #include "game/quest.h"
 #include "helpers/manual.h"
@@ -105,7 +109,13 @@ void XHero::NewMove()
             }
             if (!ch) {
                 vGotoXY(x + SCR_X - l->map->wx, y + SCR_Y - l->map->wy);
+#ifdef __EMSCRIPTEN__
+                be_at_cmd(true);
+#endif
                 ch = vGetch();
+#ifdef __EMSCRIPTEN__
+                be_at_cmd(false);
+#endif
             }
         } else {
             ch = last_char;
@@ -202,6 +212,11 @@ void XHero::NewMove()
                     XMapObject* spec = l->map->GetSpecial(x, y);
 
                     if (dynamic_cast<XStairWay *>(spec) && spec->view == '>') {
+#ifdef __EMSCRIPTEN__
+                        // RVIP autosave: once, before going down, quietly.
+                        XGame::hero_guid = guid();
+                        XArchive::StoreGame();
+#endif
                         for (int q = -10; q < 10; q++)
                             for (int w = -10; w < 10; w++) {
                                 l->map->ResVisible(x + w, y + q);

@@ -33,6 +33,10 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #endif
 
 // Directory for private data files (user settings, saved games, ...)
+#if defined(__EMSCRIPTEN__) && !defined(HOME_DIR)
+    // RVIP: the page mounts its IndexedDB folder here (RvipApp.dir).
+    #define HOME_DIR "/avanor/"
+#endif
 #ifndef HOME_DIR
     #define HOME_DIR "~/.avanor/"
 #endif
