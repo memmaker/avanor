@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avanor</title>
+<style>
+  :root { --bg: #000; --fg: #c0c0c0; }
+  body { margin: 0; background: var(--bg); color: var(--fg); }
+  #screen { margin: 8px; font: 16px/1.15 monospace; white-space: pre; }
+  #screen .cur { outline: 1px solid #c0c0c0; }
+  #status { margin: 8px; font: 12px monospace; color: #888; }
+</style>
+</head>
+<body>
+<pre id="screen" tabindex="0"></pre>
+<div id="status">Loading...</div>
+<script src="page.js"></script>
+<script async src="avanor.js"></script>
+</body>
+</html>

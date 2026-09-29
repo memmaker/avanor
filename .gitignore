@@ -49,3 +49,6 @@ external/
 .idea/
 .vscode/
 docs/
+web/ext/
+web/obj*/
+web/dist/

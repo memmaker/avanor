@@ -88,6 +88,11 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
     #include <vector>
 
     #include <stc.hpp>
+
+    #ifdef __EMSCRIPTEN__
+        // RVIP: the browser frontend (port/be_web.cpp) stands in for the terminal.
+        #include "port/be_web.h"
+    #endif
 #else
     #include <ncpp/NotCurses.hh>
     #include <ncpp/Plane.hh>
@@ -177,6 +182,9 @@ void QueryScreenSize()
         size_x = 80;
         size_y = 25;
     }
+#elif defined(__EMSCRIPTEN__)
+    size_x = 80;
+    size_y = 25;
 #else
     winsize ws{};
 
@@ -259,6 +267,13 @@ void vInit()
 {
     std::filesystem::create_directory(vMakePath(HOME_DIR, ""));
 
+#ifdef __EMSCRIPTEN__
+    QueryScreenSize();
+    be_init(size_x, size_y);
+    vClrScr();
+    return;
+#endif
+
 #ifdef _WIN32
     // The classic Windows console (conhost, behind cmd.exe/Windows Terminal)
     // only interprets the ANSI escapes below once this is turned on; mintty
@@ -313,6 +328,10 @@ void vClrScr()
 
 void vFinit()
 {
+#ifdef __EMSCRIPTEN__
+    be_finit();
+    return;
+#endif
     std::cout << stc::reset;
     std::cout << "\x1b[?25h\x1b[?1049l" << std::flush;
 
@@ -323,6 +342,22 @@ void vFinit()
 
 void vRefresh()
 {
+#ifdef __EMSCRIPTEN__
+    {
+        static std::vector<char> chars;
+        static std::vector<unsigned> rgbs;
+        chars.resize(stc_screen.size());
+        rgbs.resize(stc_screen.size());
+
+        for (size_t i = 0; i < stc_screen.size(); i++) {
+            chars[i] = stc_screen[i].ch;
+            rgbs[i] = stc_screen[i].rgb & 0xFFFFFF;
+        }
+
+        be_present(chars.data(), rgbs.data(), size_x, size_y);
+        return;
+    }
+#endif
     std::ostringstream oss;
     oss << stc::true_color;
     oss << "\x1b[H";
@@ -576,6 +611,10 @@ void vDelay(const int n)
         return;
     }
 
+#ifdef __EMSCRIPTEN__
+    be_delay(n);
+    return;
+#endif
     std::this_thread::sleep_for(std::chrono::milliseconds(n));
 }
 
@@ -600,6 +639,18 @@ int vGetch()
     }
 
     return ch;
+}
+
+#elif defined(__EMSCRIPTEN__)
+
+int vKbhit()
+{
+    return be_kbhit();
+}
+
+int vGetch()
+{
+    return be_getkey();
 }
 
 #else // unixoid
@@ -921,6 +972,10 @@ int vXGetch(const char* ch_buf)
 
 void vXGotoXY(int x, int y)
 {
+#ifdef __EMSCRIPTEN__
+    be_cursor(x, y);
+    return;
+#endif
     // Shows the hardware cursor at this position - vGetS() uses this to
     // give visible feedback while the player is typing, mirroring
     // ncpp::Plane::cursor_enable(), which both shows and moves it at once.
@@ -929,6 +984,10 @@ void vXGotoXY(int x, int y)
 
 void vHideCursor()
 {
+#ifdef __EMSCRIPTEN__
+    be_cursor(-1, -1);
+    return;
+#endif
     std::cout << "\x1b[?25l" << std::flush;
 }
 
