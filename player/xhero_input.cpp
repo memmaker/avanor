@@ -89,7 +89,12 @@ void XHero::NewMove()
 
         if (--isDisturb <= 0) {
             vGotoXY(x + SCR_X - l->map->wx, y + SCR_Y - l->map->wy);
-            ch = vGetch();
+            // RVIP: an explore or stair walk in progress picks the key.
+            ch = ExploreStep();
+            if (!ch) {
+                vGotoXY(x + SCR_X - l->map->wx, y + SCR_Y - l->map->wy);
+                ch = vGetch();
+            }
         } else {
             ch = last_char;
         }
@@ -157,8 +162,11 @@ void XHero::NewMove()
 
                         MoveStairWay();
                     } else {
-                        msgwin.Add("There is no stair up here.");
+                        // RVIP: walk to the nearest known stair up.
                         moved = 0;
+                        if (ExploreStart(2)) {
+                            continue;
+                        }
                     }
 
                     break;
@@ -175,12 +183,22 @@ void XHero::NewMove()
 
                         MoveStairWay();
                     } else {
-                        msgwin.Add("There is no stair down here.");
+                        // RVIP: walk to the nearest known stair down.
                         moved = 0;
+                        if (ExploreStart(3)) {
+                            continue;
+                        }
                     }
 
                     break;
                 }
+
+                case 'H' : // RVIP: auto-explore
+                    moved = 0;
+                    if (ExploreStart(1)) {
+                        continue;
+                    }
+                    break;
 
                 case '~' :
                     isDisturb = 500;

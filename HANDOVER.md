@@ -2,7 +2,21 @@
 
 ## RVIP progress
 
-- **Stage 1 (get + build): done.** Next: stage 2 (explore + stairs + no `--More--`).
+- **Stage 1 (get + build): done.**
+- **Stage 2 (explore + stairs + no `--More--`): done.** Next: stage 3 (Enter menu + inventory).
+  Explore key `H` (free; `X` also free). Code: `player/xhero_explore.cpp`
+  (`XHero::ExploreStart(mode)` / `ExploreStep()`, added to Makefile SRCS).
+  Hook: `XHero::NewMove()` (`player/xhero_input.cpp`) asks `ExploreStep()`
+  for a digit direction key before `vGetch()`; `<`/`>` off the stairs call
+  `ExploreStart(2/3)` (walk to nearest known stair, stop there, press again).
+  Known grid: `XMapTile::known` (!= ' ' and != 0; set by `SetVisible`, never
+  forgotten). Stops: hostile in view (named), new non-shop item in view,
+  new message (`msgwin.count`, added), key (`vKbhit`), no move; a step into a
+  closed door (bump opens it) or onto a door/stairs doesn't stop on its own
+  message. Shop wares (`GetPlace`) are no targets. `(more)` in
+  `XMsgWin::Add` skipped under `__EMSCRIPTEN__` (history `M` keeps all).
+  Help: `manual/kblayout.html`. Local build: Homebrew emcc on PATH
+  (`EMSDK` optional).
 - Folder `/home/user/avanor` (cloud), repo `memmaker/avanor`, branch
   `claude/loving-hawking-5x9q75`. Pristine upstream = `20a0f59` "Two more random
   mines" (jaydg/avanor revival, v0.6.0; only `main` upstream).
@@ -36,5 +50,5 @@
   no reports. Build removed.
 - **Browser:** headless Chromium (Playwright): title → New game → birth → walks
   in the Valley, no console errors.
-- **Open:** save persistence/exit path untested in browser; birth screens need
+- **Open:** explore stops on every ambient message ("Something nearby smells like it is rotting."); hostile in view blocks explore by design (Valley bandits). Save persistence/exit path untested in browser; birth screens need
   ~150 ms between keys in tests.

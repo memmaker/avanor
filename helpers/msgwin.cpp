@@ -50,6 +50,7 @@ void XMsgWin::Add(std::string_view tstr)
     // Expanded up front: the wrapping below measures words, and a role
     // is two bytes once expanded however long its name was.
     std::string str = ExpandMarkup(tstr);
+    count++;
     static bool end_sent = true;
 
     if (end_sent) {
@@ -90,10 +91,14 @@ void XMsgWin::Add(std::string_view tstr)
             }
         } else {
             if (index_x + wlen >= size_x - 8) {
+#ifndef __EMSCRIPTEN__
                 vSetAttr(xCYAN);
                 vPutS("(more)");
                 vRefresh();
                 vGetch();
+#endif
+                // RVIP: no "(more)" stop in the web build; the older lines
+                // stay in the message history (M).
                 ClrMsg();
                 index_x = 0;
                 index_y = 0;

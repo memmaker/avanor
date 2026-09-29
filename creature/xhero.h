@@ -97,6 +97,9 @@ class XHero final : public XCreature
         explicit XHero(NewCharacter);
         void PlayerSetup();
         void NewMove() override;
+        // RVIP auto-explore and stair walks (player/xhero_explore.cpp).
+        int ExploreStep();
+        bool ExploreStart(int mode);
         void Move() override;
 
         // Says that something in plain view cannot be made out, so the hero

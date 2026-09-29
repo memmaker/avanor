@@ -41,6 +41,7 @@ class XMsgWin
         XGuiList* history_list;
 
     public:
+        int count = 0; // RVIP: messages added so far (explore's new-message stop)
         XMsgWin();
         ~XMsgWin();
 
