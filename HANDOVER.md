@@ -3,7 +3,7 @@
 ## RVIP progress
 
 - **Stage 1 (get + build): done.**
-- **Stage 2 (explore + stairs + no `--More--`): done.** Next: stage 3 (Enter menu + inventory).
+- **Stage 2 (explore + stairs + no `--More--`): done.**
   Explore key `H` (free; `X` also free). Code: `player/xhero_explore.cpp`
   (`XHero::ExploreStart(mode)` / `ExploreStep()`, added to Makefile SRCS).
   Hook: `XHero::NewMove()` (`player/xhero_input.cpp`) asks `ExploreStep()`
@@ -17,6 +17,26 @@
   `XMsgWin::Add` skipped under `__EMSCRIPTEN__` (history `M` keeps all).
   Help: `manual/kblayout.html`. Local build: Homebrew emcc on PATH
   (`EMSDK` optional).
+- **Stage 3 (Enter menu + inventory): done.** Next: stage 4 (tiles).
+  Code: `player/xhero_menu.cpp` (in Makefile SRCS): `XHero::CommandMenu()`
+  (Enter; static table grouped as `manual/kblayout.html`, no moves) and
+  `XHero::InventoryMenu()` (`i`); both return a command key that
+  `NewMove()` (`player/xhero_input.cpp`) dispatches like a typed key.
+  Box menus: `XBoxMenu(title, {key,text})` in `helpers/xgui.cpp` (sized to
+  content, scrolls when taller than 25 rows; 8/2/arrows, 5/6/Enter/Space
+  choose, entry key runs it, Esc/0/./4 close). List cursor:
+  `XGuiList::EnableCursor()` (`>` marker; on in every `Inventory()` prompt
+  and in `Equipment()`). Item actions: `Actions()` table (u/E/D/r, wear/take
+  off direct via `XBodyPart::Wear/UnWear`, !/d/s/g, examine = message);
+  command keys run through the real commands with globals `rvip_pre` +
+  `rvip_pre_state` (1 pending, 2 used) + `rvip_pre_oneshot`, taken in
+  `XHero::Inventory()` without drawing; cleared at the next `NewMove()` key
+  read; `rvip_reopen` reopens `i` unless `HostileInView()`. `i` keys:
+  lowercase letter = main action, uppercase = drop/take off, Ctrl+letter =
+  examine, 5/Enter = item menu, + - * numpad, 4/6 = equipment, other keys =
+  normal command (filter keys `[|{}'=!?"\%]$X` still filter).
+  Explore: ambient messages via `msgwin.AddAmbient()` (corpse smell/decay,
+  `item/xcorpse.cpp`); explore compares `msgwin.Important()`.
 - Folder `/home/user/avanor` (cloud), repo `memmaker/avanor`, branch
   `claude/loving-hawking-5x9q75`. Pristine upstream = `20a0f59` "Two more random
   mines" (jaydg/avanor revival, v0.6.0; only `main` upstream).
@@ -50,5 +70,5 @@
   no reports. Build removed.
 - **Browser:** headless Chromium (Playwright): title → New game → birth → walks
   in the Valley, no console errors.
-- **Open:** explore stops on every ambient message ("Something nearby smells like it is rotting."); hostile in view blocks explore by design (Valley bandits). Save persistence/exit path untested in browser; birth screens need
+- **Open:** item prompts can't switch pack/equipment/floor with 4/6 (only `i` → equipment); examine is a one-line message (no item description in the game); no mouse yet (page is the stage-1 `<pre>`, stage 5). Hostile in view blocks explore by design (Valley bandits). Save persistence/exit path untested in browser; birth screens need
   ~150 ms between keys in tests.

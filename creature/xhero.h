@@ -59,6 +59,10 @@ enum INVENTORY_FLAG {
     // moment the list is asking you to part with something. Offering a
     // worn item and refusing it afterwards is worse than not offering it.
     IF_HIDE_WORN = 8,
+
+    // RVIP: return nullptr on any key that is no filter key (rvip_pick_key
+    // holds the key an item was picked with, or the key that closed it).
+    IF_CURSOR = 16,
 };
 
 enum SKILL_FLAG {
@@ -66,6 +70,15 @@ enum SKILL_FLAG {
     SKF_LIST_SKILL,
     SKF_USE_SKILL,
 };
+
+// RVIP: item preselect for the next Inventory() prompt (xhero_menu.cpp).
+// state 1: take rvip_pre if that list shows it, else return nothing;
+// state 2: used, further prompts of a one-shot command return nothing.
+class XItem;
+extern XItem* rvip_pre;
+extern int rvip_pre_state;
+extern bool rvip_pre_oneshot;
+extern int rvip_pick_key;
 
 class XHero final : public XCreature
 {
@@ -100,6 +113,13 @@ class XHero final : public XCreature
         // RVIP auto-explore and stair walks (player/xhero_explore.cpp).
         int ExploreStep();
         bool ExploreStart(int mode);
+        bool HostileInView();
+        // RVIP stage 3 (player/xhero_menu.cpp): Enter command menu and the
+        // `i` list with a cursor and item menus. Both return a command key
+        // for NewMove() to run (0 = none).
+        int CommandMenu();
+        int InventoryMenu();
+        bool rvip_reopen = false; // reopen `i` after an item action
         void Move() override;
 
         // Says that something in plain view cannot be made out, so the hero

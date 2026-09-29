@@ -195,9 +195,9 @@ bool XCorpse::Run()
         // does not say which of several it is - so this stays "something"
         // even for a corpse the hero is carrying and could name.
         if (owner_sp && owner_sp->isHero()) {
-            msgwin.Add("Something in your backpack smells like it is rotting.");
+            msgwin.AddAmbient("Something in your backpack smells like it is rotting.");
         } else if (l && isInVisibleArea()) {
-            msgwin.Add("Something nearby smells like it is rotting.");
+            msgwin.AddAmbient("Something nearby smells like it is rotting.");
         }
     } else if (time_of_roating > pCorpseData->roating_time) {
         if (owner_sp) {
@@ -208,7 +208,7 @@ bool XCorpse::Run()
             // above has become "has rotted away", so the message reads as
             // the end of something the hero was already following.
             if (owner_sp->isHero()) {
-                msgwin.Add("Something in your backpack has rotted away.");
+                msgwin.AddAmbient("Something in your backpack has rotted away.");
             }
 
             owner_sp->UnCarryItem(this);
@@ -216,7 +216,7 @@ bool XCorpse::Run()
             // On the ground it can be watched going, so here it is named.
             // Said before Invalidate() below, while toString() still has
             // a corpse to describe.
-            msgwin.Add(fmt::format("The {} has decomposed.", toString()));
+            msgwin.AddAmbient(fmt::format("The {} has decomposed.", toString()));
         }
 
         Invalidate();

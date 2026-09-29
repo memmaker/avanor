@@ -42,6 +42,9 @@ class XMsgWin
 
     public:
         int count = 0; // RVIP: messages added so far (explore's new-message stop)
+        int ambient = 0; // RVIP: of those, ambient ones (AddAmbient; explore ignores them)
+        void AddAmbient(std::string_view str) { Add(str); ambient++; }
+        int Important() const { return count - ambient; }
         XMsgWin();
         ~XMsgWin();
 

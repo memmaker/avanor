@@ -221,6 +221,9 @@ void XGuiList::Put(const std::optional<std::reference_wrapper<std::ofstream>> fi
 
                     vGotoXY(0, y_pos);
                     vPutS(selector);
+                    if (cursor_on && i - 1 == cursor) {
+                        vPutCh(3, y_pos, '>', ResolveColour(ROLE_KEY));
+                    }
                     selectable_items_count++;
                 }
             }
@@ -403,8 +406,46 @@ int XGuiList::Run(int flag, int flag2)
 
     while (true) {
         Put();
+        if (cursor_on && cursor >= selectable_items_count && selectable_items_count > 0) {
+            cursor = selectable_items_count - 1;
+            Put();
+        }
         int ch = vGetch();
         last_pressed_key = ch;
+
+        // RVIP: cursor keys (arrows, numpad 8/2), 5/Enter/+/-/* pick the
+        // cursor line (the caller reads the key), Ctrl+letter picks that
+        // line, 0/. close, 4/6 return to the caller.
+        if (cursor_on) {
+            int pick = -1;
+
+            if (ch == KEY_UP || ch == '8') {
+                if (cursor > 0) cursor--; else LineUp();
+                continue;
+            }
+            if (ch == KEY_DOWN || ch == '2') {
+                if (cursor + 1 < selectable_items_count) cursor++; else LineDown();
+                continue;
+            }
+            if (ch == KEY_ENTER || ch == '\n' || ch == '5' || ch == '+' || ch == '-' || ch == '*') {
+                pick = cursor;
+            } else if (ch >= 1 && ch <= 26 && ch != 9) {
+                pick = SelectorIndex('a' + ch - 1, selectable_items_count);
+            } else if (ch == '0' || ch == '.') {
+                last_pressed_key = KEY_ESC;
+                vRestore(&xyzbuf);
+                vRefresh();
+                return -1;
+            } else if (ch == '4' || ch == '6') {
+                vRestore(&xyzbuf);
+                return -1;
+            }
+
+            if (pick >= 0 && pick < selectable_items_count) {
+                vRestore(&xyzbuf);
+                return top_selectable_index + pick;
+            }
+        }
 
         if (const int picked = SelectorIndex(ch, selectable_items_count); picked >= 0) {
             vRestore(&xyzbuf);
@@ -465,4 +506,88 @@ int XGuiList::Run(int flag, int flag2)
         }
 
     }
+}
+
+// RVIP: floating menu box, sized to its content (longest line x lines +
+// border, one space padding), scrolled when taller than the screen.
+int XBoxMenu(const std::string_view title, const std::vector<XBoxEntry>& entries)
+{
+    auto keyname = [](int k) {
+        if (k >= 1 && k <= 26) return fmt::format("^{}", static_cast<char>('A' + k - 1));
+        return std::string(1, static_cast<char>(k));
+    };
+    std::vector<std::string> lines;
+    int w = static_cast<int>(title.size());
+    for (const auto& e : entries) {
+        std::string l = e.key ? fmt::format("{:>2} {}", keyname(e.key), e.text) : e.text;
+        w = std::max(w, static_cast<int>(l.size()));
+        lines.push_back(std::move(l));
+    }
+    int cur = 0;
+    while (cur < static_cast<int>(entries.size()) && !entries[cur].key) cur++;
+    if (cur == static_cast<int>(entries.size())) return 0;
+
+    const int n = static_cast<int>(lines.size());
+    const int bw = std::min(w + 4, size_x);
+    const int rows = std::min(n, size_y - 2);
+    const int x0 = (size_x - bw) / 2;
+    const int y0 = (size_y - rows - 2) / 2;
+    int top = 0;
+
+    V_BUFFER buf;
+    vStore(&buf);
+    vHideCursor();
+    auto step = [&](int d) {
+        int c = cur;
+        do { c += d; } while (c >= 0 && c < n && !entries[c].key);
+        if (c >= 0 && c < n) cur = c;
+    };
+
+    int result = 0;
+    while (true) {
+        if (cur < top) top = cur;
+        if (cur >= top + rows) top = cur - rows + 1;
+        if (top > 0 && !entries[top - 1].key && cur == top) top--; // show its header
+        const unsigned deco = ResolveColour(ROLE_DECORATION);
+        const std::string edge = "+" + std::string(bw - 2, '-') + "+";
+        for (int i = 0; i < bw; i++) {
+            vPutCh(x0 + i, y0, edge[i], deco);
+            vPutCh(x0 + i, y0 + rows + 1, edge[i], deco);
+        }
+        for (int i = 0; i < static_cast<int>(title.size()) && i < bw - 4; i++) {
+            vPutCh(x0 + 2 + i, y0, title[i], ResolveColour(ROLE_VALUE));
+        }
+        for (int r = 0; r < rows; r++) {
+            const int k = top + r;
+            vPutCh(x0, y0 + 1 + r, '|', deco);
+            vPutCh(x0 + bw - 1, y0 + 1 + r, '|', deco);
+            const bool sel = k == cur;
+            const unsigned col = !entries[k].key ? ResolveColour(ROLE_VALUE)
+                : sel ? ResolveColour(ROLE_KEY) : ResolveColour(ROLE_TEXT);
+            vPutCh(x0 + 1, y0 + 1 + r, sel ? '>' : ' ', col);
+            for (int i = 0; i < bw - 3; i++) {
+                const char c = i < static_cast<int>(lines[k].size()) ? lines[k][i] : ' ';
+                vPutCh(x0 + 2 + i, y0 + 1 + r, c, col);
+            }
+        }
+        if (top > 0) vPutCh(x0 + bw - 1, y0 + 1, '^', deco);
+        if (top + rows < n) vPutCh(x0 + bw - 1, y0 + rows, 'v', deco);
+        vRefresh();
+
+        const int ch = vGetch();
+        if (ch == KEY_UP || ch == '8') { step(-1); continue; }
+        if (ch == KEY_DOWN || ch == '2') { step(1); continue; }
+        if (ch == KEY_PGUP) { for (int i = 0; i < rows; i++) step(-1); continue; }
+        if (ch == KEY_PGDOWN) { for (int i = 0; i < rows; i++) step(1); continue; }
+        if (ch == KEY_ENTER || ch == '\n' || ch == '5' || ch == '6' || ch == ' ') { result = entries[cur].key; break; }
+        if (ch == KEY_ESC || ch == '0' || ch == '.' || ch == '4') break;
+        bool hit = false;
+        for (const auto& e : entries) {
+            if (e.key && e.key == ch) { result = ch; hit = true; break; }
+        }
+        if (hit) break;
+    }
+    vRestore(&buf);
+    vRefresh();
+    return result;
 }

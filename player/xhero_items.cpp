@@ -178,8 +178,32 @@ std::shared_ptr<XItem> XHero::Inventory(XItemList* item_list, ItemKind mask, con
             return nullptr;
         }
 
-        int item_number = list.Run(1, first_item);
-        first_item = list.GetTopItemIndex();
+        // RVIP: a preselected item (item actions from the `i` menu) is
+        // taken without showing the list; a prompt of that command that
+        // doesn't show it, or comes after it, gets nothing.
+        int item_number;
+        if (rvip_pre_state == 2 && rvip_pre_oneshot) {
+            return nullptr;
+        }
+        if (rvip_pre_state == 1) {
+            item_number = -1;
+            int n = 0;
+            for (const auto& it : *item_list) {
+                if (shows(it.get())) {
+                    if (it.get() == rvip_pre) { item_number = n; break; }
+                    n++;
+                }
+            }
+            if (item_number < 0) {
+                return nullptr;
+            }
+            rvip_pre_state = 2;
+        } else {
+            list.EnableCursor();
+            item_number = list.Run(1, first_item);
+            first_item = list.GetTopItemIndex();
+            rvip_pick_key = list.GetLastKey();
+        }
 
         if (item_number == -1 || (flag & IF_VIEW_ONLY)) { //there was no item selected
             const int ch = list.GetLastKey();
@@ -192,6 +216,10 @@ std::shared_ptr<XItem> XHero::Inventory(XItemList* item_list, ItemKind mask, con
             }
 
             if (ch == 0 || ch == KEY_ESC || ch == 'z' || ch == 'v' || ch == 'V' || ch == 'Z' || ch == ' ') {
+                break;
+            }
+
+            if ((flag & IF_CURSOR) && !(!(flag & IF_FIXED_MASK) && strchr(smask, ch) && ch)) {
                 break;
             }
         } else {
@@ -262,6 +290,7 @@ void XHero::Equipment(const std::optional<std::reference_wrapper<std::ofstream>>
 
         list.SetCaption("<DECORATION>###<TEXT> Equipment <DECORATION>###");
         list.SetFooter("<DECORATION>[<VALUE>V<DECORATION>]<TEXT> - show inventory.");
+        list.EnableCursor();
 
         for (auto& xbp: components) {
             xqsa[counter] = xbp.get();

@@ -87,10 +87,22 @@ void XHero::NewMove()
 
         int ch;
 
+        // RVIP: an item action from the `i` list is over.
+        rvip_pre = nullptr;
+        rvip_pre_state = 0;
+
         if (--isDisturb <= 0) {
             vGotoXY(x + SCR_X - l->map->wx, y + SCR_Y - l->map->wy);
-            // RVIP: an explore or stair walk in progress picks the key.
+            // RVIP: an explore or stair walk in progress picks the key;
+            // after an item action the list reopens unless a hostile is
+            // in view.
             ch = ExploreStep();
+            if (!ch && rvip_reopen) {
+                rvip_reopen = false;
+                if (!HostileInView()) {
+                    ch = 'i';
+                }
+            }
             if (!ch) {
                 vGotoXY(x + SCR_X - l->map->wx, y + SCR_Y - l->map->wy);
                 ch = vGetch();
@@ -100,6 +112,20 @@ void XHero::NewMove()
         }
 
         msgwin.ClrMsg();
+
+        // RVIP: Enter opens the command menu, `i` the inventory with its
+        // item menus; both hand back the key of the command to run.
+        if (ch == KEY_ENTER || ch == '\n') {
+            ch = CommandMenu();
+        }
+        if (ch == 'i') {
+            ch = InventoryMenu();
+            rvip_reopen = rvip_pre_state == 1;
+            if (!ch) {
+                moved = 0;
+                continue;
+            }
+        }
 
         int dx = 0;
         int dy = 0;
@@ -204,11 +230,6 @@ void XHero::NewMove()
                     isDisturb = 500;
                     last_char = '5';
                     w_pressed = 1;
-                    break;
-
-                case 'i' :
-                    moved = 0;
-                    Inventory(&contain, ItemKind::ALL, IF_VIEW_ONLY);
                     break;
 
                 case 'e' :

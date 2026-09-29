@@ -172,7 +172,7 @@ int XHero::ExploreStep()
             return stop("");
         }
 
-        if (!door_step && !quiet_step && msgwin.count != msg_base) {
+        if (!door_step && !quiet_step && msgwin.Important() != msg_base) {
             return stop("");
         }
 
@@ -300,7 +300,7 @@ int XHero::ExploreStep()
 
     last_x = x;
     last_y = y;
-    msg_base = msgwin.count;
+    msg_base = msgwin.Important();
     // Stepping into a closed door opens it and stays put; its message is
     // our own, not news.
     auto* door = dynamic_cast<XDoor *>(m->GetSpecial(sx, sy));

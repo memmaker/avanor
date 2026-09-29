@@ -191,6 +191,9 @@ class XGuiList final
         std::string footer;
 
         int last_pressed_key{};
+        // RVIP: cursor over the selectable lines of the current screenful.
+        bool cursor_on = false;
+        int cursor = 0;
 
         // Measures the list against however much screen there is now.
         // Called once as Run() starts and again whenever the terminal
@@ -261,6 +264,7 @@ class XGuiList final
             lines_count += item->GetHeight();
         }
 
+        void EnableCursor() { cursor_on = true; }
         void AddHtmlText(std::string_view text);
 
         void Put(std::optional<std::reference_wrapper<std::ofstream>> file = std::nullopt);
@@ -295,5 +299,11 @@ class XGuiList final
             return last_pressed_key;
         }
 };
+
+// RVIP: floating menu box over the screen, sized to its entries. An entry
+// with key 0 is a group header. Returns the chosen entry's key, 0 on
+// Escape/0/./4 (back).
+struct XBoxEntry { int key; std::string text; };
+int XBoxMenu(std::string_view title, const std::vector<XBoxEntry>& entries);
 
 #endif
