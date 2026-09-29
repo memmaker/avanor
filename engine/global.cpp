@@ -1523,12 +1523,18 @@ V_BUFFER::~V_BUFFER()
 
 void vStore(const V_BUFFER* buf)
 {
+#ifdef __EMSCRIPTEN__
+    be_tiles_suspend(true); // a menu or screen goes over the map: text
+#endif
     delete static_cast<std::vector<STCCell>*>(buf->saved);
     const_cast<V_BUFFER*>(buf)->saved = new std::vector<STCCell>(stc_screen);
 }
 
 void vRestore(const V_BUFFER* buf)
 {
+#ifdef __EMSCRIPTEN__
+    be_tiles_suspend(false);
+#endif
     const auto* saved = static_cast<std::vector<STCCell>*>(buf->saved);
 
     // A screen saved before the terminal changed shape is of no use - see

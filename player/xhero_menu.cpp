@@ -151,8 +151,8 @@ void Examine(XItem* it)
 
 } // namespace
 
-// `i`: the inventory with a cursor. Letter = main action, Shift+letter
-// drops, Ctrl+letter examines, 5/Enter/Space opens the item menu, numpad
+// `i`: the inventory with a cursor. The letter as shown (uppercase) = main
+// action, lowercase letter drops (or takes off), Ctrl+letter examines, 5/Enter/Space opens the item menu, numpad
 // + - * main/drop/examine. Returns a command key for NewMove() (with the
 // item preselected when it is an item action), or 0.
 int XHero::InventoryMenu()
@@ -192,7 +192,7 @@ int XHero::InventoryMenu()
             if (!k) continue;
             act = 0;
             for (const auto& a : acts) if (a.label == k) { act = a.key; break; }
-        } else if (how == '-' || (how >= 'A' && how <= 'Z')) {
+        } else if (how == '-' || (how >= 'a' && how <= 'z')) {
             act = IsWorn(it) ? ACT_TAKEOFF : 'd';
         } else if (how == '*' || (how >= 1 && how <= 26)) {
             act = ACT_EXAMINE;

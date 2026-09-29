@@ -9,11 +9,19 @@
   body { margin: 0; background: var(--bg); color: var(--fg); }
   #screen { margin: 8px; font: 16px/1.15 monospace; white-space: pre; }
   #screen .cur { outline: 1px solid #c0c0c0; }
+  #screen.split { margin-bottom: 0; }
+  #below { margin: 0 8px 8px; font: 16px/1.15 monospace; white-space: pre; }
+  #map { display: block; margin: 0 8px; image-rendering: pixelated; }
+  #bar { margin: 8px; font: 12px monospace; }
+  #bar button { font: inherit; }
   #status { margin: 8px; font: 12px monospace; color: #888; }
 </style>
 </head>
 <body>
+<div id="bar"><button id="tiles">Tiles: DawnLike</button> <button id="zout">&minus;</button><button id="zin">+</button></div>
 <pre id="screen" tabindex="0"></pre>
+<canvas id="map" hidden></canvas>
+<pre id="below" hidden></pre>
 <div id="status">Loading...</div>
 <script src="page.js"></script>
 <script async src="avanor.js"></script>

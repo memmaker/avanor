@@ -17,7 +17,7 @@
   `XMsgWin::Add` skipped under `__EMSCRIPTEN__` (history `M` keeps all).
   Help: `manual/kblayout.html`. Local build: Homebrew emcc on PATH
   (`EMSDK` optional).
-- **Stage 3 (Enter menu + inventory): done.** Next: stage 4 (tiles).
+- **Stage 3 (Enter menu + inventory): done.**
   Code: `player/xhero_menu.cpp` (in Makefile SRCS): `XHero::CommandMenu()`
   (Enter; static table grouped as `manual/kblayout.html`, no moves) and
   `XHero::InventoryMenu()` (`i`); both return a command key that
@@ -32,11 +32,49 @@
   `rvip_pre_state` (1 pending, 2 used) + `rvip_pre_oneshot`, taken in
   `XHero::Inventory()` without drawing; cleared at the next `NewMove()` key
   read; `rvip_reopen` reopens `i` unless `HostileInView()`. `i` keys:
-  lowercase letter = main action, uppercase = drop/take off, Ctrl+letter =
+  letter as shown (uppercase) = main action, lowercase = drop/take off
+  (swapped in stage 4: the shown letter used to drop), Ctrl+letter =
   examine, 5/Enter = item menu, + - * numpad, 4/6 = equipment, other keys =
   normal command (filter keys `[|{}'=!?"\%]$X` still filter).
   Explore: ambient messages via `msgwin.AddAmbient()` (corpse smell/decay,
   `item/xcorpse.cpp`); explore compares `msgwin.Important()`.
+- **Stage 4 (tiles): done.** Next: stage 5 (web page and windows).
+  Set: **DawnLike** only (fallback set; Avanor ships no tiles, upstream/
+  SourceForge have none; fantasy theme so no need to ask). Credit
+  DragonDePlatino + DawnBringer (CC BY 4.0; README done, Help in stage 6).
+  `web/mkdawn.py` reads the world's ids (tiles.lua terrain, Monster.new +
+  class, Template.new, Item/Food.new, Plant.new, PotionColour.new,
+  TrapType.new, MapObject.new, hero races) and writes `web/tiles-dawn.png`
+  (16x16, 16 per row, original size, 691 slots; "floor+sprite" slots are
+  composites of two DawnLike sprites) + `port/dawn_map.inc` (key → slot).
+  Coverage (own DawnLike sprite per id; rest same-set stand-ins): terrain
+  27/27, monsters 112/112, hero races 7/7, item types 76/76, special
+  items/food 24/24, potion appearances 37/42 (6 share a sprite), plants
+  18/18, traps 7/7, map objects 10/12 (furniture, outer objects stay text)
+  = 318/325 = 97.8%. Unknown ids fall back by monster class / ItemKind.
+  Code: `port/rvip_tiles.cpp` (`RvipTerrainTile/ObjectTile/ItemTile/
+  CreatureTile`), called from `XMap::Put()` (`map/map.cpp`, `#ifdef
+  __EMSCRIPTEN__`) → `be_tile(sx, sy, bg, fg, dim, ch, rgb)`
+  (`port/be_web.cpp`), sent per present only while the screen cell still
+  shows that char+colour; -2 = map cell as text, -1 = not map. `vStore`
+  suspends tiles until `vRestore` (menus/lists over the map = text).
+  Floors autotile (16 per style, bordered where the real neighbour's
+  terrain differs), walls join walls/doors (Movability::WALL). Potions by
+  appearance (`PotionDescription::force_color`), herbs by species only
+  once identified (`XHerb::Species()`, added), traps by type
+  (`XTrap::GetTrapType()`, added), stairs by the object's own glyph (type
+  isn't stored), items by `GetContentId()` then `it` then kind. Memory:
+  `XMapTile::rvip_bg/fg` (not saved; after a load remembered cells whose
+  glyph is the terrain's get the terrain tile, others text); remembered =
+  dim flag, page darkens.
+  Page (still stage-1 `<pre>`): map rows on a `<canvas>` (16px × zoom,
+  nearest-neighbour, `drawImage`), text rows above/below as `<pre>`; bar
+  with Tiles button (DawnLike → None) and −/+ zoom (1..6). Pref file
+  `/home/web_user/.avanor/web-tiles` = "<set name> <zoom>", read in the
+  preRun `syncfs` callback before the sheet loads; `sheetGen` guards late
+  loads. Tested in the pane: new game, tiles, explore, remembered dim, i
+  menu text-only, None sticks over reload, uppercase D drinks / lowercase
+  e drops. IDBFS db deleted after.
 - Folder `/home/user/avanor` (cloud), repo `memmaker/avanor`, branch
   `claude/loving-hawking-5x9q75`. Pristine upstream = `20a0f59` "Two more random
   mines" (jaydg/avanor revival, v0.6.0; only `main` upstream).
@@ -70,5 +108,5 @@
   no reports. Build removed.
 - **Browser:** headless Chromium (Playwright): title → New game → birth → walks
   in the Valley, no console errors.
-- **Open:** item prompts can't switch pack/equipment/floor with 4/6 (only `i` → equipment); examine is a one-line message (no item description in the game); no mouse yet (page is the stage-1 `<pre>`, stage 5). Hostile in view blocks explore by design (Valley bandits). Save persistence/exit path untested in browser; birth screens need
+- **Open:** stage 5 must move the map canvas into an rvip-wm window (map scrolls with the hero; now the canvas is 80 cells wide and the page scrolls) and menus into pop-ups; nested vStore menus re-enable tiles on the inner vRestore. Item prompts can't switch pack/equipment/floor with 4/6 (only `i` → equipment); examine is a one-line message (no item description in the game); no mouse yet (page is the stage-1 `<pre>`, stage 5). Hostile in view blocks explore by design (Valley bandits). Save persistence/exit path untested in browser; birth screens need
   ~150 ms between keys in tests.

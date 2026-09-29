@@ -42,7 +42,7 @@ for f in $SRCS; do
   for d in $VPATH; do [ -f "$d/$f" ] && { src="$d/$f"; break; }; done
   OBJS="$OBJS $OBJ/${f%.cpp}.o"
 done
-OBJS="$OBJS $OBJ/be_web.o $OBJ/fmt_format.o $OBJ/fmt_os.o"
+OBJS="$OBJS $OBJ/be_web.o $OBJ/rvip_tiles.o $OBJ/fmt_format.o $OBJ/fmt_os.o"
 ZOBJS=""
 for f in $EXT/zstd/lib/common/*.c $EXT/zstd/lib/compress/*.c $EXT/zstd/lib/decompress/*.c; do
   ZOBJS="$ZOBJS $OBJ/zstd_$(basename "${f%.c}").o"
@@ -56,6 +56,7 @@ NP=$(nproc 2>/dev/null || sysctl -n hw.ncpu)
     echo "em++ -MMD $CXXFLAGS -c $src -o $OBJ/${f%.cpp}.o"
   done
   echo "em++ -MMD $CXXFLAGS -c port/be_web.cpp -o $OBJ/be_web.o"
+  echo "em++ -MMD $CXXFLAGS -c port/rvip_tiles.cpp -o $OBJ/rvip_tiles.o"
   echo "em++ $OPT $SAN -std=c++17 -fexceptions -isystem $EXT/fmt/include -c $EXT/fmt/src/format.cc -o $OBJ/fmt_format.o"
   echo "em++ $OPT $SAN -std=c++17 -fexceptions -isystem $EXT/fmt/include -c $EXT/fmt/src/os.cc -o $OBJ/fmt_os.o"
   for f in $EXT/zstd/lib/common/*.c $EXT/zstd/lib/compress/*.c $EXT/zstd/lib/decompress/*.c; do
@@ -79,9 +80,10 @@ em++ $OPT $SAN -fexceptions -o web/dist/avanor.js $OBJS $ZOBJS \
   -sASYNCIFY -sASYNCIFY_STACK_SIZE=262144 -sSTACK_SIZE=8388608 \
   -sALLOW_MEMORY_GROWTH -sINITIAL_MEMORY=128MB \
   -sEXPORTED_FUNCTIONS=_main,_be_pushkey \
-  -sEXPORTED_RUNTIME_METHODS=FS,IDBFS,HEAPU8,HEAPU32,callMain \
+  -sEXPORTED_RUNTIME_METHODS=FS,IDBFS,HEAPU8,HEAPU32,HEAP32,callMain \
   -sFORCE_FILESYSTEM -lidbfs.js -sENVIRONMENT=web \
   --preload-file world@/world --preload-file manual@/manual
 cp web/index.html web/dist/index.html
 cp web/page.js web/dist/page.js
+cp web/tiles-dawn.png web/dist/tiles-dawn.png
 echo "built web/dist"

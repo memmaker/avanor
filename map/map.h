@@ -164,6 +164,8 @@ struct XMapTile {
     bool visible;                    // visible for HERO!!!
     char known;                      // for hero memory
     unsigned color;                  // for hero memory
+    // RVIP tiles: the sprites last seen here (not saved; -1 = none).
+    short rvip_bg = -1, rvip_fg = -1;
 
     // Pointer to an object which describes this place. It can be nullptr, Shop,
     // special room etc. It will be useful to mark all rooms in cave (to create

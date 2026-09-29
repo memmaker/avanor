@@ -377,6 +377,9 @@ Avanor is released under the **GNU General Public License version 2 or later (GP
 
 ---
 
+The browser version's map tiles are DawnLike by DragonDePlatino, palette by
+DawnBringer, licensed CC BY 4.0 (`web/tiles-dawn.png`, built by `web/mkdawn.py`).
+
 ## Original Credits
 
 **Original Author:**

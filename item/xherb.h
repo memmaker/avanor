@@ -151,6 +151,7 @@ class XHerb : public XAnyFood
         // registered it under.
         std::string species;
     public:
+        const std::string& Species() const { return species; }
         DECLARE_CREATOR(XHerb, XAnyFood);
         explicit XHerb(std::string _species);
         XHerb(XHerb * copy) : XAnyFood((XAnyFood*)copy), species(copy->species) { }

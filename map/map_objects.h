@@ -148,6 +148,7 @@ class XTrap final : public XMapObject
         XGUID last_activator{};
     public:
         int activation_count = 0;
+        const TRAP_TYPE& GetTrapType() const { return trap_type; }
         DECLARE_CREATOR(XTrap, XMapObject);
         XTrap() : trap_type(), trap_level()
         {

@@ -10,3 +10,5 @@ void be_cursor(int x, int y);
 int be_kbhit();
 int be_getkey();
 void be_delay(int ms);
+// Map tiles off while a stored screen is covered (vStore .. vRestore).
+void be_tiles_suspend(bool on);

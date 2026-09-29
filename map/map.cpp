@@ -30,6 +30,9 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "item/item.h"
 #include "map/map.h"
 #include "map/map_objects.h"
+#ifdef __EMSCRIPTEN__
+#include "port/rvip_tiles.h"
+#endif
 
 void XTileType::RegisterLua(sol::state_view& lua)
 {
@@ -563,12 +566,34 @@ void XMap::PutChar(const int x, const int y, const char c, const int color) cons
 
 void XMap::Put(XCreature * cr) const
 {
+#ifdef __EMSCRIPTEN__
+    // What each cell shows, for the map tiles: the char+colour drawn and
+    // the sprites the game's data gives for it (port/rvip_tiles.cpp).
+    char tch = ' ';
+    unsigned trgb = xBLACK;
+    int tbg = -1, tfg = -1;
+    bool tdim = false;
+    auto put = [&](int sx, int sy, char c, unsigned rgb) {
+        vPutCh(sx, sy, c, rgb);
+        tch = c;
+        trgb = rgb;
+    };
+#else
+    auto put = [](int sx, int sy, char c, unsigned rgb) { vPutCh(sx, sy, c, rgb); };
+#endif
     for (int i = 0; i < SCR_HGT && wy + i < hgt; i++) {
         for (int j = 0; j < SCR_LEN && wx + j < len; j++) {
             XMapTile* tmap = Cell(wx + j, wy + i);
+#ifdef __EMSCRIPTEN__
+            tbg = tfg = -1;
+            tdim = false;
+#endif
 
             if (!tmap) {
                 vPutCh(j + SCR_X, i + SCR_Y, ' ', xBLACK);
+#ifdef __EMSCRIPTEN__
+                be_tile(j + SCR_X, i + SCR_Y, -1, -1, false, ' ', xBLACK);
+#endif
                 continue;
             }
 
@@ -578,11 +603,20 @@ void XMap::Put(XCreature * cr) const
 
             if (lit) {
                 auto* trap = dynamic_cast<XTrap *>(tmap->pSpecialObject.get());
+#ifdef __EMSCRIPTEN__
+                tbg = RvipTerrainTile(this, wx + j, wy + i);
+#endif
 
                 // Everything standing here is drawn, except a trap the
                 // hero has not found yet.
                 if (tmap->pSpecialObject && (!trap || trap->isDiscovered())) {
-                    vPutCh(j + SCR_X, i + SCR_Y, tmap->pSpecialObject->view, tmap->pSpecialObject->color);
+                    put(j + SCR_X, i + SCR_Y, tmap->pSpecialObject->view, tmap->pSpecialObject->color);
+#ifdef __EMSCRIPTEN__
+                    tfg = RvipObjectTile(tmap->pSpecialObject.get());
+                    if (tfg < 0) {
+                        tbg = -1;
+                    }
+#endif
 
                     if (tmap->visible) {
                         tmap->color = tmap->pSpecialObject->color;
@@ -591,7 +625,10 @@ void XMap::Put(XCreature * cr) const
                 } else if (!tmap->item_list.empty()) {
                     const XItem* item = tmap->item_list.begin()->get();
 
-                    vPutCh(j + SCR_X, i + SCR_Y, item->view, item->color);
+                    put(j + SCR_X, i + SCR_Y, item->view, item->color);
+#ifdef __EMSCRIPTEN__
+                    tfg = RvipItemTile(item);
+#endif
 
                     if (tmap->visible) {
                         tmap->color = item->color;
@@ -600,23 +637,49 @@ void XMap::Put(XCreature * cr) const
                 } else {
                     //int tn = (i + wy) * len + j + wx;
                     int n = tmap->n;
-                    vPutCh(j + SCR_X, i + SCR_Y, std_tile_data[n].view,
+                    put(j + SCR_X, i + SCR_Y, std_tile_data[n].view,
                            JitterRGB(std_tile_data[n].color, wx + j, wy + i));
                 }
 
+#ifdef __EMSCRIPTEN__
+                if (tmap->visible) {
+                    tmap->rvip_bg = static_cast<short>(tbg);
+                    tmap->rvip_fg = static_cast<short>(tfg);
+                }
+#endif
+
                 if (tmap->pMonster && cr->isCreatureVisible(tmap->pMonster.get())) {
                     XCreature * xb = tmap->pMonster.get();
-                    vPutCh(xb->x - wx + SCR_X, xb->y - wy + SCR_Y, xb->view, xb->color);
+                    put(xb->x - wx + SCR_X, xb->y - wy + SCR_Y, xb->view, xb->color);
+#ifdef __EMSCRIPTEN__
+                    tfg = RvipCreatureTile(xb);
+                    if (tbg < 0) {
+                        tbg = RvipTerrainTile(this, wx + j, wy + i);
+                    }
+#endif
                 }
             } else {
-                vPutCh(j + SCR_X, i + SCR_Y, ' ', xBLACK);
+                put(j + SCR_X, i + SCR_Y, ' ', xBLACK);
             }
 
             // Remembered, not seen: the same glyph and colour, dimmed,
             // so the hero's field of view reads at a glance.
             if (tmap->known && !lit) {
-                vPutCh(j + SCR_X, i + SCR_Y, tmap->known, DimRGB(tmap->color, RememberedBrightness()));
+                put(j + SCR_X, i + SCR_Y, tmap->known, DimRGB(tmap->color, RememberedBrightness()));
+#ifdef __EMSCRIPTEN__
+                tdim = true;
+                if (tmap->rvip_bg >= 0) {
+                    tbg = tmap->rvip_bg;
+                    tfg = tmap->rvip_fg;
+                } else if (tmap->known == std_tile_data[tmap->n].view) {
+                    // Restored from a save: memory holds only the glyph.
+                    tbg = RvipTerrainTile(this, wx + j, wy + i);
+                }
+#endif
             }
+#ifdef __EMSCRIPTEN__
+            be_tile(j + SCR_X, i + SCR_Y, tbg, tfg, tdim, tch, trgb);
+#endif
         }
 
         // A map narrower than the screen reaches only part of the way
