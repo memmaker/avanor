@@ -328,7 +328,10 @@ EM_JS(void, be_js_beacon, (const char* ev, const char* name, const char* killer,
         if (window.RvipWM && RvipWM.report) RvipWM.report(q); else fetch('/roguelikes/beacon?' + q, { keepalive: true, mode: 'no-cors' }).catch(function () {});
     } catch (e) {}
 });
+bool be_run_over = false;
+
 void be_run_end(const char* ev, const char* name, const char* killer, long score, int turns, int lvl)
 {
+    be_run_over = true;
     be_js_beacon(ev, name, killer, (double)score, turns, lvl);
 }

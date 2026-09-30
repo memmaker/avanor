@@ -396,9 +396,9 @@ void XGame::Run()
     XObject::InvalidateAllObjects();
 
 #ifdef __EMSCRIPTEN__
-    // RVIP: the web build autosaves before stairs down; a dead hero's
-    // save goes, or reloading the page would bring the dead back.
-    if (XQuest::quest.hero_die == 1) {
+    // RVIP: the web build autosaves before stairs down; a reported run's
+    // save goes (death, quit, win), or a reload would resume and report it again.
+    if (be_run_over) {
         std::remove(vMakePath(HOME_DIR, std::string(XArchive::PLAYER_SLOT) + ".svg.zst").c_str());
         be_saved();
     }
