@@ -5,7 +5,6 @@
 id: overworld
 name: Overworld
 category: world monster object
-under: world/green_grass_0
 legend: ! monster/black_scorpion
 legend: " monster/captain_orc
 legend: # monster/carrion_crawler
@@ -91,54 +90,82 @@ legend: w world/sand_9
 legend: x world/stone_floor_0
 legend: y world/stone_floor_1
 legend: z world/stone_floor_10
-legend: { world/stone_floor_2
-legend: | world/stone_floor_4
-legend: } world/stone_floor_5
-legend: À world/stone_floor_6
-legend: Á world/stone_floor_8
-legend: Â world/stone_floor_9
+legend: { world/stone_floor_11
+legend: | world/stone_floor_2
+legend: } world/stone_floor_4
+legend: À world/stone_floor_5
+legend: Á world/stone_floor_6
+legend: Â world/stone_floor_7
+legend: Ã world/stone_floor_8
+legend: Ä world/stone_floor_9
 legend: T world/tree
 legend: < world/up
 legend: ~ world/water
-legend: Ã world/window_3
-legend: Ä world/wood_wall_10
-legend: Å world/wood_wall_12
-legend: Æ world/wood_wall_3
-legend: Ç world/wood_wall_5
-legend: È world/wood_wall_6
-legend: É world/wood_wall_9
+legend: Å world/window_3
+legend: Æ world/wood_wall_10
+legend: Ç world/wood_wall_12
+legend: È world/wood_wall_3
+legend: É world/wood_wall_5
+legend: Ê world/wood_wall_6
+legend: Ë world/wood_wall_9
 map:
 + FFOOFFFFF2FFFOOFFFFFFFFFFFFFFFFFFFFFFGtr~~=~~trMOOOOOOOOOOOOOOOF
 + FGTTMFFFFFOOGTTMF;FFOOOOOOOOOOOFFFFFFGtr~~=~~trNY_____________`M
-+ FGTHFFFFFGTTQRJFOFFGÇÆÆÆÃÆÆÃÆÆÈMFFFFFGtr~~=~~trNZWWW[[WWWWWWWWXM
-+ FOJFFFFFFFRKTNTNTMFGÅzÁÁÁÁÁÁÁÂÅMFFFFFGtr~~=~~trNZWWXaa^[WWWWWWXM
-+ GTTMFFFFF.GTLFRFJFFGÅ{xxxxxxxyÅMFFFFFGtr~~=~~trNZWWW`abb^[WWWWXM
-+ GTTMFFFFFFFKTMOGTMFGÅ{xxxxxxxyÅMFFFFFGtr~~=~~trNZWWWW_`bVbZWWWXM
-+ FSTMFFFFFOGTTNTMJFFGÅ{xxx,xxxyÅMFFFFFGtr~~=~~trNZWWWWWW___WWWWXM
-+ FFRFFOFFGTMJRGTNTMFGÅÀ|||||||}ÅMFFFFFGtr~~=~~t5NZWWWWWWWWWWWWWXM
-+ FFFFGTQFGTNTMFJFJOFGÉÆÆÆÆ+ÆÆÆÆÄMFFFFFGtr~~=~~trNZWWWWWWWWWWWWWXM
++ FGTHFFFFFGTTQRJFOFFGÉÈÈÈÅÈÈÅÈÈÊMFFFFFGtr~~=~~trNZWWW[[WWWWWWWWXM
++ FOJFFFFFFFRKTNTNTMFGÇzÃÃÃÃÃÃÃÄÇMFFFFFGtr~~=~~trNZWWXaa^[WWWWWWXM
++ GTTMFFFFF.GTLFRFJFFGÇ|xxxxxxxyÇMFFFFFGtr~~=~~trNZWWW`abb^[WWWWXM
++ GTTMFFFFFFFKTMOGTMFGÇ|xxxxxxxyÇMFFFFFGtr~~=~~trNZWWWW_`bVbZWWWXM
++ FSTMFFFFFOGTTNTMJFFGÇ|xxx,xxxyÇMFFFFFGtr~~=~~trNZWWWWWW___WWWWXM
++ FFRFFOFFGTMJRGTNTMFGÇÁ}}}x}}}ÀÇMFFFFFGtr~~=~~t5NZWWWWWWWWWWWWWXM
++ FFFFGTQFGTNTMFJFJOFGËÈÈÈÈ+ÈÈÈÈÆMFFFFFGtr~~=~~trNZWWWWWWWWWWWWWXM
 + FOFFOSTMFJFJFPTNTTMFRRRRRRRRRRRFFFFFFGtr~~=~~trN^[[[[[[[[[[[[[]M
 + GTMGTMRFGTNTNTTMSTMFFFF3FFFFFFFFFFFFFGtr~~=~~trMRRRRRRRRRRRRRRRF
 + PTQOJOOOOJPTQJJOOJOOOOOOOOOOOOOOOOOOOPvu~~=~~vuQOOOOOOOOOOOOOOOO
 + ooooooooooooooooooooooooooooooooooooooop?????qooooooooooooo!oooo
 + RRRSTTHRRRSTTTIT/JRRRRRRRRRRRSgHRRRRRSsw~~=~~"wH*RRRRRRRRRRRRRRR
 + FFFGTHFFFFFRJRFRGTMFOOOOOOOOOGiMFFFFFGtr~~=~~trMFOOOOOOOOOOOOFFF
-+ FFFFRFFFFOFGTMFFGTMGÇÆÆÆ'ÆÆÆÈNiMFFFFF0tr~~=~~trMGCBBBBBBBBBBDMFF
-+ F(F%FFFFPTMFROFFFRFGÅzÁÁÁÁÁÂÅNiMFFFFFGtr~~=~~trMGAHJJJJJJJJSAMFF
-+ FFFFOFFGTLFFGTQFOFFGÅ{xxxxxyÅNiMFFFFFGtr~~=~~trMGANfmmmmmmnNAMFF
-+ FFFGTQFGTTMOFSTNTMFGÅ{xxxxxyÅNiM:FFFFGtr~~=~~8rMGANhd)dddde6AMF1
-+ FOFFSTMGTLGTMORFROFGÅ{xxxxxyÅNiMFFFFFGtr~~=~~trMGANhddddddeNAMFF
-+ GTMOPTMFKTQRUTMOPTMGÅÀ|||||}ÅNiMFFFFFGtr~~=~~trMGA-hddddddeNAMFF
-+ FJGTTHFGTTTMORPTTHFGÉÆÆÆÆÆÆÆÄ4iMFFFFFGtr~~=~~trMGANljjjjjjkNAMFF
++ FFFFRFFFFOFGTMFFGTMGÉÈÈÈ'ÈÈÈÊNiMFFFFF0tr~~=~~trMGCBBBBBBBBBBDMFF
++ F(F%FFFFPTMFROFFFRFGÇzÃÃxÃÃÄÇNiMFFFFFGtr~~=~~trMGAHJJJJJJJJSAMFF
++ FFFFOFFGTLFFGTQFOFFGÇ|xxxxxyÇNiMFFFFFGtr~~=~~trMGANfmmmmmmnNAMFF
++ FFFGTQFGTTMOFSTNTMFGÇ|xxxxxyÇNiM:FFFFGtr~~=~~8rMGANhd)dddde6AMF1
++ FOFFSTMGTLGTMORFROFGÇ|xxxxxyÇNiMFFFFFGtr~~=~~trMGANhddddddeNAMFF
++ GTMOPTMFKTQRUTMOPTMGÇÁ}}}}}ÀÇNiMFFFFFGtr~~=~~trMGA-hddddddeNAMFF
++ FJGTTHFGTTTMORPTTHFGËÈÈÈÈÈÈÈÆ4iMFFFFFGtr~~=~~trMGANljjjjjjkNAMFF
 + GTNTH<FORRRPTNcHRFFFRRRRRRRRRGiMFFFFFGtr~~=~~trMGA7JJJJJJJJPAMFF
 + FJFR$FGTMFGTHGTMOFFFFFFFFFFFFGiMFFFFFGtr~~=~~trMGEBBBBBBBBBB@MFF
 + GTMFFFFRFFFRFFRGTMFFFFFFFFFFFGiMFFFFFGtr~~=~~trMFRRRRRRRRRRRRFFF
 + FRFFF9FFFFFFFFFFRFFFFFFFFFFFFGiMFFFFFGtr~~=~~trMFFFFFF#FFFFFFFFF
+ground:
++          F
++                  F
++ 
++ 
++          F
++ 
++                          x
++                                               r
++                          Â
++ 
++                        F
++ 
++                                                            o
++                 H                            s  R
++ 
++                         {            G
++  F F
++ 
++                                 F            t       d     N   F
++ 
++             G                                     N
++                              N
++      F        T                                   Q
++     F
++ 
++      F                                                F
 
 id: dungeon
 name: Dungeon level
 category: world monster object
-under: world/cave_floor_0
 legend: ! monster/bat
 legend: " monster/bearded_devil
 legend: # monster/beelzevile
@@ -226,11 +253,35 @@ map:
 +    ]YYYYYYYYYYYYYW       ]YYYYYYYYYYYYYYYW     XRPPPPPPPPPPPPPQX
 +                                                ]YYYYYYYYYYYYYYYW
 + 
+ground:
++ 
++ 
++      S     S
++     J   J    J                     M       M      J
++                M     M     J                 J    J   J
++            J                                   J
++          J                  O
++      P                                                     J
++         O                                          P
++                                                     O
++                             O
++                                   S
++         O                        J
++                                  J                  O
++                             K        J                 S
++                                                      J
++     N   J     J  M       M   S
++                                J                N
++            JJ             N     J    J   M     M
++      J          K              J                N
++       P       P                                    J        J
++ 
++ 
++ 
 
 id: terrain
 name: All terrain
 category: world
-under: world/stone_floor_0
 legend: ! world/altar
 legend: " world/black_marble_wall_0
 legend: # world/black_marble_wall_1
@@ -578,11 +629,43 @@ map:
 + šŗšŗšŗšŗšŗšŗšŗšŗšŗšššššššššššššššššššššššššššššššššššššššššššššššš
 + ŔTŜ~Ŝ=Ŝ&ŜàŜāŜÏŜ5ŜŴśŹœŸœŶœżœŷœźœŻœ<œ>œ'œ+œųœ!œ{œŵœÎœĂœœœœœœœœœœœœœœ
 + œšœšœšœšœšœšœšœšœšœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœ
+ground:
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++ 
++                    œ œ œ œ œ œ œ œ œ œ œ œ œ œ œ œ œ
++ 
 
 id: bestiary
 name: Every monster
 category: monster
-under: world/stone_floor_0
 legend: ! monster/ahkulan
 legend: " monster/any_bat
 legend: # monster/any_blob
@@ -753,11 +836,30 @@ map:
 +  üøööööööööööööööööööööööööööööööööööööööö÷ü
 +  Āýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýû
 + 
+ground:
++ 
++ 
++ 
++    ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò
++ 
++    ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò
++ 
++    ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò
++ 
++    ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò
++ 
++    ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò
++ 
++    ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò
++ 
++    ò ò ò ò ò ò ò ò ò ò ò ò ò ò ò
++ 
++ 
++ 
 
 id: items
 name: Every item
 category: object
-under: world/stone_floor_0
 legend: ! object/alchemy_set
 legend: " object/alchemy_set_2
 legend: # object/amulet
@@ -976,4 +1078,26 @@ map:
 +  īĤÌġÆġÍġÈġÅġÖġÕġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
 +  īħĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĦī
 +  įĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĪ
++ 
+ground:
++ 
++ 
++ 
++    ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ
++ 
++    ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ
++ 
++    ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ
++ 
++    ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ
++ 
++    ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ
++ 
++    ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ
++ 
++    ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ ġ
++ 
++    ġ ġ ġ ġ ġ ġ ġ
++ 
++ 
 + 

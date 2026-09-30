@@ -7,7 +7,8 @@ Reads the ids from web/avanor-dawnlike.rec, writes web/avanor-scenes.rec:
              style, the single terrains, map objects and traps
   bestiary   every monster, items  every item
 Tiles as port/rvip_tiles.cpp picks them: a floor is bordered on the sides whose
-neighbour is other terrain, a wall joins walls and doors. Each scene of a
+neighbour is other terrain, a wall joins walls and doors; a thing is drawn over
+its cell's terrain (ground), as map.cpp sends bg and fg. Each scene of a
 category asserts it shows every id of it. Run after mkdawn.py:
   python3 web/mkscenes.py"""
 import os, random, sys
@@ -56,48 +57,42 @@ class Scene:
         for k, (x, y) in zip(keys, spots):
             self.put(k, x, y)
 
-    def cells(self):
+    def terrain(self, x, y):
+        """the terrain tile as rvip_tiles.cpp RvipTerrainTile() picks it"""
         def wallish(x, y):
             return (0 <= x < self.w and 0 <= y < self.h
                     and (self.terr[y][x] in WALLS or self.over[y][x] in ['world/' + d for d in DOORS]))
 
-        def same(x, y, t):   # outside the map counts as the same floor (rvip_tiles.cpp SameFloor)
+        def same(x, y, t):   # outside the map counts as the same floor (SameFloor)
             return not (0 <= x < self.w and 0 <= y < self.h) or self.terr[y][x] == t
-        out = []
-        for y in range(self.h):
-            row = []
-            for x in range(self.w):
-                t = self.terr[y][x]
-                if self.over[y][x] and self.over[y][x].startswith('world/'):
-                    row.append(self.over[y][x])   # doors, stairs, traps, objects: one cell, one id
-                    continue
-                if self.over[y][x]:
-                    row.append(self.over[y][x])   # drawn over the scene's "under" floor by the preview
-                    continue
-                if t is None:
-                    row.append(None)
-                elif t in FLOORS:
-                    m = sum(b for b, (dx, dy) in zip((8, 4, 2, 1), ((0, -1), (0, 1), (-1, 0), (1, 0))) if not same(x + dx, y + dy, t))
-                    row.append('world/%s_%d' % (t, m))
-                elif t in WALLS:
-                    m = sum(b for b, (dx, dy) in zip((8, 4, 2, 1), ((0, -1), (0, 1), (-1, 0), (1, 0))) if wallish(x + dx, y + dy))
-                    row.append('world/%s_%d' % (t, m))
-                else:
-                    row.append('world/' + t)
-            out.append(row)
-        return out
+        sides = list(zip((8, 4, 2, 1), ((0, -1), (0, 1), (-1, 0), (1, 0))))
+        t = self.terr[y][x]
+        if t is None:
+            return None
+        if t in FLOORS:
+            return 'world/%s_%d' % (t, sum(b for b, (dx, dy) in sides if not same(x + dx, y + dy, t)))
+        if t in WALLS:
+            return 'world/%s_%d' % (t, sum(b for b, (dx, dy) in sides if wallish(x + dx, y + dy)))
+        return 'world/' + t
+
+    def layers(self):
+        """(map, ground) as map.cpp sends a cell: the object, item or creature on top (fg), the cell's
+        terrain under it (bg); a cell with nothing on it is its terrain alone"""
+        top = [[self.over[y][x] or self.terrain(x, y) for x in range(self.w)] for y in range(self.h)]
+        ground = [[self.terrain(x, y) if self.over[y][x] else None for x in range(self.w)] for y in range(self.h)]
+        return top, ground
 
 
 MNEMONIC = {'world/up': '<', 'world/down': '>', 'world/door_closed': '+', 'world/door_open': "'",
             'world/water': '~', 'world/deep_water': '=', 'world/tree': 'T', 'world/lava': '&'}
 
 
-def rec(sc, sid, name, cats, under):
-    return dawnlike_rec.scene_lines(sid, name, cats, under, sc.cells(), MNEMONIC)
+def rec(sc, sid, name, cats):
+    return dawnlike_rec.scene_lines(sid, name, cats, *sc.layers(), mnemonic=MNEMONIC)
 
 
 def check(sc, cat):
-    used = {c for row in sc.cells() for c in row if c}
+    used = {c for grid in sc.layers() for row in grid for c in row if c}
     missing = [i for i in IDS[cat] if cat + '/' + i not in used]
     assert not missing, (cat, missing)
 
@@ -126,8 +121,10 @@ def overworld():
         s.terr[y][x] = t
     s.room(21, 3, 29, 7, 'wood_wall', 'stone_floor')     # a village: two houses and a fenced field
     s.terr[2][24], s.terr[2][27] = 'window', 'window'
+    s.terr[8][25] = 'stone_floor'   # a door stands on floor, the wall runs round it
     s.put('world/door_closed', 25, 8)
     s.room(21, 16, 27, 20, 'wood_wall', 'stone_floor')
+    s.terr[15][24] = 'stone_floor'
     s.put('world/door_open', 24, 15)
     s.fill(49, 15, 60, 23, 'fence')
     s.fill(50, 16, 59, 22, 'green_grass')
@@ -138,7 +135,7 @@ def overworld():
     spots = [(x, y) for y in range(26) for x in range(64) if s.terr[y][x] in ('green_grass', 'stone_floor', 'path', 'sand', 'road') and not s.over[y][x]]
     for k, xy in zip(things(rnd, 14, 10), rnd.sample(spots, 24)):
         s.put(k, *xy)
-    return rec(s, 'overworld', 'Overworld', ['world', 'monster', 'object'], 'world/green_grass_0')
+    return rec(s, 'overworld', 'Overworld', ['world', 'monster', 'object'])
 
 
 def dungeon():
@@ -167,7 +164,7 @@ def dungeon():
     spots = [(x, y) for (x0, y0, x1, y1) in rooms for y in range(y0, y1 + 1) for x in range(x0, x1 + 1) if s.free(x, y)]
     for k, xy in zip(things(rnd, 14, 20), rnd.sample(spots, 34)):
         s.put(k, *xy)
-    return rec(s, 'dungeon', 'Dungeon level', ['world', 'monster', 'object'], 'world/cave_floor_0')
+    return rec(s, 'dungeon', 'Dungeon level', ['world', 'monster', 'object'])
 
 
 def terrain():
@@ -207,7 +204,7 @@ def terrain():
             s.terr[y][x] = t
         x += 2
     check(s, 'world')
-    return rec(s, 'terrain', 'All terrain', ['world'], 'world/stone_floor_0')
+    return rec(s, 'terrain', 'All terrain', ['world'])
 
 
 def gallery(cat, sid, name, w, skip=()):
@@ -217,7 +214,7 @@ def gallery(cat, sid, name, w, skip=()):
     s.room(2, 2, w + 1, h + 1, 'stone_wall', 'stone_floor')
     s.scatter(keys, 3, 3, w, h)
     check(s, cat)
-    return rec(s, sid, name, [cat], 'world/stone_floor_0')
+    return rec(s, sid, name, [cat])
 
 
 out = ['# Remapper preview scenes for Avanor (web/mkscenes.py writes them; design time only)', '', '%rec: Scene', '']
