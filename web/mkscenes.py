@@ -217,6 +217,27 @@ def gallery(cat, sid, name, w, skip=()):
     return rec(s, sid, name, [cat])
 
 
+def card():
+    """the roguelikes index card (img/avanor.png, 12x5 tiles at 2x): the valley where a game starts, a
+    house, the plank road, the river, the hero and a villager, drawn with the current mapping"""
+    s = Scene(12, 5, 'green_grass')
+    s.fill(0, 0, 1, 4, 'wood_wall')
+    s.fill(0, 0, 0, 4, 'stone_floor')
+    s.fill(2, 0, 2, 4, 'path')
+    s.fill(7, 0, 9, 1, 'road')
+    s.fill(9, 0, 9, 4, 'sand')
+    s.fill(10, 0, 11, 4, 'water')
+    s.terr[1][11] = 'bridge'
+    s.put('monster/hero_human', 3, 3)
+    s.put('monster/farmer', 6, 1)
+    return dawnlike_rec.render(os.path.join(ROOT, 'web', 'avanor-dawnlike.rec'), *s.layers())
+
+
+INDEX = os.path.expanduser(os.environ.get('RVIP_INDEX', '~/Games/roguelikes-index'))
+if os.path.isdir(os.path.join(INDEX, 'img')):
+    card().save(os.path.join(INDEX, 'img', 'avanor.png'))
+    print('card: ' + os.path.join(INDEX, 'img', 'avanor.png'))
+
 out = ['# Remapper preview scenes for Avanor (web/mkscenes.py writes them; design time only)', '', '%rec: Scene', '']
 for r in (overworld(), dungeon(), terrain(), gallery('monster', 'bestiary', 'Every monster', 41),
           gallery('object', 'items', 'Every item', 51)):
