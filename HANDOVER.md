@@ -169,3 +169,16 @@
   downloaded; shop/options untested; no mouse; item prompts can't switch lists
   with 4/6; examine is one message line.
 - Remaining: stages 7-9 (repo memmaker/avanor exists).
+
+### Stage 7 (publish) - done
+- README starts with the upstream (jaydg/avanor @ 20a0f59, 0.6.0) + compare
+  link `memmaker/avanor/compare/20a0f59...main`; version already in Help
+  ("About this version") and Docs facts (repo link added to the fact).
+- Card in roguelikes-index (2001, "ADOM-inspired", img/avanor.png: 12x5
+  DawnLike tiles from the Valley at start, map zoom 32 = 2x). Tree:
+  `<li class="insp">` under ADOM - RogueBasin lists ADOM as influence and
+  avanor.sourceforge.net calls it "ADOM-like"; own C++ code. Year 2001
+  (RogueBasin first release 2001-11-28); upstream README says "created in
+  2000" (development start, not release). og tags live.
+- Stale branch claude/loving-hawking-5x9q75 deleted (ancestor of main).
+- Next: stage 8 (shrine), then 9.
