@@ -190,3 +190,21 @@
   found (rules of thumb + links). Cheats: `--god` exists upstream but the
   web build passes no command-line options, so not available.
 - Next: stage 9 (graveyard + leaderboard).
+
+### Stage 9 (graveyard + leaderboard) - done
+- Beacon: `be_run_end()` in `port/be_web.cpp` (EM_JS, `RvipWM.report`
+  outbox, fetch fallback). Sent from `XHero::EndGame(msg, report_ev,
+  killer)` (`player/xhero_game.cpp`): with `report_ev` it computes the
+  achievements score, reports and returns before `list.Run()`. Callers:
+  `XHero::Die()` before its "You died!!!" key wait (ev=death, killer =
+  `killer->name`, the Lua `:View` name; none for suicide/no killer),
+  `XQuest::WinGame()` (ev=win; Lua endings in `world/uniques/gefeon.lua`
+  and `ahkulan.lua`), `Q` confirmed in `player/xhero_input.cpp` (ev=quit).
+  Fields: g, ev, name, killer, score (the "You scored" number), turns
+  (`turn_count`), lvl. No depth (locations are named, no dungeon level).
+- Tested in the pane (temporary keys HP=1 / `WinGame`, removed): quit
+  held in outbox on 503 with id/at, sent on reload with 204; death
+  (killer=farmer, score = hiscore number) and win (score = "You scored").
+- Killer art: `roguelikes-index/killers/make.py avanor()` → 110 PNGs.
+- Open: `Q` and wins leave the autosave (only deaths delete it), so a
+  reload can resume a quit/won run.

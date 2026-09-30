@@ -317,3 +317,18 @@ void be_delay(int ms)
 // A game action's sound event (port/rvip_sound.h); the page plays it.
 EM_JS(void, be_js_sound, (const char* e), { if (Module.av.sound) Module.av.sound(UTF8ToString(e)); });
 void be_sound(const char* event) { be_js_sound(event); }
+
+// Graveyard/leaderboard report (RVIP stage 9); errors swallowed.
+EM_JS(void, be_js_beacon, (const char* ev, const char* name, const char* killer, double score, int turns, int lvl), {
+    try {
+        var p = [['g', 'avanor'], ['ev', UTF8ToString(ev)], ['name', name ? UTF8ToString(name) : ''],
+                 ['killer', killer ? UTF8ToString(killer) : ''], ['score', score], ['turns', turns], ['lvl', lvl]];
+        var q = p.filter(function (a) { return a[1] !== ''; })
+                 .map(function (a) { return a[0] + '=' + encodeURIComponent(a[1]); }).join('&');
+        if (window.RvipWM && RvipWM.report) RvipWM.report(q); else fetch('/roguelikes/beacon?' + q, { keepalive: true, mode: 'no-cors' }).catch(function () {});
+    } catch (e) {}
+});
+void be_run_end(const char* ev, const char* name, const char* killer, long score, int turns, int lvl)
+{
+    be_js_beacon(ev, name, killer, (double)score, turns, lvl);
+}

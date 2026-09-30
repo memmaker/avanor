@@ -232,7 +232,10 @@ class XHero final : public XCreature
         const char* GetRaceStr() const;
         const char* GetProfessionStr() const;
 
-        static void EndGame(const char* end_msg);
+        // RVIP: with report_ev ("death"/"win"/"quit") only compute the score,
+        // send the run report (graveyard beacon) and return - called before
+        // any key wait, so a tab closed on the end screens keeps the run.
+        static void EndGame(const char* end_msg, const char* report_ev = nullptr, const char* killer = nullptr);
 
         // ALCHEMY
         int LearnRecipe(PotionName pn1, PotionName pn2, PotionName pn3);

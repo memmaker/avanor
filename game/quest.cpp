@@ -62,6 +62,7 @@ void XQuest::SetFlag(const std::string& name, int value)
 void XQuest::WinGame(const std::string& msg)
 {
     hero_win = 1;
+    XHero::EndGame(msg.c_str(), "win");
     XHero::EndGame(msg.c_str());
 }
 

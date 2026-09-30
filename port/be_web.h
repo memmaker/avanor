@@ -26,5 +26,7 @@ void be_status_rows(int y0, int n);
 void be_at_cmd(bool on);
 // A save was written or removed: write IndexedDB.
 void be_saved();
+// A run ended (ev death/win/quit): graveyard beacon via RvipWM.report.
+void be_run_end(const char* ev, const char* name, const char* killer, long score, int turns, int lvl);
 // A finished message line (markup already expanded) for the log.
 void be_msg(const std::string& line);

@@ -180,6 +180,7 @@ void XHero::NewMove()
                     msgwin.Add("Are you sure you want to QUIT the game ");
 
                     if (GetTarget(TR_YES_NO)) {
+                        EndGame("Quit.", "quit");
                         _exit_flag = 1;
                     } else {
                         moved = 0;

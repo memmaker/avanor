@@ -156,7 +156,6 @@ void XHero::Die(XCreature * killer)
     l->map->Put(this);
     vRefresh();
 
-    vGetch();
     std::string str;
 
     if (killer == this) {
@@ -166,6 +165,10 @@ void XHero::Die(XCreature * killer)
     } else {
         str = fmt::format("Died at {}.", l->GetFullName());
     }
+
+    // RVIP: report before the key wait; killer as the game stores it.
+    EndGame(str.c_str(), "death", killer && killer != this ? killer->name.c_str() : nullptr);
+    vGetch();
 
     XQuest::quest.hero_die = 1;
 

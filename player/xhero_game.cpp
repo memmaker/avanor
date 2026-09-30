@@ -23,6 +23,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 // and the end of it all.
 
 #include "port/rvip_sound.h"
+#include "port/be_web.h"
 #include <filesystem>
 #include <iostream>
 #include <memory>
@@ -295,7 +296,7 @@ void XHero::CreateScreenShot()
     }
 }
 
-void XHero::EndGame(const char* end_msg)
+void XHero::EndGame(const char* end_msg, const char* report_ev, const char* killer)
 {
     // Static, so there is no `this` to write the tombstone for - it goes
     // through main_creature, whoever is standing in for the hero. In
@@ -380,6 +381,17 @@ void XHero::EndGame(const char* end_msg)
 
         score += quest->score;
     }
+
+#ifdef __EMSCRIPTEN__
+    if (report_ev) {
+        be_run_end(report_ev, hero->name.c_str(), killer, (long)score, (int)hero->turn_count, hero->level);
+        return;
+    }
+#else
+    if (report_ev) {
+        return;
+    }
+#endif
 
     list.AddItem(new XGuiItem_Text(fmt::format("You scored {}.", score)));
     list.SetCaption("<DECORATION>###<TEXT> Achievements <DECORATION>###");
