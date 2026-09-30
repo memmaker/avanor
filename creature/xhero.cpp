@@ -24,6 +24,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 // commands - is the player's interface rather than the hero's nature, and
 // lives in the xhero_*.cpp beside this one.
 
+#include "port/rvip_sound.h"
 #include <memory>
 #include <vector>
 #include <cereal/archives/json.hpp>
@@ -135,6 +136,8 @@ int XHero::PossibleWayCount(const int px, const int py) const
 
 void XHero::Die(XCreature * killer)
 {
+    RVIP_SOUND("death");
+
     if (XGame::isGodMode) {
         // God mode entails a choice about whether I die.
         msgwin.Add("You died!!! Continue game?");

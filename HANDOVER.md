@@ -147,18 +147,25 @@
 - **Open:** shop and death not tested in the browser this stage (death path: save removed, end screen, reload); no help.html yet (stage 6); no mouse. Item prompts can't switch pack/equipment/floor with 4/6 (only `i` → equipment); examine is a one-line message (no item description in the game); Hostile in view blocks explore by design (Valley bandits). Birth screens need
   ~150 ms between keys in tests.
 
-### Orchestrator note (stage 6 interrupted)
-- Stages 1–5 done and committed; `main-rvip` pushed to `memmaker` as `main`
-  (`d19fb8c`); live at https://ruzzoli.de/roguelikes/avanor/.
-- **Stage 6 (docs + sound) was interrupted mid-work.** Uncommitted edits in
-  creature/, magic/, player/, port/be_web.cpp, web/avanor.js are that agent's
-  unfinished sound/death-path work, not verified. Next agent: review `git diff`,
-  finish or revert, then do stage 6 fully.
-- Stage 6 brief extras: help sources `manual/`, https://avanor.sourceforge.net/,
-  https://www.roguebasin.com/index.php/Avanor (user-supplied; also for stage 8
-  shrine); credit DawnLike (DragonDePlatino, DawnBringer, CC BY 4.0); document
-  H explore, `<`/`>` stair walk, Enter menu, `i` item menus; exercise the death
-  path once (never run in stage 5).
-- Still open: shop/options/death untested in browser; no mouse; item prompts
-  can't switch lists with 4/6; examine is one message line.
-- Remaining: stages 6–9. Before stage 7 the repo exists already (memmaker/avanor).
+### Stage 6 (docs + sound) - done
+- Help: `web/make-help.py` → `dist/help.html` from the Docs entry
+  (`~/Desktop/Games/Roguelikes/Docs`: `avanor.html` in `build-docs.py`
+  with `parse_avanor()` reading the Enter-menu table in
+  `player/xhero_menu.cpp`, 46 keys; guide + Saving in `guides.py`). Credits:
+  Gaidukevich/Semashko/de Groot, DawnLike (DragonDePlatino, DawnBringer,
+  CC BY 4.0). `build-docs.py` currently stops at Omega (missing
+  `~/Games/omega/omegalib/help12.txt`, not ours) after writing avanor.html.
+- Sound: web search found no audio for Avanor (upstream has none), so
+  `web/mksounds.py` synthesizes one wav per `RVIP_SOUND("x")`
+  (`port/rvip_sound.h`, no-op natively) at game actions: hit/miss/mon_hit
+  (`InflictDamage`), kill, death, pickup, drop, eat, quaff, read, wear, shoot,
+  spell, pray, stairs, level. Audio ▾ → Sound effects, off by default, saved
+  in the layout file; sounds.json fetched when on (also at load if saved on).
+- Death path tested in the pane (temporary HP=1 hook, reverted): "You died",
+  Achievements, "Create Memory File?", score table, RIP, reload to title,
+  save removed. Tested: Help opens/Esc closes, sound plays after a real click
+  on the checkbox (quaff), remembered after reload.
+- Open: the death memory file (`<name>.mem`) is written to IDBFS but can't be
+  downloaded; shop/options untested; no mouse; item prompts can't switch lists
+  with 4/6; examine is one message line.
+- Remaining: stages 7-9 (repo memmaker/avanor exists).

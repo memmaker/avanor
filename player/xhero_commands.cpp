@@ -22,6 +22,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 // What a key does, once NewMove() has decided which key it was: the world
 // commands, the ones that act on something other than the pack.
 
+#include "port/rvip_sound.h"
 #include <cctype>
 #include <iostream>
 #include <memory>
@@ -347,6 +348,7 @@ int XHero::XShoot()
                     // Stays in contain - it's simply also worn now (see
                     // XBodyPart::Wear()).
                     bp->Wear(it.get());
+                    RVIP_SOUND("wear");
                     break;
                 }
 
@@ -909,6 +911,8 @@ void XHero::doSacrifice()
 
 void XHero::Pray()
 {
+    RVIP_SOUND("pray");
+
     XGuiList list;
 
     // One section per god a world declares, in the order it declared

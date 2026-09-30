@@ -22,6 +22,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 // The game around the game: making a character, saving, gaining a level,
 // and the end of it all.
 
+#include "port/rvip_sound.h"
 #include <filesystem>
 #include <iostream>
 #include <memory>
@@ -100,6 +101,7 @@ int ChooseFromMenu(const char* title, const std::vector<std::string>& names,
 
 void XHero::IncLevel()
 {
+    RVIP_SOUND("level");
     msgwin.Add("Congratulations! You have advanced to a new level. Press any key.");
     l->map->Put(this);
     vRefresh();

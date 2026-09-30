@@ -87,4 +87,6 @@ em++ $OPT $SAN -fexceptions -o web/dist/avanor-core.js $OBJS $ZOBJS \
 cp web/index.html web/dist/index.html
 cp web/avanor.js web/dist/avanor.js
 cp web/tiles-dawn.png web/dist/tiles-dawn.png
+python3 web/mksounds.py web/dist/sound
+python3 web/make-help.py web/dist/help.html
 echo "built web/dist"

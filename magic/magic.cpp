@@ -19,6 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
+#include "port/rvip_sound.h"
 #include <iostream>
 
 #include <algorithm>
@@ -293,6 +294,10 @@ RESULT XMagic::Cast(XSpell* spell, XCreature* caster, XCreature* on)
     const int power = GetSpellPower(spell, caster);
 
     if (caster->PP - spell->GetManaCost() >= 0) {
+        if (caster->isHero()) {
+            RVIP_SOUND("spell");
+        }
+
         if (caster->isInVisibleArea() && !caster->isHero()) {
             // Said as it looks from outside: casting at somebody names
             // them, so a shaman patching up a warrior reads as that rather

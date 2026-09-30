@@ -128,8 +128,32 @@
 	function placePop() { if (popOpen && rects.map) RvipWM.popup($('pop'), { center: true }); }
 	function popFont() { $('pop').style.fontSize = RvipWM.fontSize('msg') + 'px'; placePop(); }
 
+	/* ---------- audio ---------- */
+	/* events come from game actions (RVIP_SOUND -> port/be_web.cpp); web/mksounds.py
+	 * synthesizes one wav per event; rvip-sound.js plays them. Off by default;
+	 * nothing is fetched until Sound effects is on. Avanor has no music. */
+	window.avAudio = function () { return audio; };
+	var audio = { cfg: null, loading: false, played: 0 };
+	function play(name) {
+		if (!L || !L.sound) return;
+		if (!audio.cfg) {
+			if (!audio.loading) {
+				audio.loading = true;
+				fetch('sound/sounds.json').then(function (r) { return r.json(); })
+					.then(function (c) { audio.cfg = c; }).catch(function () { audio.loading = false; });
+			}
+			return;
+		}
+		var f = audio.cfg[name];
+		if (!f || !f.length) return;
+		audio.played++;                          /* testing */
+		RVIPSound.play([f[0]], 0.6);
+	}
+	function renderAudio() { $('chk-sound').checked = !!(L && L.sound); if (L && L.sound) play(''); }   /* fetch sounds.json now, not on the first event */
+
 	/* ---------- called by the game ---------- */
 	var av = {
+		sound: play,
 		map: function (ch, rgb, tl, len, hgt, hx, hy) {
 			M.len = len; M.hgt = hgt; M.ch = ch; M.rgb = rgb; M.tl = tl; M.hx = hx; M.hy = hy;
 			if (M.cur >= len * hgt) M.cur = -1;
@@ -164,7 +188,7 @@
 
 	/* ---------- layout ---------- */
 	function loadLayout() {
-		L = { cell: 24, tiles: 'DawnLike', face: '', mapFace: '' };
+		L = { cell: 24, tiles: 'DawnLike', face: '', mapFace: '', sound: false };
 		try {
 			var s = JSON.parse(Module.FS.readFile(LAYOUT_FILE, { encoding: 'utf8' }));
 			if (s && CELLS.indexOf(s.cell) >= 0) L.cell = s.cell;
@@ -172,6 +196,7 @@
 			if (s && typeof s.face === 'string') L.face = s.face;
 			if (s && typeof s.mapFace === 'string') L.mapFace = s.mapFace;
 			if (s && s.wm) L.wm = s.wm;
+			if (s && s.sound === true) L.sound = true;
 		} catch (e) { /* nothing saved yet */ }
 	}
 	var saveTimer = 0;
@@ -247,7 +272,7 @@
 			Module.addRunDependency('idbfs');
 			RvipApp.mount(function (err) {
 				if (err) app.status('Could not read saved games from IndexedDB (' + err + ').', true);
-				loadLayout();
+				loadLayout(); renderAudio();
 				$('game').hidden = false;
 				makeWM(); applyFace(); popFont();
 				useSet(L.tiles);
@@ -294,6 +319,11 @@
 
 	document.addEventListener('DOMContentLoaded', function () {
 		RvipWM.dropdown($('btn-file'), $('menu-file'));
+		RvipWM.dropdown($('btn-audio'), $('menu-audio'));
+		$('chk-sound').onchange = function () {
+			if (!L) { this.checked = false; return; }
+			L.sound = this.checked; if (L.sound) play(''); saveLayout();
+		};
 		RvipWM.fontOptions($('sel-font')); RvipWM.fontOptions(mapSel);
 		[[$('sel-font'), 'face'], [mapSel, 'mapFace']].forEach(function (a) {
 			a[0].onchange = function () { if (!L) return; L[a[1]] = this.value; saveLayout(); loadFace(this.value, true); this.blur(); };

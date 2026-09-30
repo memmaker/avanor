@@ -19,6 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
+#include "port/rvip_sound.h"
 #ifdef __EMSCRIPTEN__
 #include "port/be_web.h"
 #endif
@@ -401,6 +402,10 @@ int XCreature::continueEat()
 
 int XCreature::Eat(XAnyFood * food)
 {
+    if (isHero()) {
+        RVIP_SOUND("eat");
+    }
+
     int res = food->onEat(this);
 
     if (res) {
@@ -1118,6 +1123,10 @@ int XCreature::GetResistance(RESISTANCE tr)
 
 void XCreature::Die(XCreature* killer)
 {
+    if (killer && killer->isHero() && !isHero()) {
+        RVIP_SOUND("kill");
+    }
+
     assert(isValid());
 
     // LastStep() below drops the map cell's shared_ptr reference (pMonster),
@@ -1199,6 +1208,10 @@ bool XCreature::DropItem(XItem* i)
 
     if (flag) {
         // Adjust weight
+        if (isHero()) {
+            RVIP_SOUND("drop");
+        }
+
         UnCarryItem(i);
 
         // Drop() (via XMap::PutItem -> XItem::Own()) establishes the
@@ -1228,6 +1241,10 @@ bool XCreature::PickUpItem(XItem* i)
 
     if (flag) {
         if (CarryItem(i)) {
+            if (isHero()) {
+                RVIP_SOUND("pickup");
+            }
+
             i->x = -1;
             i->y = -1;
 
@@ -1464,6 +1481,10 @@ const char* XCreature::GetWoundMsg(int flag)
 
 void XCreature::MoveStairWay()
 {
+    if (isHero()) {
+        RVIP_SOUND("stairs");
+    }
+
     XCreature * tc = this;
     XLocation * xl = l;
 
@@ -1587,6 +1608,10 @@ void XCreature::GetRangeAttackInfo(int* range, int* hit, XDice * dmg)
 
 int XCreature::Shoot(int tx, int ty)
 {
+    if (isHero() && !(tx == x && ty == y)) {
+        RVIP_SOUND("shoot");
+    }
+
     if (tx == x && ty == y) {
         // can't do suicide!
         return 0;
@@ -1816,6 +1841,10 @@ int XCreature::continueRead()
 
 int XCreature::Read(XItem * item)
 {
+    if (isHero()) {
+        RVIP_SOUND("read");
+    }
+
     XSkill * skill = sk->GetSkill(XSkill::Skill::LITERACY);
 
     if (!skill) {

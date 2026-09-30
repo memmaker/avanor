@@ -313,3 +313,7 @@ void be_delay(int ms)
 {
     emscripten_sleep(ms);
 }
+
+// A game action's sound event (port/rvip_sound.h); the page plays it.
+EM_JS(void, be_js_sound, (const char* e), { if (Module.av.sound) Module.av.sound(UTF8ToString(e)); });
+void be_sound(const char* event) { be_js_sound(event); }

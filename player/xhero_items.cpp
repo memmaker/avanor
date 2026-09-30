@@ -26,6 +26,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 // remembers which list it last showed and how far down it was scrolled, so
 // that reopening it lands where the player left it.
 
+#include "port/rvip_sound.h"
 #include <memory>
 #include <fmt/format.h>
 
@@ -363,8 +364,10 @@ void XHero::Equipment(const std::optional<std::reference_wrapper<std::ofstream>>
                 if (picked) {
                     if (xqsa[n]->bp_uin == BP_HAND) {
                         xqsa[n]->Wear(picked.get());
+                        RVIP_SOUND("wear");
                     } else if (xqsa[n]->bp_uin == picked->bp) {
                         xqsa[n]->Wear(picked.get());
+                        RVIP_SOUND("wear");
                     }
                 }
             }
@@ -433,6 +436,7 @@ void XHero::DrinkPotion()
     auto pot = dynamic_cast<XPotion *>(pot_sp.get());
 
     if (pot) {
+        RVIP_SOUND("quaff");
         pot->onDrink(this);
         pot->UnCarry();
         pot->Invalidate();

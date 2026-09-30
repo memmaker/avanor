@@ -19,6 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
+#include "port/rvip_sound.h"
 #include <fmt/format.h>
 
 #include "creature/creature.h"
@@ -472,6 +473,14 @@ int XCreature::InflictDamage(DAMAGE_DATA_EX * pData)
 
         p = ((tohit + 1) * 20) / (tohit + todv + 1);
         v = vRand(20); /*0..19*/
+    }
+
+    if (pData->attacker && pData->attacker != this) {
+        if (pData->attacker->isHero()) {
+            RVIP_SOUND(v <= p ? "hit" : "miss");
+        } else if (isHero() && v <= p) {
+            RVIP_SOUND("mon_hit");
+        }
     }
 
     if (v <= p) {

@@ -5,6 +5,7 @@ RVIP stage 3: the Enter command menu and the inventory list with a cursor
 and item menus. GPL-2.0-or-later, like the rest of the game.
 */
 
+#include "port/rvip_sound.h"
 #include <vector>
 #include <fmt/format.h>
 
@@ -213,6 +214,7 @@ int XHero::InventoryMenu()
                 for (auto* bp : parts) if (!bp->Item()) { use = bp; break; }
                 if (use->Item()) use->UnWear();
                 use->Wear(it);
+                RVIP_SOUND("wear");
                 continue;
             }
             default:
