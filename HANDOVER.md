@@ -146,3 +146,19 @@
   in the Valley, no console errors.
 - **Open:** shop and death not tested in the browser this stage (death path: save removed, end screen, reload); no help.html yet (stage 6); no mouse. Item prompts can't switch pack/equipment/floor with 4/6 (only `i` → equipment); examine is a one-line message (no item description in the game); Hostile in view blocks explore by design (Valley bandits). Birth screens need
   ~150 ms between keys in tests.
+
+### Orchestrator note (stage 6 interrupted)
+- Stages 1–5 done and committed; `main-rvip` pushed to `memmaker` as `main`
+  (`d19fb8c`); live at https://ruzzoli.de/roguelikes/avanor/.
+- **Stage 6 (docs + sound) was interrupted mid-work.** Uncommitted edits in
+  creature/, magic/, player/, port/be_web.cpp, web/avanor.js are that agent's
+  unfinished sound/death-path work, not verified. Next agent: review `git diff`,
+  finish or revert, then do stage 6 fully.
+- Stage 6 brief extras: help sources `manual/`, https://avanor.sourceforge.net/,
+  https://www.roguebasin.com/index.php/Avanor (user-supplied; also for stage 8
+  shrine); credit DawnLike (DragonDePlatino, DawnBringer, CC BY 4.0); document
+  H explore, `<`/`>` stair walk, Enter menu, `i` item menus; exercise the death
+  path once (never run in stage 5).
+- Still open: shop/options/death untested in browser; no mouse; item prompts
+  can't switch lists with 4/6; examine is one message line.
+- Remaining: stages 6–9. Before stage 7 the repo exists already (memmaker/avanor).
