@@ -8,6 +8,8 @@
 #include "port/rvip_tiles.h"
 
 #include <emscripten.h>
+#include <cstdlib>
+#include "rec.h"
 
 #include <deque>
 #include <string>
@@ -96,10 +98,45 @@ extern "C" EMSCRIPTEN_KEEPALIVE void be_pushkey(int key)
     keys.push_back(key);
 }
 
+/*
+ * The sheet and the cell each tile slot shows: /tiles.rec (the remapper's
+ * runtime rec, web/avanor-dawnlike.rec; c-rec), slot -> id from
+ * port/dawn_ids.inc. No rec: tiles-dawn.png, where slot = cell. A slot the
+ * rec leaves unassigned (icon -1) draws nothing.
+ */
+#include "port/dawn_ids.inc"
+EM_JS(void, be_js_tileset, (const char* file, int w, int h, int ox, int oy, int gx, int gy, const int* cells, int n), {
+    Module.av.tileset(UTF8ToString(file), w, h, ox, oy, gx, gy, HEAP32.slice(cells >> 2, (cells >> 2) + n));
+});
+static void load_tile_rec()
+{
+    static const char* const cut_field[6] = {"tile_w", "tile_h", "off_x", "off_y", "gap_x", "gap_y"};
+    static int cells[DAWN_SLOTS];
+    int cut[6] = {16, 16, 0, 0, 0, 0};
+    rec_file* f = rec_load("/tiles.rec");
+    const char* file = rec_get(f, "Tileset", nullptr, "file");
+
+    if (file) {
+        for (int i = 0; i < 6; i++) {
+            if (const char* v = rec_get(f, "Tileset", nullptr, cut_field[i])) {
+                cut[i] = std::atoi(v);
+            }
+        }
+        for (int i = 0; i < DAWN_SLOTS; i++) {
+            const std::string id = dawn_ids[i] ? dawn_ids[i] : "";
+            const auto slash = id.find('/');
+            cells[i] = slash == std::string::npos ? -1 : rec_icon(f, id.substr(0, slash).c_str(), id.c_str() + slash + 1);
+        }
+        be_js_tileset(file, cut[0], cut[1], cut[2], cut[3], cut[4], cut[5], cells, DAWN_SLOTS);
+    }
+    rec_free(f);
+}
+
 void be_init(int cols, int rows)
 {
     scr_cols = cols;
     scr_rows = rows;
+    load_tile_rec();
 }
 void be_finit() { be_js_finit(); }
 void be_cursor(int x, int y)

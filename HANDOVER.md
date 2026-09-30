@@ -75,6 +75,18 @@
   loads. Tested in the pane: new game, tiles, explore, remembered dim, i
   menu text-only, None sticks over reload, uppercase D drinks / lowercase
   e drops. IDBFS db deleted after.
+- **Tile remapping (2026-09-30).** `./remap.sh` opens `web/avanor-dawnlike.rec`
+  in the remapper (~/Projects/remapper; F1 help, F2 previews
+  `web/avanor-scenes.rec`) and rebuilds web/dist. The rec maps every slot's
+  id (`world/`, `monster/`, `object/`; `port/dawn_ids.inc`) to a cell of
+  `web/dawnlike-0.png` (all DawnLike sheets stacked + the floor+sprite
+  composites; `-1` = second frame). `be_web.cpp` `load_tile_rec()` reads it
+  (c-rec, ~/Projects/c-rec by path in build.sh, preloaded as /tiles.rec;
+  `AVANOR_REC=` picks another) and hands the cells + cutting to
+  `av.tileset()`; no rec → `tiles-dawn.png` with slot = cell. Slots are now
+  one per key (766). `web/mkdawn.py` keeps the rec's icons and composed tiles
+  when re-run; `web/mkscenes.py` rebuilds the scenes and asserts every id is
+  in one. Shared code: rvip-tools/tilesets/dawnlike_rec.py (MAG uses it too).
 - **Stage 5 (web page and windows): done.** Next: stage 6 (docs and sound).
   Live: https://ruzzoli.de/roguelikes/avanor/ (`web/deploy.sh`, guard; branch
   `main-rvip` pushed as `memmaker/main`). Page: `web/index.html` +

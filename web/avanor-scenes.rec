@@ -1,0 +1,979 @@
+# Remapper preview scenes for Avanor (web/mkscenes.py writes them; design time only)
+
+%rec: Scene
+
+id: overworld
+name: Overworld
+category: world monster object
+under: world/green_grass_0
+legend: ! monster/black_scorpion
+legend: " monster/captain_orc
+legend: # monster/carrion_crawler
+legend: $ monster/cat
+legend: % monster/cobra
+legend: ( monster/farmer
+legend: ) monster/goblin_chieftain
+legend: * monster/horned_devil
+legend: , monster/jorgus
+legend: - monster/magnush
+legend: . monster/rotmoth
+legend: / monster/scorpion
+legend: 0 monster/skeleton
+legend: 1 monster/todin
+legend: 2 object/elvish_waybread
+legend: 3 object/katana
+legend: 4 object/plant_convallaria_flower
+legend: 5 object/potion_aquamarine
+legend: 6 object/potion_red
+legend: 7 object/rapier
+legend: 8 object/sandals
+legend: 9 object/scroll
+legend: : object/short_spear
+legend: ; object/sling_bullet
+legend: ? world/bridge
+legend: = world/deep_water
+legend: + world/door_closed
+legend: ' world/door_open
+legend: @ world/fence_10
+legend: A world/fence_12
+legend: B world/fence_3
+legend: C world/fence_5
+legend: D world/fence_6
+legend: E world/fence_9
+legend: F world/green_grass_0
+legend: G world/green_grass_1
+legend: H world/green_grass_10
+legend: I world/green_grass_11
+legend: J world/green_grass_12
+legend: K world/green_grass_13
+legend: L world/green_grass_14
+legend: M world/green_grass_2
+legend: N world/green_grass_3
+legend: O world/green_grass_4
+legend: P world/green_grass_5
+legend: Q world/green_grass_6
+legend: R world/green_grass_8
+legend: S world/green_grass_9
+legend: U world/herb_bush
+legend: V world/high_mountain
+legend: W world/hill_0
+legend: X world/hill_1
+legend: Y world/hill_10
+legend: Z world/hill_2
+legend: [ world/hill_4
+legend: ] world/hill_5
+legend: ^ world/hill_6
+legend: _ world/hill_8
+legend: ` world/hill_9
+legend: a world/low_mountain
+legend: b world/mountain
+legend: c world/mushroom
+legend: d world/path_0
+legend: e world/path_1
+legend: f world/path_10
+legend: g world/path_11
+legend: h world/path_2
+legend: i world/path_3
+legend: j world/path_4
+legend: k world/path_5
+legend: l world/path_6
+legend: m world/path_8
+legend: n world/path_9
+legend: o world/road_12
+legend: p world/road_13
+legend: q world/road_14
+legend: r world/sand_1
+legend: s world/sand_10
+legend: t world/sand_2
+legend: u world/sand_5
+legend: v world/sand_6
+legend: w world/sand_9
+legend: x world/stone_floor_0
+legend: y world/stone_floor_1
+legend: z world/stone_floor_10
+legend: { world/stone_floor_2
+legend: | world/stone_floor_4
+legend: } world/stone_floor_5
+legend: À world/stone_floor_6
+legend: Á world/stone_floor_8
+legend: Â world/stone_floor_9
+legend: T world/tree
+legend: < world/up
+legend: ~ world/water
+legend: Ã world/window_3
+legend: Ä world/wood_wall_10
+legend: Å world/wood_wall_12
+legend: Æ world/wood_wall_3
+legend: Ç world/wood_wall_5
+legend: È world/wood_wall_6
+legend: É world/wood_wall_9
+map:
++ FFOOFFFFF2FFFOOFFFFFFFFFFFFFFFFFFFFFFGtr~~=~~trMOOOOOOOOOOOOOOOF
++ FGTTMFFFFFOOGTTMF;FFOOOOOOOOOOOFFFFFFGtr~~=~~trNY_____________`M
++ FGTHFFFFFGTTQRJFOFFGÇÆÆÆÃÆÆÃÆÆÈMFFFFFGtr~~=~~trNZWWW[[WWWWWWWWXM
++ FOJFFFFFFFRKTNTNTMFGÅzÁÁÁÁÁÁÁÂÅMFFFFFGtr~~=~~trNZWWXaa^[WWWWWWXM
++ GTTMFFFFF.GTLFRFJFFGÅ{xxxxxxxyÅMFFFFFGtr~~=~~trNZWWW`abb^[WWWWXM
++ GTTMFFFFFFFKTMOGTMFGÅ{xxxxxxxyÅMFFFFFGtr~~=~~trNZWWWW_`bVbZWWWXM
++ FSTMFFFFFOGTTNTMJFFGÅ{xxx,xxxyÅMFFFFFGtr~~=~~trNZWWWWWW___WWWWXM
++ FFRFFOFFGTMJRGTNTMFGÅÀ|||||||}ÅMFFFFFGtr~~=~~t5NZWWWWWWWWWWWWWXM
++ FFFFGTQFGTNTMFJFJOFGÉÆÆÆÆ+ÆÆÆÆÄMFFFFFGtr~~=~~trNZWWWWWWWWWWWWWXM
++ FOFFOSTMFJFJFPTNTTMFRRRRRRRRRRRFFFFFFGtr~~=~~trN^[[[[[[[[[[[[[]M
++ GTMGTMRFGTNTNTTMSTMFFFF3FFFFFFFFFFFFFGtr~~=~~trMRRRRRRRRRRRRRRRF
++ PTQOJOOOOJPTQJJOOJOOOOOOOOOOOOOOOOOOOPvu~~=~~vuQOOOOOOOOOOOOOOOO
++ ooooooooooooooooooooooooooooooooooooooop?????qooooooooooooo!oooo
++ RRRSTTHRRRSTTTIT/JRRRRRRRRRRRSgHRRRRRSsw~~=~~"wH*RRRRRRRRRRRRRRR
++ FFFGTHFFFFFRJRFRGTMFOOOOOOOOOGiMFFFFFGtr~~=~~trMFOOOOOOOOOOOOFFF
++ FFFFRFFFFOFGTMFFGTMGÇÆÆÆ'ÆÆÆÈNiMFFFFF0tr~~=~~trMGCBBBBBBBBBBDMFF
++ F(F%FFFFPTMFROFFFRFGÅzÁÁÁÁÁÂÅNiMFFFFFGtr~~=~~trMGAHJJJJJJJJSAMFF
++ FFFFOFFGTLFFGTQFOFFGÅ{xxxxxyÅNiMFFFFFGtr~~=~~trMGANfmmmmmmnNAMFF
++ FFFGTQFGTTMOFSTNTMFGÅ{xxxxxyÅNiM:FFFFGtr~~=~~8rMGANhd)dddde6AMF1
++ FOFFSTMGTLGTMORFROFGÅ{xxxxxyÅNiMFFFFFGtr~~=~~trMGANhddddddeNAMFF
++ GTMOPTMFKTQRUTMOPTMGÅÀ|||||}ÅNiMFFFFFGtr~~=~~trMGA-hddddddeNAMFF
++ FJGTTHFGTTTMORPTTHFGÉÆÆÆÆÆÆÆÄ4iMFFFFFGtr~~=~~trMGANljjjjjjkNAMFF
++ GTNTH<FORRRPTNcHRFFFRRRRRRRRRGiMFFFFFGtr~~=~~trMGA7JJJJJJJJPAMFF
++ FJFR$FGTMFGTHGTMOFFFFFFFFFFFFGiMFFFFFGtr~~=~~trMGEBBBBBBBBBB@MFF
++ GTMFFFFRFFFRFFRGTMFFFFFFFFFFFGiMFFFFFGtr~~=~~trMFRRRRRRRRRRRRFFF
++ FRFFF9FFFFFFFFFFRFFFFFFFFFFFFGiMFFFFFGtr~~=~~trMFFFFFF#FFFFFFFFF
+
+id: dungeon
+name: Dungeon level
+category: world monster object
+under: world/cave_floor_0
+legend: ! monster/bat
+legend: " monster/bearded_devil
+legend: # monster/beelzevile
+legend: $ monster/bone_devil
+legend: % monster/carrion_crawler
+legend: ( monster/death_beetle
+legend: ) monster/dwarf_cleric
+legend: * monster/elder_gridor
+legend: , monster/goblin_warmaster
+legend: - monster/gray_snake
+legend: . monster/hell_hound
+legend: / monster/highpriest
+legend: 0 monster/werewolf
+legend: 1 monster/yohjishiro
+legend: 2 object/amulet
+legend: 3 object/avanor_defender
+legend: 4 object/avanor_scepter
+legend: 5 object/battle_axe
+legend: 6 object/bone
+legend: 7 object/cloak
+legend: 8 object/club
+legend: 9 object/cooking_set_2
+legend: : object/elvish_waybread
+legend: ; object/herb
+legend: ? object/large_ration
+legend: @ object/long_dagger
+legend: A object/mace
+legend: B object/plant_chamomilla_flower
+legend: C object/plant_mentha_leave
+legend: D object/plate_mail
+legend: E object/potion_blue
+legend: F object/potion_maroon
+legend: G object/rapier
+legend: H object/small_axe
+legend: I world/altar
+legend: J world/cave_floor_0
+legend: K world/cave_floor_1
+legend: L world/cave_floor_10
+legend: M world/cave_floor_12
+legend: N world/cave_floor_2
+legend: O world/cave_floor_3
+legend: P world/cave_floor_4
+legend: Q world/cave_floor_5
+legend: R world/cave_floor_6
+legend: S world/cave_floor_8
+legend: U world/cave_floor_9
+legend: + world/door_closed
+legend: ' world/door_open
+legend: > world/down
+legend: V world/grave
+legend: & world/lava
+legend: W world/stone_wall_10
+legend: X world/stone_wall_12
+legend: Y world/stone_wall_3
+legend: Z world/stone_wall_5
+legend: [ world/stone_wall_6
+legend: ] world/stone_wall_9
+legend: ^ world/teleport
+legend: _ world/trap_fire_bolt
+legend: ` world/trap_magic_arrow
+legend: a world/trap_pit
+legend: < world/up
+map:
++                      ZYYYYYYYYYYYYY[
++  ZYYYYYYYYYYYYY[     XLSSSSSSSSSSSUX       ZYYYYYYYYYYYYYYYYYYY[
++  XLSS1SSSSS6SSUX     XNJJJJJJJJJJJKX       XLSSSSSSSSSSSSSSSSSUX
++  XNJ<JJJ:JJJJAKX     XNJJJJJJJJJJJJ'MMMMMMM+JJJJJJVJJJJJJJJJJJKX
++  XNJJJJJJJJJJJJ+MMMMM+JJJJJ2JJJJJJKX       XN!JJJJEJJJ%JJJJJJJKX
++  XNJJJJJJJJ4JJKX     XRPPPPPJPPPPPQX       XNJJ8JJJJJJJJJJJJJJKX
++  XNJJJJJJ,JJJJKX     ]YYYYYY'YYYYYYW       XNJJJJJJJJJJJJJJJJJKX
++  XRPP$PPJPPPPPQX            O              XNJJJJJJJJJJJJJJ7JJKX
++  ]YYYYYY'YYYYYYW            O              XRPPPPPP*JPPPPPPPPPQX
++         O                   O              ]YYYYYYYY'YYYYYYYYYYW
++         O                ZYY'YYYYYYYYYYYY[          O
++         O                XLSJSSSSSGSSSSSUX          O
++    ZYYYY'YYYYYYYY[       XNJJJJJJIJJJJJJKX          O
++    XLSSSJSSSSSSSUX       XNJJPPPJ;JJJJJJKX     ZYYYY+YYYYYYYYYY[
++    XNJJJJJJJJJJJKX       XNJ_&&&NJJJJFJJKX     XLSSSJSSBSSSSSSUX
++    XNJJJJJJJJJJJKX       XNJK&&&NJJJJJJJKX     XNJJJJCJJJJJJJJKX
++    X0JJJ#JJJJJ-JJ+MMMMMMM+JJJaSSJJJJJJJJKX     XNJJJJJJJJJJJJJKX
++    XNJJJJJJJJJJJKX       XNJJJJDJJJJJJJJKX     XHJJJJJJJJJJJJJKX
++    XNJJJJJJ(^JJJKX       X9JJJJJ`JJJJ.JJJ'MMMMM'JJJJJJJJJJJJJJKX
++    XN?JJJJJJJJJJ/X       XNJJJJ"JJJJJJJJKX     X3JJJJJJJJJJJJJKX
++    XRP@PPPPPPP5PQX       XRPPPPPPPPPPPPPQX     XNJJ)JJJJJJJJ>JKX
++    ]YYYYYYYYYYYYYW       ]YYYYYYYYYYYYYYYW     XRPPPPPPPPPPPPPQX
++                                                ]YYYYYYYYYYYYYYYW
++ 
+
+id: terrain
+name: All terrain
+category: world
+under: world/stone_floor_0
+legend: ! world/altar
+legend: " world/black_marble_wall_0
+legend: # world/black_marble_wall_1
+legend: $ world/black_marble_wall_10
+legend: % world/black_marble_wall_11
+legend: ( world/black_marble_wall_12
+legend: ) world/black_marble_wall_13
+legend: * world/black_marble_wall_14
+legend: , world/black_marble_wall_15
+legend: - world/black_marble_wall_2
+legend: . world/black_marble_wall_3
+legend: / world/black_marble_wall_4
+legend: 0 world/black_marble_wall_5
+legend: 1 world/black_marble_wall_6
+legend: 2 world/black_marble_wall_7
+legend: 3 world/black_marble_wall_8
+legend: 4 world/black_marble_wall_9
+legend: 5 world/bridge
+legend: 6 world/cave_floor_0
+legend: 7 world/cave_floor_1
+legend: 8 world/cave_floor_10
+legend: 9 world/cave_floor_11
+legend: : world/cave_floor_12
+legend: ; world/cave_floor_13
+legend: ? world/cave_floor_14
+legend: @ world/cave_floor_15
+legend: A world/cave_floor_2
+legend: B world/cave_floor_3
+legend: C world/cave_floor_4
+legend: D world/cave_floor_5
+legend: E world/cave_floor_6
+legend: F world/cave_floor_7
+legend: G world/cave_floor_8
+legend: H world/cave_floor_9
+legend: = world/deep_water
+legend: + world/door_closed
+legend: ' world/door_open
+legend: > world/down
+legend: I world/fence_0
+legend: J world/fence_1
+legend: K world/fence_10
+legend: L world/fence_11
+legend: M world/fence_12
+legend: N world/fence_13
+legend: O world/fence_14
+legend: P world/fence_15
+legend: Q world/fence_2
+legend: R world/fence_3
+legend: S world/fence_4
+legend: U world/fence_5
+legend: V world/fence_6
+legend: W world/fence_7
+legend: X world/fence_8
+legend: Y world/fence_9
+legend: Z world/golden_fence_0
+legend: [ world/golden_fence_1
+legend: ] world/golden_fence_10
+legend: ^ world/golden_fence_11
+legend: _ world/golden_fence_12
+legend: ` world/golden_fence_13
+legend: a world/golden_fence_14
+legend: b world/golden_fence_15
+legend: c world/golden_fence_2
+legend: d world/golden_fence_3
+legend: e world/golden_fence_4
+legend: f world/golden_fence_5
+legend: g world/golden_fence_6
+legend: h world/golden_fence_7
+legend: i world/golden_fence_8
+legend: j world/golden_fence_9
+legend: k world/golden_floor_0
+legend: l world/golden_floor_1
+legend: m world/golden_floor_10
+legend: n world/golden_floor_11
+legend: o world/golden_floor_12
+legend: p world/golden_floor_13
+legend: q world/golden_floor_14
+legend: r world/golden_floor_15
+legend: s world/golden_floor_2
+legend: t world/golden_floor_3
+legend: u world/golden_floor_4
+legend: v world/golden_floor_5
+legend: w world/golden_floor_6
+legend: x world/golden_floor_7
+legend: y world/golden_floor_8
+legend: z world/golden_floor_9
+legend: { world/grave
+legend: | world/green_grass_0
+legend: } world/green_grass_1
+legend: À world/green_grass_10
+legend: Á world/green_grass_11
+legend: Â world/green_grass_12
+legend: Ã world/green_grass_13
+legend: Ä world/green_grass_14
+legend: Å world/green_grass_15
+legend: Æ world/green_grass_2
+legend: Ç world/green_grass_3
+legend: È world/green_grass_4
+legend: É world/green_grass_5
+legend: Ê world/green_grass_6
+legend: Ë world/green_grass_7
+legend: Ì world/green_grass_8
+legend: Í world/green_grass_9
+legend: Î world/herb_bush
+legend: Ï world/high_mountain
+legend: Ð world/hill_0
+legend: Ñ world/hill_1
+legend: Ò world/hill_10
+legend: Ó world/hill_11
+legend: Ô world/hill_12
+legend: Õ world/hill_13
+legend: Ö world/hill_14
+legend: × world/hill_15
+legend: Ø world/hill_2
+legend: Ù world/hill_3
+legend: Ú world/hill_4
+legend: Û world/hill_5
+legend: Ü world/hill_6
+legend: Ý world/hill_7
+legend: Þ world/hill_8
+legend: ß world/hill_9
+legend: & world/lava
+legend: à world/low_mountain
+legend: á world/magma_0
+legend: â world/magma_1
+legend: ã world/magma_10
+legend: ä world/magma_11
+legend: å world/magma_12
+legend: æ world/magma_13
+legend: ç world/magma_14
+legend: è world/magma_15
+legend: é world/magma_2
+legend: ê world/magma_3
+legend: ë world/magma_4
+legend: ì world/magma_5
+legend: í world/magma_6
+legend: î world/magma_7
+legend: ï world/magma_8
+legend: ð world/magma_9
+legend: ñ world/marble_wall_0
+legend: ò world/marble_wall_1
+legend: ó world/marble_wall_10
+legend: ô world/marble_wall_11
+legend: õ world/marble_wall_12
+legend: ö world/marble_wall_13
+legend: ÷ world/marble_wall_14
+legend: ø world/marble_wall_15
+legend: ù world/marble_wall_2
+legend: ú world/marble_wall_3
+legend: û world/marble_wall_4
+legend: ü world/marble_wall_5
+legend: ý world/marble_wall_6
+legend: þ world/marble_wall_7
+legend: ÿ world/marble_wall_8
+legend: Ā world/marble_wall_9
+legend: ā world/mountain
+legend: Ă world/mushroom
+legend: ă world/obsidian_floor_0
+legend: Ą world/obsidian_floor_1
+legend: ą world/obsidian_floor_10
+legend: Ć world/obsidian_floor_11
+legend: ć world/obsidian_floor_12
+legend: Ĉ world/obsidian_floor_13
+legend: ĉ world/obsidian_floor_14
+legend: Ċ world/obsidian_floor_15
+legend: ċ world/obsidian_floor_2
+legend: Č world/obsidian_floor_3
+legend: č world/obsidian_floor_4
+legend: Ď world/obsidian_floor_5
+legend: ď world/obsidian_floor_6
+legend: Đ world/obsidian_floor_7
+legend: đ world/obsidian_floor_8
+legend: Ē world/obsidian_floor_9
+legend: ē world/path_0
+legend: Ĕ world/path_1
+legend: ĕ world/path_10
+legend: Ė world/path_11
+legend: ė world/path_12
+legend: Ę world/path_13
+legend: ę world/path_14
+legend: Ě world/path_15
+legend: ě world/path_2
+legend: Ĝ world/path_3
+legend: ĝ world/path_4
+legend: Ğ world/path_5
+legend: ğ world/path_6
+legend: Ġ world/path_7
+legend: ġ world/path_8
+legend: Ģ world/path_9
+legend: ģ world/quartz_0
+legend: Ĥ world/quartz_1
+legend: ĥ world/quartz_10
+legend: Ħ world/quartz_11
+legend: ħ world/quartz_12
+legend: Ĩ world/quartz_13
+legend: ĩ world/quartz_14
+legend: Ī world/quartz_15
+legend: ī world/quartz_2
+legend: Ĭ world/quartz_3
+legend: ĭ world/quartz_4
+legend: Į world/quartz_5
+legend: į world/quartz_6
+legend: İ world/quartz_7
+legend: ı world/quartz_8
+legend: Ĳ world/quartz_9
+legend: ĳ world/road_0
+legend: Ĵ world/road_1
+legend: ĵ world/road_10
+legend: Ķ world/road_11
+legend: ķ world/road_12
+legend: ĸ world/road_13
+legend: Ĺ world/road_14
+legend: ĺ world/road_15
+legend: Ļ world/road_2
+legend: ļ world/road_3
+legend: Ľ world/road_4
+legend: ľ world/road_5
+legend: Ŀ world/road_6
+legend: ŀ world/road_7
+legend: Ł world/road_8
+legend: ł world/road_9
+legend: Ń world/sand_0
+legend: ń world/sand_1
+legend: Ņ world/sand_10
+legend: ņ world/sand_11
+legend: Ň world/sand_12
+legend: ň world/sand_13
+legend: ŉ world/sand_14
+legend: Ŋ world/sand_15
+legend: ŋ world/sand_2
+legend: Ō world/sand_3
+legend: ō world/sand_4
+legend: Ŏ world/sand_5
+legend: ŏ world/sand_6
+legend: Ő world/sand_7
+legend: ő world/sand_8
+legend: Œ world/sand_9
+legend: œ world/stone_floor_0
+legend: Ŕ world/stone_floor_1
+legend: ŕ world/stone_floor_10
+legend: Ŗ world/stone_floor_11
+legend: ŗ world/stone_floor_12
+legend: Ř world/stone_floor_13
+legend: ř world/stone_floor_14
+legend: Ś world/stone_floor_15
+legend: ś world/stone_floor_2
+legend: Ŝ world/stone_floor_3
+legend: ŝ world/stone_floor_4
+legend: Ş world/stone_floor_5
+legend: ş world/stone_floor_6
+legend: Š world/stone_floor_7
+legend: š world/stone_floor_8
+legend: Ţ world/stone_floor_9
+legend: ţ world/stone_wall_0
+legend: Ť world/stone_wall_1
+legend: ť world/stone_wall_10
+legend: Ŧ world/stone_wall_11
+legend: ŧ world/stone_wall_12
+legend: Ũ world/stone_wall_13
+legend: ũ world/stone_wall_14
+legend: Ū world/stone_wall_15
+legend: ū world/stone_wall_2
+legend: Ŭ world/stone_wall_3
+legend: ŭ world/stone_wall_4
+legend: Ů world/stone_wall_5
+legend: ů world/stone_wall_6
+legend: Ű world/stone_wall_7
+legend: ű world/stone_wall_8
+legend: Ų world/stone_wall_9
+legend: ų world/teleport
+legend: Ŵ world/teleport_white
+legend: ŵ world/trap
+legend: Ŷ world/trap_acid_bolt
+legend: ŷ world/trap_arrow
+legend: Ÿ world/trap_fire_bolt
+legend: Ź world/trap_magic_arrow
+legend: ź world/trap_pit
+legend: Ż world/trap_spear_pit
+legend: ż world/trap_teleport
+legend: T world/tree
+legend: < world/up
+legend: ~ world/water
+legend: Ž world/window_0
+legend: ž world/window_1
+legend: ſ world/window_10
+legend: ƀ world/window_11
+legend: Ɓ world/window_12
+legend: Ƃ world/window_13
+legend: ƃ world/window_14
+legend: Ƅ world/window_15
+legend: ƅ world/window_2
+legend: Ɔ world/window_3
+legend: Ƈ world/window_4
+legend: ƈ world/window_5
+legend: Ɖ world/window_6
+legend: Ɗ world/window_7
+legend: Ƌ world/window_8
+legend: ƌ world/window_9
+legend: ƍ world/wood_wall_0
+legend: Ǝ world/wood_wall_1
+legend: Ə world/wood_wall_10
+legend: Ɛ world/wood_wall_11
+legend: Ƒ world/wood_wall_12
+legend: ƒ world/wood_wall_13
+legend: Ɠ world/wood_wall_14
+legend: Ɣ world/wood_wall_15
+legend: ƕ world/wood_wall_2
+legend: Ɩ world/wood_wall_3
+legend: Ɨ world/wood_wall_4
+legend: Ƙ world/wood_wall_5
+legend: ƙ world/wood_wall_6
+legend: ƚ world/wood_wall_7
+legend: ƛ world/wood_wall_8
+legend: Ɯ world/wood_wall_9
+map:
++ ăččččăčččăčăăăččččăčččăčăăăččččăčččăčăăăččččăčččăčăĄśŝŝŝŝœŝŝŝœŝœŔ
++ Ą8GGHČ?:;Č9ċăĄmyyzČqopČnċăĄÀÌÌÍČÄÂÃČÁċăĄÒÞÞßČÖÔÕČÓċĄŜąđđĒŜĉćĈŜĆśŔ
++ ĄA667ċđćđĄBċăĄskklċđćđĄtċăĄÆ||}ċđćđĄÇċăĄØÐÐÑċđćđĄÙċĄŜċăăĄśšŗšŔČśŔ
++ ĄECCDċĄ@ċĄFċăĄwuuvċĄrċĄxċăĄÊÈÈÉċĄÅċĄËċăĄÜÚÚÛċĄ×ċĄÝċĄŜďččĎśŔĊśŔĐśŔ
++ ăđđđđăăđăăđăăăđđđđăăđăăđăăăđđđđăăđăăđăăăđđđđăăđăăđăĄśššššœœšœœšœŔ
++ ăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăăĄşŝŝŝŝŝŝŝŝŝŝŝŞ
++ ăččččăčččăčăăăččččăčččăčăăăččččăčččăčăăăččččăčččăčăĄ
++ ĄĕġġĢČęėĘČĖċăĄĵŁŁłČĹķĸČĶċăĄŅőőŒČŉŇňČņċăĄŕššŢČřŗŘČŖċĄ
++ ĄěēēĔċđćđĄĜċăĄĻĳĳĴċđćđĄļċăĄŋŃŃńċđćđĄŌċăĄśœœŔċđćđĄŜċĄ
++ ĄğĝĝĞċĄĚċĄĠċăĄĿĽĽľċĄĺċĄŀċăĄŏōōŎċĄŊċĄŐċăĄşŝŝŞċĄŚċĄŠċĄ
++ ăđđđđăăđăăđăăăđđđđăăđăăđăăăđđđđăăđăăđăăăđđđđăăđăăđăĄ
++ čččččččččččččččččččččččččččččččččččččččččččččččččččĎ
++ šŗŗŗŗŗšŗŗššŢ ŕŗŗŗŗŗšŗŗššŢ ŕŗŗŗŗŗšŗŗššŢ ŕŗŗŗŗŗšŗŗššŢ ŕŗŗŗŗŗšŗŗššŢ
++ Ŕ0.2.1Ŝ#-śœŔ ŜURWRVŜJQśœŔ ŜfdhdgŜ[cśœŔ ŜìêîêíŜâéśœŔ ŜüúþúýŜòùśœŔ
++ Ŕ(Ś(Ś(śŗšœœŔ ŜMŚMŚMśŗšœœŔ Ŝ_Ś_Ś_śŗšœœŔ ŜåŚåŚåśŗšœœŔ ŜõŚõŚõśŗšœœŔ
++ Ŕ).,.*Ŝ/śœœŔ ŜNRPROŜSśœœŔ Ŝ`dbdaŜeśœœŔ ŜæêèêçŜëśœœŔ Ŝöúøú÷ŜûśœœŔ
++ Ŕ(Ś(Ś(Ŝ3śœŝŔ ŜMŚMŚMŜXśœŝŔ Ŝ_Ś_Ś_ŜiśœŝŔ ŜåŚåŚåŜïśœŝŔ ŜõŚõŚõŜÿśœŝŔ
++ Ŕ4.%.$śšœŔ"Ŝ ŜYRLRKśšœŔIŜ Ŝjd^d]śšœŔZŜ ŜðêäêãśšœŔáŜ ŜĀúôúóśšœŔñŜ
++ œšššššœœœœšŔ śšššššœœœœšŔ śšššššœœœœšŔ śšššššœœœœšŔ śšššššœœœœšŔ
++ œœœœœœœœœœœŔ śœœœœœœœœœœŔ śœœœœœœœœœœŔ śœœœœœœœœœœŔ şŝŝŝŝŝŝŝŝŝŝŞ
++ œŝŝŝŝŝœŝŝœœŔ śŝŝŝŝŝœŝŝœœŔ śŝŝŝŝŝœŝŝœœŔ śŝŝŝŝŝœŝŝœœŔ
++ ŔĮĬİĬįŜĤīśœŔ ŜŮŬŰŬůŜŤūśœŔ ŜƈƆƊƆƉŜžƅśœŔ ŜƘƖƚƖƙŜƎƕśœŔ
++ ŔħŚħŚħśŗšœœŔ ŜŧŚŧŚŧśŗšœœŔ ŜƁŚƁŚƁśŗšœœŔ ŜƑŚƑŚƑśŗšœœŔ
++ ŔĨĬĪĬĩŜĭśœœŔ ŜŨŬŪŬũŜŭśœœŔ ŜƂƆƄƆƃŜƇśœœŔ ŜƒƖƔƖƓŜƗśœœŔ
++ ŔħŚħŚħŜıśœŝŔ ŜŧŚŧŚŧŜűśœŝŔ ŜƁŚƁŚƁŜƋśœŝŔ ŜƑŚƑŚƑŜƛśœŝŔ
++ ŔĲĬĦĬĥśšœŔģŜ ŜŲŬŦŬťśšœŔţŜ ŜƌƆƀƆſśšœŔŽŜ ŜƜƖƐƖƏśšœŔƍŜ
++ œšššššœœœœšŔ śšššššœœœœšŔ śšššššœœœœšŔ śšššššœœœœšŔ
++ ŝŝŝŝŝŝŝŝŝŝŝŞ şŝŝŝŝŝŝŝŝŝŝŞ şŝŝŝŝŝŝŝŝŝŝŞ şŝŝŝŝŝŝŝŝŝŝŞ
++ 
++ šŗšŗšŗšŗšŗšŗšŗšŗšŗšššššššššššššššššššššššššššššššššššššššššššššššš
++ ŔTŜ~Ŝ=Ŝ&ŜàŜāŜÏŜ5ŜŴśŹœŸœŶœżœŷœźœŻœ<œ>œ'œ+œųœ!œ{œŵœÎœĂœœœœœœœœœœœœœœ
++ œšœšœšœšœšœšœšœšœšœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœœ
+
+id: bestiary
+name: Every monster
+category: monster
+under: world/stone_floor_0
+legend: ! monster/ahkulan
+legend: " monster/any_bat
+legend: # monster/any_blob
+legend: $ monster/any_canine
+legend: % monster/any_demon
+legend: ( monster/any_feline
+legend: ) monster/any_giant
+legend: * monster/any_goblin
+legend: , monster/any_human
+legend: - monster/any_humanoid
+legend: . monster/any_insect
+legend: / monster/any_kobold
+legend: 0 monster/any_orc
+legend: 1 monster/any_other
+legend: 2 monster/any_rat
+legend: 3 monster/any_reptile
+legend: 4 monster/any_undead
+legend: 5 monster/bandit
+legend: 6 monster/barbed_devil
+legend: 7 monster/bat
+legend: 8 monster/bearded_devil
+legend: 9 monster/beelzevile
+legend: : monster/black_rat
+legend: ; monster/black_scorpion
+legend: ? monster/bone_devil
+legend: @ monster/brida
+legend: A monster/brown_snake
+legend: B monster/captain_orc
+legend: C monster/carrion_crawler
+legend: D monster/cat
+legend: E monster/centipede
+legend: F monster/chieftain_kobold
+legend: G monster/chieftain_orc
+legend: H monster/citizen
+legend: I monster/cobra
+legend: J monster/dark_orc
+legend: K monster/death_beetle
+legend: L monster/death_knight
+legend: M monster/dog
+legend: N monster/dread
+legend: O monster/dretch
+legend: P monster/dungeon_crawler
+legend: Q monster/dwarf
+legend: R monster/dwarf_cleric
+legend: S monster/dwarf_guard
+legend: U monster/elder_gridor
+legend: V monster/farmer
+legend: W monster/fcitizen
+legend: X monster/fire_beetle
+legend: Y monster/frost_beetle
+legend: Z monster/gefeon
+legend: [ monster/gekta
+legend: ] monster/gelatinous_cube
+legend: ^ monster/ghost
+legend: _ monster/ghoul
+legend: ` monster/giana
+legend: a monster/giant_bee
+legend: b monster/giant_crawler
+legend: c monster/giant_spider
+legend: d monster/giant_wasp
+legend: e monster/gnoll
+legend: f monster/gnoll_warmaster
+legend: g monster/goat
+legend: h monster/goblin
+legend: i monster/goblin_chieftain
+legend: j monster/goblin_warmaster
+legend: k monster/goblin_warrior
+legend: l monster/goodwife
+legend: m monster/gray_ooze
+legend: n monster/gray_snake
+legend: o monster/greater_mongbat
+legend: p monster/green_beetle
+legend: q monster/hell_hound
+legend: r monster/hero_dwarf
+legend: s monster/hero_gnome
+legend: t monster/hero_half_elf
+legend: u monster/hero_half_orc
+legend: v monster/hero_halfling
+legend: w monster/hero_high_elf
+legend: x monster/hero_human
+legend: y monster/highpriest
+legend: z monster/hill_orc
+legend: { monster/horned_devil
+legend: | monster/huge_bat
+legend: } monster/huge_rat
+legend: À monster/imp
+legend: Á monster/jorgus
+legend: Â monster/killer_beetle
+legend: Ã monster/king_cobra
+legend: Ä monster/kobold
+legend: Å monster/large_dog
+legend: Æ monster/large_kobold
+legend: Ç monster/large_orc
+legend: È monster/large_rat
+legend: É monster/large_snake
+legend: Ê monster/large_wolf
+legend: Ë monster/lemure
+legend: Ì monster/lich
+legend: Í monster/lieutenant_orc
+legend: Î monster/magnush
+legend: Ï monster/mongbat
+legend: Ð monster/orc
+legend: Ñ monster/ozorik
+legend: Ò monster/pink_scorpion
+legend: Ó monster/quasit
+legend: Ô monster/rabid_dog
+legend: Õ monster/rat
+legend: Ö monster/rattlesnake
+legend: × monster/roderik
+legend: Ø monster/rotmoth
+legend: Ù monster/royal_guard
+legend: Ú monster/royal_guard_elite
+legend: Û monster/salamander
+legend: Ü monster/scorpion
+legend: Ý monster/shaman_kobold
+legend: Þ monster/sheep
+legend: ß monster/shopkeeper
+legend: à monster/skeleton
+legend: á monster/small_snake
+legend: â monster/spectre
+legend: ã monster/spider
+legend: ä monster/starveling
+legend: å monster/stegocentipede
+legend: æ monster/tarantula
+legend: ç monster/todin
+legend: è monster/torin
+legend: é monster/vampire
+legend: ê monster/vrock
+legend: ë monster/wendigo
+legend: ì monster/werewolf
+legend: í monster/wild_cat
+legend: î monster/wolf
+legend: ï monster/xshee_voo
+legend: ð monster/yohjishiro
+legend: ñ monster/zombie
+legend: ò world/stone_floor_0
+legend: ó world/stone_floor_1
+legend: ô world/stone_floor_10
+legend: õ world/stone_floor_2
+legend: ö world/stone_floor_4
+legend: ÷ world/stone_floor_5
+legend: ø world/stone_floor_6
+legend: ù world/stone_floor_8
+legend: ú world/stone_floor_9
+legend: û world/stone_wall_10
+legend: ü world/stone_wall_12
+legend: ý world/stone_wall_3
+legend: þ world/stone_wall_5
+legend: ÿ world/stone_wall_6
+legend: Ā world/stone_wall_9
+map:
++ 
++  þýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýÿ
++  üôùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùùúü
++  üõ7ò|òÏòoòMòÅòÔòîòÊòìòDòíòËòOòÀòÓòqò8ò6òêóü
++  üõòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòóü
++  üõ?ò{òäòëòhòkòjòiòVòlò5òHòWòÙòÚòLòßòQòSòãóü
++  üõòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòóü
++  üõcòæòÜò;òÒòXòYòpòÂòKòaòdòEòåòPòbòCòÄòÆòFóü
++  üõòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòóü
++  üõÝòeòfòÞògòmò]òÐòÇòzòJòÍòBòGòÕòÈò:ò}òáònóü
++  üõòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòóü
++  üõAòÛòÉòIòÃòÖòàòñò_ò^òâòNòéòÌòÎòïò!ò9òRòUóü
++  üõòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòóü
++  üõZò[òyòÁòÑò×òØò`ò@òçòèòðò2ò"ò(ò$ò3ò.ò,ò0óü
++  üõòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòòóü
++  üõ)ò/ò4ò*ò%ò-ò#ò1òxòtòwòvòuòròsòòòòòòòòòòóü
++  üøööööööööööööööööööööööööööööööööööööööö÷ü
++  Āýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýýû
++ 
+
+id: items
+name: Every item
+category: object
+under: world/stone_floor_0
+legend: ! object/alchemy_set
+legend: " object/alchemy_set_2
+legend: # object/amulet
+legend: $ object/ancient_machine_part
+legend: % object/ancient_machine_part_2
+legend: ( object/any_body
+legend: ) object/any_book
+legend: * object/any_boots
+legend: , object/any_chest
+legend: - object/any_cloak
+legend: . object/any_food
+legend: / object/any_gem
+legend: 0 object/any_gloves
+legend: 1 object/any_hat
+legend: 2 object/any_lightsource
+legend: 3 object/any_missile
+legend: 4 object/any_missilew
+legend: 5 object/any_money
+legend: 6 object/any_neck
+legend: 7 object/any_other
+legend: 8 object/any_potion
+legend: 9 object/any_ring
+legend: : object/any_scroll
+legend: ; object/any_shield
+legend: ? object/any_tool
+legend: @ object/any_wand
+legend: A object/any_weapon
+legend: B object/arrow
+legend: C object/avanor_crown
+legend: D object/avanor_defender
+legend: E object/avanor_mitre
+legend: F object/avanor_scepter
+legend: G object/bat_wing
+legend: H object/battle_axe
+legend: I object/black_club
+legend: J object/bone
+legend: K object/book
+legend: L object/broad_sword
+legend: M object/cap
+legend: N object/cape
+legend: O object/chain_mail
+legend: P object/chest
+legend: Q object/cloak
+legend: R object/clothes
+legend: S object/club
+legend: U object/cooking_set
+legend: V object/cooking_set_2
+legend: W object/corpse
+legend: X object/crossbow
+legend: Y object/dagger
+legend: Z object/death_hack
+legend: [ object/dress
+legend: ] object/dwarf_crown
+legend: ^ object/elvish_waybread
+legend: _ object/eye_of_raa
+legend: ` object/flail
+legend: a object/forest_brother_cloak
+legend: b object/gauntlets
+legend: c object/glamdring
+legend: d object/gloves
+legend: e object/great_axe
+legend: f object/great_elemental_ring
+legend: g object/halberd
+legend: h object/hard_boots
+legend: i object/hat
+legend: j object/heavy_crossbow
+legend: k object/helmet
+legend: l object/herb
+legend: m object/katana
+legend: n object/knife
+legend: o object/knuckles
+legend: p object/large_ration
+legend: q object/large_shield
+legend: r object/light_boots
+legend: s object/light_cloak
+legend: t object/light_crossbow
+legend: u object/light_mail
+legend: v object/long_bow
+legend: w object/long_dagger
+legend: x object/long_spear
+legend: y object/long_sword
+legend: z object/mace
+legend: { object/medium_shield
+legend: | object/money
+legend: } object/orcish_axe
+legend: À object/orcish_dagger
+legend: Á object/pickaxe
+legend: Â object/pickaxe_2
+legend: Ã object/pike
+legend: Ä object/pitchfork
+legend: Å object/plant_blue_mushroom
+legend: Æ object/plant_chamomilla_flower
+legend: Ç object/plant_convallaria_flower
+legend: È object/plant_green_mushroom
+legend: É object/plant_melissa_leave
+legend: Ê object/plant_mentha_leave
+legend: Ë object/plant_paeonia_root
+legend: Ì object/plant_plantago_leave
+legend: Í object/plant_red_mushroom
+legend: Î object/plant_stellaria_leave
+legend: Ï object/plant_taraxacum_flower
+legend: Ð object/plant_trifolium_flower
+legend: Ñ object/plant_trifolium_leave
+legend: Ò object/plant_tussilago_leave
+legend: Ó object/plant_urtica_leave
+legend: Ô object/plant_valeriana_root
+legend: Õ object/plant_white_mushroom
+legend: Ö object/plant_yellow_mushroom
+legend: × object/plate_mail
+legend: Ø object/potion
+legend: Ù object/potion_aquamarine
+legend: Ú object/potion_azure
+legend: Û object/potion_beige
+legend: Ü object/potion_black
+legend: Ý object/potion_blobby
+legend: Þ object/potion_blue
+legend: ß object/potion_brown
+legend: à object/potion_clear
+legend: á object/potion_coral
+legend: â object/potion_cyan
+legend: ã object/potion_dark_blue
+legend: ä object/potion_dark_gray
+legend: å object/potion_dark_green
+legend: æ object/potion_dark_red
+legend: ç object/potion_glowing
+legend: è object/potion_golden
+legend: é object/potion_gray
+legend: ê object/potion_green
+legend: ë object/potion_haze
+legend: ì object/potion_ivory
+legend: í object/potion_light_blue
+legend: î object/potion_light_gray
+legend: ï object/potion_light_green
+legend: ð object/potion_light_red
+legend: ñ object/potion_maroon
+legend: ò object/potion_mercury
+legend: ó object/potion_mottled
+legend: ô object/potion_mouldy
+legend: õ object/potion_murky
+legend: ö object/potion_oily
+legend: ÷ object/potion_orange
+legend: ø object/potion_pink
+legend: ù object/potion_purple
+legend: ú object/potion_red
+legend: û object/potion_silver
+legend: ü object/potion_smoky
+legend: ý object/potion_tan
+legend: þ object/potion_turquoise
+legend: ÿ object/potion_violet
+legend: Ā object/potion_viscous
+legend: ā object/potion_white
+legend: Ă object/potion_yellow
+legend: ă object/quarrel
+legend: Ą object/rapier
+legend: ą object/rat_tail
+legend: Ć object/ration
+legend: ć object/ring
+legend: Ĉ object/ring_mail
+legend: ĉ object/robe
+legend: Ċ object/rock
+legend: ċ object/sandals
+legend: Č object/scale_mail
+legend: č object/scimitar
+legend: Ď object/scroll
+legend: ď object/shadow_cloak
+legend: Đ object/short_bow
+legend: đ object/short_spear
+legend: Ē object/short_sword
+legend: ē object/shuriken
+legend: Ĕ object/sling
+legend: ĕ object/sling_bullet
+legend: Ė object/small_axe
+legend: ė object/small_ration
+legend: Ę object/small_shield
+legend: ę object/soft_boots
+legend: Ě object/staff
+legend: ě object/torin_axe
+legend: Ĝ object/torin_shield
+legend: ĝ object/tower_shield
+legend: Ğ object/wakizashi
+legend: ğ object/war_axe
+legend: Ġ object/war_hammer
+legend: ġ world/stone_floor_0
+legend: Ģ world/stone_floor_1
+legend: ģ world/stone_floor_10
+legend: Ĥ world/stone_floor_2
+legend: ĥ world/stone_floor_4
+legend: Ħ world/stone_floor_5
+legend: ħ world/stone_floor_6
+legend: Ĩ world/stone_floor_8
+legend: ĩ world/stone_floor_9
+legend: Ī world/stone_wall_10
+legend: ī world/stone_wall_12
+legend: Ĭ world/stone_wall_3
+legend: ĭ world/stone_wall_5
+legend: Į world/stone_wall_6
+legend: į world/stone_wall_9
+map:
++ 
++  ĭĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĮ
++  īģĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĨĩī
++  īĤRġ[ġĉġuġČġ×ġOġĈġċġrġęġhġiġMġkġsġQġďġNġdġbġoġvġĐġtĢī
++  īĤġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
++  īĤXġjġĔġBġăġĕġĊġēġĘġ{ġqġĝġSġĠġYġnġÀġwġĒġyġLġĄġčġmġĞĢī
++  īĤġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
++  īĤĖġğġHġeġ}ġzġ`ġđġxġÄġÃġgġĚġ!ġUġÁġ$ġ#ġćġĎġKġ|ġWġPġlĢī
++  īĤġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
++  īĤØġJġpġĆġėġ^ġ%ġÂġ"ġVġ_ġIġfġEġcġZġCġFġěġĜġ]ġąġGġDġaĢī
++  īĤġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
++  īĤ1ġ6ġ(ġ-ġAġ;ġ0ġ9ġ*ġ4ġ3ġ8ġ:ġ)ġ@ġ.ġ7ġ2ġ?ġ/ġ5ġ,ġàġüġêĢī
++  īĤġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
++  īĤ÷ġĂġÜġÞġāġâġùġëġèġûġÚġõġúġçġóġÝġøġôġéġòġöġĀġæġðġãĢī
++  īĤġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
++  īĤíġßġîġäġåġïġÛġÙġáġìġñġýġþġÿġÔġÎġÑġÐġÓġÇġÒġÉġÊġÏġËĢī
++  īĤġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
++  īĤÌġÆġÍġÈġÅġÖġÕġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġġĢī
++  īħĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĥĦī
++  įĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĬĪ
++ 

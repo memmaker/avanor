@@ -43,7 +43,11 @@ for f in $SRCS; do
   for d in $VPATH; do [ -f "$d/$f" ] && { src="$d/$f"; break; }; done
   OBJS="$OBJS $OBJ/${f%.cpp}.o"
 done
-OBJS="$OBJS $OBJ/be_web.o $OBJ/rvip_tiles.o $OBJ/fmt_format.o $OBJ/fmt_os.o"
+# c-rec reads the tile mapping (the remapper's rec file) at startup
+CREC=${CREC:-$HOME/Projects/c-rec}
+REC=${AVANOR_REC:-web/avanor-dawnlike.rec}
+CXXFLAGS="$CXXFLAGS -I$CREC"
+OBJS="$OBJS $OBJ/be_web.o $OBJ/rvip_tiles.o $OBJ/rec.o $OBJ/fmt_format.o $OBJ/fmt_os.o"
 ZOBJS=""
 for f in $EXT/zstd/lib/common/*.c $EXT/zstd/lib/compress/*.c $EXT/zstd/lib/decompress/*.c; do
   ZOBJS="$ZOBJS $OBJ/zstd_$(basename "${f%.c}").o"
@@ -58,6 +62,7 @@ NP=$(nproc 2>/dev/null || sysctl -n hw.ncpu)
   done
   echo "em++ -MMD $CXXFLAGS -c port/be_web.cpp -o $OBJ/be_web.o"
   echo "em++ -MMD $CXXFLAGS -c port/rvip_tiles.cpp -o $OBJ/rvip_tiles.o"
+  echo "emcc $OPT $SAN -c $CREC/rec.c -o $OBJ/rec.o"
   echo "em++ $OPT $SAN -std=c++17 -fexceptions -isystem $EXT/fmt/include -c $EXT/fmt/src/format.cc -o $OBJ/fmt_format.o"
   echo "em++ $OPT $SAN -std=c++17 -fexceptions -isystem $EXT/fmt/include -c $EXT/fmt/src/os.cc -o $OBJ/fmt_os.o"
   for f in $EXT/zstd/lib/common/*.c $EXT/zstd/lib/compress/*.c $EXT/zstd/lib/decompress/*.c; do
@@ -83,10 +88,11 @@ em++ $OPT $SAN -fexceptions -o web/dist/avanor-core.js $OBJS $ZOBJS \
   -sEXPORTED_FUNCTIONS=_main,_be_pushkey \
   -sEXPORTED_RUNTIME_METHODS=FS,IDBFS,ENV,HEAPU8,HEAPU32,HEAP32,UTF8ToString,addRunDependency,removeRunDependency \
   -sFORCE_FILESYSTEM -lidbfs.js -sENVIRONMENT=web \
-  --preload-file world@/world --preload-file manual@/manual
+  --preload-file world@/world --preload-file manual@/manual --preload-file "$REC@/tiles.rec"
 cp web/index.html web/dist/index.html
 cp web/avanor.js web/dist/avanor.js
 cp web/tiles-dawn.png web/dist/tiles-dawn.png
+cp "$(dirname "$REC")/$(sed -n 's/^file: *//p' "$REC")" web/dist/   # the rec's sheet
 python3 web/mksounds.py web/dist/sound
 python3 web/make-help.py web/dist/help.html
 echo "built web/dist"

@@ -15,7 +15,15 @@
 	var FONT = '"DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", monospace';
 	/* Tile sets offered, then None (text). Slot layout: web/mkdawn.py.
 	 * Credit: DawnLike by DragonDePlatino, palette DawnBringer (CC BY 4.0). */
-	var SETS = [['DawnLike', 'tiles-dawn.png']], TS = 16;
+	var SETS = [['DawnLike', 'tiles-dawn.png']];
+	/* how the sheet is cut and the cell each slot shows (null: slot = cell): av.tileset from the rec */
+	var cut = { w: 16, h: 16, ox: 0, oy: 0, gx: 0, gy: 0 }, cells = null;
+	function cellXY(t) {
+		var c = cells ? cells[t] : t, cols;
+		if (!(c >= 0)) return null;
+		cols = Math.max(1, Math.floor((sheet.width - cut.ox + cut.gx) / (cut.w + cut.gx)));
+		return [cut.ox + c % cols * (cut.w + cut.gx), cut.oy + Math.floor(c / cols) * (cut.h + cut.gy)];
+	}
 	var CELLS = [8, 10, 12, 14, 16, 20, 24, 28, 32, 40, 48, 64];
 
 	function $(id) { return document.getElementById(id); }
@@ -33,9 +41,9 @@
 		var c = cell(), x = i % M.len, y = (i / M.len) | 0, px = x * c, py = y * c, t = M.tl[i];
 		ctx.fillStyle = '#000'; ctx.fillRect(px, py, c, c);
 		if (useTiles() && t >= 0) {
-			var sc = sheet.width / TS, bg = t & 0xfff, fg = (t >> 12) & 0xfff;
-			if (bg !== 0xfff) ctx.drawImage(sheet, bg % sc * TS, (bg / sc | 0) * TS, TS, TS, px, py, c, c);
-			if (fg !== 0xfff) ctx.drawImage(sheet, fg % sc * TS, (fg / sc | 0) * TS, TS, TS, px, py, c, c);
+			var bg = t & 0xfff, fg = (t >> 12) & 0xfff, p;
+			if (bg !== 0xfff && (p = cellXY(bg))) ctx.drawImage(sheet, p[0], p[1], cut.w, cut.h, px, py, c, c);
+			if (fg !== 0xfff && (p = cellXY(fg))) ctx.drawImage(sheet, p[0], p[1], cut.w, cut.h, px, py, c, c);
 			if (t & (1 << 24)) { ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.fillRect(px, py, c, c); }
 		} else if (M.ch[i] > 32) {
 			ctx.fillStyle = hex(M.rgb[i]);
@@ -97,11 +105,12 @@
 
 	/* sprite for the lists: a 16 px CSS sprite from the sheet (tiles on), else null */
 	function icon(t) {
-		if (!useTiles() || !(t >= 0)) return null;
-		var d = document.createElement('span'), sc = sheet.width / TS;
+		var p = useTiles() && t >= 0 && cellXY(t);
+		if (!p) return null;
+		var d = document.createElement('span');
 		d.className = 'ic';
 		d.style.backgroundImage = 'url(' + sheet.src + ')';
-		d.style.backgroundPosition = -(t % sc) * TS + 'px ' + -((t / sc) | 0) * TS + 'px';
+		d.style.backgroundPosition = -p[0] + 'px ' + -p[1] + 'px';   /* ponytail: the .ic span is 16 px, other tile sizes crop */
 		return d;
 	}
 	var invStr = '', visStr = '';
@@ -153,6 +162,12 @@
 
 	/* ---------- called by the game ---------- */
 	var av = {
+		tileset: function (file, w, h, ox, oy, gx, gy, c) {
+			SETS[0][1] = file;
+			cut = { w: w, h: h, ox: ox, oy: oy, gx: gx, gy: gy };
+			cells = c;
+			if (L) useSet(L.tiles);
+		},
 		sound: play,
 		map: function (ch, rgb, tl, len, hgt, hx, hy) {
 			M.len = len; M.hgt = hgt; M.ch = ch; M.rgb = rgb; M.tl = tl; M.hx = hx; M.hy = hy;

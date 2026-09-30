@@ -1,0 +1,2548 @@
+# Avanor tile mapping: web/mkdawn.py writes it, the remapper edits it (./remap.sh);
+# port/rvip_tiles.cpp reads it at startup (c-rec). Re-running mkdawn.py keeps every icon.
+
+%rec: Tileset
+id: dawnlike
+name: DawnLike
+file: dawnlike-0.png
+anim_file: dawnlike-1.png
+tile_w: 16
+tile_h: 16
+off_x: 0
+off_y: 0
+gap_x: 0
+gap_y: 0
+scenes: avanor-scenes.rec
+
+%rec: world
+%doc: World (terrain, map objects, traps)
+
+id: green_grass_0
+name: green grass (border none)
+icon: 7988
+
+id: green_grass_1
+name: green grass (border e)
+icon: 7989
+
+id: green_grass_2
+name: green grass (border w)
+icon: 7987
+
+id: green_grass_3
+name: green grass (border w e)
+icon: 7990
+
+id: green_grass_4
+name: green grass (border s)
+icon: 8009
+
+id: green_grass_5
+name: green grass (border s e)
+icon: 8010
+
+id: green_grass_6
+name: green grass (border s w)
+icon: 8008
+
+id: green_grass_7
+name: green grass (border s w e)
+icon: 8011
+
+id: green_grass_8
+name: green grass (border n)
+icon: 7967
+
+id: green_grass_9
+name: green grass (border n e)
+icon: 7968
+
+id: green_grass_10
+name: green grass (border n w)
+icon: 7966
+
+id: green_grass_11
+name: green grass (border n w e)
+icon: 7969
+
+id: green_grass_12
+name: green grass (border n s)
+icon: 7992
+
+id: green_grass_13
+name: green grass (border n s e)
+icon: 7993
+
+id: green_grass_14
+name: green grass (border n s w)
+icon: 7991
+
+id: green_grass_15
+name: green grass (border n s w e)
+icon: 7971
+
+id: tree
+name: tree
+icon: 12327
+
+id: sand_0
+name: sand (border none)
+icon: 8170
+
+id: sand_1
+name: sand (border e)
+icon: 8171
+
+id: sand_2
+name: sand (border w)
+icon: 8169
+
+id: sand_3
+name: sand (border w e)
+icon: 8172
+
+id: sand_4
+name: sand (border s)
+icon: 8191
+
+id: sand_5
+name: sand (border s e)
+icon: 8192
+
+id: sand_6
+name: sand (border s w)
+icon: 8190
+
+id: sand_7
+name: sand (border s w e)
+icon: 8193
+
+id: sand_8
+name: sand (border n)
+icon: 8149
+
+id: sand_9
+name: sand (border n e)
+icon: 8150
+
+id: sand_10
+name: sand (border n w)
+icon: 8148
+
+id: sand_11
+name: sand (border n w e)
+icon: 8151
+
+id: sand_12
+name: sand (border n s)
+icon: 8174
+
+id: sand_13
+name: sand (border n s e)
+icon: 8175
+
+id: sand_14
+name: sand (border n s w)
+icon: 8173
+
+id: sand_15
+name: sand (border n s w e)
+icon: 8153
+
+id: window_0
+name: window (joins none)
+icon: 12167
+
+id: window_1
+name: window (joins e)
+icon: 12146
+
+id: window_2
+name: window (joins w)
+icon: 12146
+
+id: window_3
+name: window (joins w e)
+icon: 12146
+
+id: window_4
+name: window (joins s)
+icon: 12166
+
+id: window_5
+name: window (joins s e)
+icon: 12145
+
+id: window_6
+name: window (joins s w)
+icon: 12147
+
+id: window_7
+name: window (joins s w e)
+icon: 12149
+
+id: window_8
+name: window (joins n)
+icon: 12166
+
+id: window_9
+name: window (joins n e)
+icon: 12187
+
+id: window_10
+name: window (joins n w)
+icon: 12189
+
+id: window_11
+name: window (joins n w e)
+icon: 12191
+
+id: window_12
+name: window (joins n s)
+icon: 12166
+
+id: window_13
+name: window (joins n s e)
+icon: 12169
+
+id: window_14
+name: window (joins n s w)
+icon: 12171
+
+id: window_15
+name: window (joins n s w e)
+icon: 12170
+
+id: magma_0
+name: magma (joins none)
+icon: 11978
+
+id: magma_1
+name: magma (joins e)
+icon: 11957
+
+id: magma_2
+name: magma (joins w)
+icon: 11957
+
+id: magma_3
+name: magma (joins w e)
+icon: 11957
+
+id: magma_4
+name: magma (joins s)
+icon: 11977
+
+id: magma_5
+name: magma (joins s e)
+icon: 11956
+
+id: magma_6
+name: magma (joins s w)
+icon: 11958
+
+id: magma_7
+name: magma (joins s w e)
+icon: 11960
+
+id: magma_8
+name: magma (joins n)
+icon: 11977
+
+id: magma_9
+name: magma (joins n e)
+icon: 11998
+
+id: magma_10
+name: magma (joins n w)
+icon: 12000
+
+id: magma_11
+name: magma (joins n w e)
+icon: 12002
+
+id: magma_12
+name: magma (joins n s)
+icon: 11977
+
+id: magma_13
+name: magma (joins n s e)
+icon: 11980
+
+id: magma_14
+name: magma (joins n s w)
+icon: 11982
+
+id: magma_15
+name: magma (joins n s w e)
+icon: 11981
+
+id: quartz_0
+name: quartz (joins none)
+icon: 11908
+
+id: quartz_1
+name: quartz (joins e)
+icon: 11887
+
+id: quartz_2
+name: quartz (joins w)
+icon: 11887
+
+id: quartz_3
+name: quartz (joins w e)
+icon: 11887
+
+id: quartz_4
+name: quartz (joins s)
+icon: 11907
+
+id: quartz_5
+name: quartz (joins s e)
+icon: 11886
+
+id: quartz_6
+name: quartz (joins s w)
+icon: 11888
+
+id: quartz_7
+name: quartz (joins s w e)
+icon: 11890
+
+id: quartz_8
+name: quartz (joins n)
+icon: 11907
+
+id: quartz_9
+name: quartz (joins n e)
+icon: 11928
+
+id: quartz_10
+name: quartz (joins n w)
+icon: 11930
+
+id: quartz_11
+name: quartz (joins n w e)
+icon: 11932
+
+id: quartz_12
+name: quartz (joins n s)
+icon: 11907
+
+id: quartz_13
+name: quartz (joins n s e)
+icon: 11910
+
+id: quartz_14
+name: quartz (joins n s w)
+icon: 11912
+
+id: quartz_15
+name: quartz (joins n s w e)
+icon: 11911
+
+id: cave_floor_0
+name: cave floor (border none)
+icon: 8121
+
+id: cave_floor_1
+name: cave floor (border e)
+icon: 8122
+
+id: cave_floor_2
+name: cave floor (border w)
+icon: 8120
+
+id: cave_floor_3
+name: cave floor (border w e)
+icon: 8123
+
+id: cave_floor_4
+name: cave floor (border s)
+icon: 8142
+
+id: cave_floor_5
+name: cave floor (border s e)
+icon: 8143
+
+id: cave_floor_6
+name: cave floor (border s w)
+icon: 8141
+
+id: cave_floor_7
+name: cave floor (border s w e)
+icon: 8144
+
+id: cave_floor_8
+name: cave floor (border n)
+icon: 8100
+
+id: cave_floor_9
+name: cave floor (border n e)
+icon: 8101
+
+id: cave_floor_10
+name: cave floor (border n w)
+icon: 8099
+
+id: cave_floor_11
+name: cave floor (border n w e)
+icon: 8102
+
+id: cave_floor_12
+name: cave floor (border n s)
+icon: 8125
+
+id: cave_floor_13
+name: cave floor (border n s e)
+icon: 8126
+
+id: cave_floor_14
+name: cave floor (border n s w)
+icon: 8124
+
+id: cave_floor_15
+name: cave floor (border n s w e)
+icon: 8104
+
+id: stone_floor_0
+name: stone floor (border none)
+icon: 7995
+
+id: stone_floor_1
+name: stone floor (border e)
+icon: 7996
+
+id: stone_floor_2
+name: stone floor (border w)
+icon: 7994
+
+id: stone_floor_3
+name: stone floor (border w e)
+icon: 7997
+
+id: stone_floor_4
+name: stone floor (border s)
+icon: 8016
+
+id: stone_floor_5
+name: stone floor (border s e)
+icon: 8017
+
+id: stone_floor_6
+name: stone floor (border s w)
+icon: 8015
+
+id: stone_floor_7
+name: stone floor (border s w e)
+icon: 8018
+
+id: stone_floor_8
+name: stone floor (border n)
+icon: 7974
+
+id: stone_floor_9
+name: stone floor (border n e)
+icon: 7975
+
+id: stone_floor_10
+name: stone floor (border n w)
+icon: 7973
+
+id: stone_floor_11
+name: stone floor (border n w e)
+icon: 7976
+
+id: stone_floor_12
+name: stone floor (border n s)
+icon: 7999
+
+id: stone_floor_13
+name: stone floor (border n s e)
+icon: 8000
+
+id: stone_floor_14
+name: stone floor (border n s w)
+icon: 7998
+
+id: stone_floor_15
+name: stone floor (border n s w e)
+icon: 7978
+
+id: path_0
+name: path (border none)
+icon: 8233
+
+id: path_1
+name: path (border e)
+icon: 8234
+
+id: path_2
+name: path (border w)
+icon: 8232
+
+id: path_3
+name: path (border w e)
+icon: 8235
+
+id: path_4
+name: path (border s)
+icon: 8254
+
+id: path_5
+name: path (border s e)
+icon: 8255
+
+id: path_6
+name: path (border s w)
+icon: 8253
+
+id: path_7
+name: path (border s w e)
+icon: 8256
+
+id: path_8
+name: path (border n)
+icon: 8212
+
+id: path_9
+name: path (border n e)
+icon: 8213
+
+id: path_10
+name: path (border n w)
+icon: 8211
+
+id: path_11
+name: path (border n w e)
+icon: 8214
+
+id: path_12
+name: path (border n s)
+icon: 8237
+
+id: path_13
+name: path (border n s e)
+icon: 8238
+
+id: path_14
+name: path (border n s w)
+icon: 8236
+
+id: path_15
+name: path (border n s w e)
+icon: 8216
+
+id: wood_wall_0
+name: wood wall (joins none)
+icon: 12160
+
+id: wood_wall_1
+name: wood wall (joins e)
+icon: 12139
+
+id: wood_wall_2
+name: wood wall (joins w)
+icon: 12139
+
+id: wood_wall_3
+name: wood wall (joins w e)
+icon: 12139
+
+id: wood_wall_4
+name: wood wall (joins s)
+icon: 12159
+
+id: wood_wall_5
+name: wood wall (joins s e)
+icon: 12138
+
+id: wood_wall_6
+name: wood wall (joins s w)
+icon: 12140
+
+id: wood_wall_7
+name: wood wall (joins s w e)
+icon: 12142
+
+id: wood_wall_8
+name: wood wall (joins n)
+icon: 12159
+
+id: wood_wall_9
+name: wood wall (joins n e)
+icon: 12180
+
+id: wood_wall_10
+name: wood wall (joins n w)
+icon: 12182
+
+id: wood_wall_11
+name: wood wall (joins n w e)
+icon: 12184
+
+id: wood_wall_12
+name: wood wall (joins n s)
+icon: 12159
+
+id: wood_wall_13
+name: wood wall (joins n s e)
+icon: 12162
+
+id: wood_wall_14
+name: wood wall (joins n s w)
+icon: 12164
+
+id: wood_wall_15
+name: wood wall (joins n s w e)
+icon: 12163
+
+id: stone_wall_0
+name: stone wall (joins none)
+icon: 11656
+
+id: stone_wall_1
+name: stone wall (joins e)
+icon: 11635
+
+id: stone_wall_2
+name: stone wall (joins w)
+icon: 11635
+
+id: stone_wall_3
+name: stone wall (joins w e)
+icon: 11635
+
+id: stone_wall_4
+name: stone wall (joins s)
+icon: 11655
+
+id: stone_wall_5
+name: stone wall (joins s e)
+icon: 11634
+
+id: stone_wall_6
+name: stone wall (joins s w)
+icon: 11636
+
+id: stone_wall_7
+name: stone wall (joins s w e)
+icon: 11638
+
+id: stone_wall_8
+name: stone wall (joins n)
+icon: 11655
+
+id: stone_wall_9
+name: stone wall (joins n e)
+icon: 11676
+
+id: stone_wall_10
+name: stone wall (joins n w)
+icon: 11678
+
+id: stone_wall_11
+name: stone wall (joins n w e)
+icon: 11680
+
+id: stone_wall_12
+name: stone wall (joins n s)
+icon: 11655
+
+id: stone_wall_13
+name: stone wall (joins n s e)
+icon: 11658
+
+id: stone_wall_14
+name: stone wall (joins n s w)
+icon: 11660
+
+id: stone_wall_15
+name: stone wall (joins n s w e)
+icon: 11659
+
+id: water
+name: water
+icon: 8782
+
+id: deep_water
+name: deep water
+icon: 10312
+
+id: lava
+name: lava
+icon: 8784
+
+id: hill_0
+name: hill (border none)
+icon: 8051
+
+id: hill_1
+name: hill (border e)
+icon: 8052
+
+id: hill_2
+name: hill (border w)
+icon: 8050
+
+id: hill_3
+name: hill (border w e)
+icon: 8053
+
+id: hill_4
+name: hill (border s)
+icon: 8072
+
+id: hill_5
+name: hill (border s e)
+icon: 8073
+
+id: hill_6
+name: hill (border s w)
+icon: 8071
+
+id: hill_7
+name: hill (border s w e)
+icon: 8074
+
+id: hill_8
+name: hill (border n)
+icon: 8030
+
+id: hill_9
+name: hill (border n e)
+icon: 8031
+
+id: hill_10
+name: hill (border n w)
+icon: 8029
+
+id: hill_11
+name: hill (border n w e)
+icon: 8032
+
+id: hill_12
+name: hill (border n s)
+icon: 8055
+
+id: hill_13
+name: hill (border n s e)
+icon: 8056
+
+id: hill_14
+name: hill (border n s w)
+icon: 8054
+
+id: hill_15
+name: hill (border n s w e)
+icon: 8034
+
+id: low_mountain
+name: low mountain
+icon: 12328
+
+id: mountain
+name: mountain
+icon: 12329
+
+id: high_mountain
+name: high mountain
+icon: 12330
+
+id: bridge
+name: bridge
+icon: 12331
+
+id: road_0
+name: road (border none)
+icon: 8240
+
+id: road_1
+name: road (border e)
+icon: 8241
+
+id: road_2
+name: road (border w)
+icon: 8239
+
+id: road_3
+name: road (border w e)
+icon: 8242
+
+id: road_4
+name: road (border s)
+icon: 8261
+
+id: road_5
+name: road (border s e)
+icon: 8262
+
+id: road_6
+name: road (border s w)
+icon: 8260
+
+id: road_7
+name: road (border s w e)
+icon: 8263
+
+id: road_8
+name: road (border n)
+icon: 8219
+
+id: road_9
+name: road (border n e)
+icon: 8220
+
+id: road_10
+name: road (border n w)
+icon: 8218
+
+id: road_11
+name: road (border n w e)
+icon: 8221
+
+id: road_12
+name: road (border n s)
+icon: 8244
+
+id: road_13
+name: road (border n s e)
+icon: 8245
+
+id: road_14
+name: road (border n s w)
+icon: 8243
+
+id: road_15
+name: road (border n s w e)
+icon: 8223
+
+id: obsidian_floor_0
+name: obsidian floor (border none)
+icon: 8107
+
+id: obsidian_floor_1
+name: obsidian floor (border e)
+icon: 8108
+
+id: obsidian_floor_2
+name: obsidian floor (border w)
+icon: 8106
+
+id: obsidian_floor_3
+name: obsidian floor (border w e)
+icon: 8109
+
+id: obsidian_floor_4
+name: obsidian floor (border s)
+icon: 8128
+
+id: obsidian_floor_5
+name: obsidian floor (border s e)
+icon: 8129
+
+id: obsidian_floor_6
+name: obsidian floor (border s w)
+icon: 8127
+
+id: obsidian_floor_7
+name: obsidian floor (border s w e)
+icon: 8130
+
+id: obsidian_floor_8
+name: obsidian floor (border n)
+icon: 8086
+
+id: obsidian_floor_9
+name: obsidian floor (border n e)
+icon: 8087
+
+id: obsidian_floor_10
+name: obsidian floor (border n w)
+icon: 8085
+
+id: obsidian_floor_11
+name: obsidian floor (border n w e)
+icon: 8088
+
+id: obsidian_floor_12
+name: obsidian floor (border n s)
+icon: 8111
+
+id: obsidian_floor_13
+name: obsidian floor (border n s e)
+icon: 8112
+
+id: obsidian_floor_14
+name: obsidian floor (border n s w)
+icon: 8110
+
+id: obsidian_floor_15
+name: obsidian floor (border n s w e)
+icon: 8090
+
+id: fence_0
+name: fence (joins none)
+icon: 11411
+
+id: fence_1
+name: fence (joins e)
+icon: 11390
+
+id: fence_2
+name: fence (joins w)
+icon: 11390
+
+id: fence_3
+name: fence (joins w e)
+icon: 11390
+
+id: fence_4
+name: fence (joins s)
+icon: 11410
+
+id: fence_5
+name: fence (joins s e)
+icon: 11389
+
+id: fence_6
+name: fence (joins s w)
+icon: 11391
+
+id: fence_7
+name: fence (joins s w e)
+icon: 11393
+
+id: fence_8
+name: fence (joins n)
+icon: 11410
+
+id: fence_9
+name: fence (joins n e)
+icon: 11431
+
+id: fence_10
+name: fence (joins n w)
+icon: 11433
+
+id: fence_11
+name: fence (joins n w e)
+icon: 11435
+
+id: fence_12
+name: fence (joins n s)
+icon: 11410
+
+id: fence_13
+name: fence (joins n s e)
+icon: 11410
+
+id: fence_14
+name: fence (joins n s w)
+icon: 11410
+
+id: fence_15
+name: fence (joins n s w e)
+icon: 11414
+
+id: golden_floor_0
+name: golden floor (border none)
+icon: 7918
+
+id: golden_floor_1
+name: golden floor (border e)
+icon: 7919
+
+id: golden_floor_2
+name: golden floor (border w)
+icon: 7917
+
+id: golden_floor_3
+name: golden floor (border w e)
+icon: 7920
+
+id: golden_floor_4
+name: golden floor (border s)
+icon: 7939
+
+id: golden_floor_5
+name: golden floor (border s e)
+icon: 7940
+
+id: golden_floor_6
+name: golden floor (border s w)
+icon: 7938
+
+id: golden_floor_7
+name: golden floor (border s w e)
+icon: 7941
+
+id: golden_floor_8
+name: golden floor (border n)
+icon: 7897
+
+id: golden_floor_9
+name: golden floor (border n e)
+icon: 7898
+
+id: golden_floor_10
+name: golden floor (border n w)
+icon: 7896
+
+id: golden_floor_11
+name: golden floor (border n w e)
+icon: 7899
+
+id: golden_floor_12
+name: golden floor (border n s)
+icon: 7922
+
+id: golden_floor_13
+name: golden floor (border n s e)
+icon: 7923
+
+id: golden_floor_14
+name: golden floor (border n s w)
+icon: 7921
+
+id: golden_floor_15
+name: golden floor (border n s w e)
+icon: 7901
+
+id: marble_wall_0
+name: marble wall (joins none)
+icon: 12174
+
+id: marble_wall_1
+name: marble wall (joins e)
+icon: 12153
+
+id: marble_wall_2
+name: marble wall (joins w)
+icon: 12153
+
+id: marble_wall_3
+name: marble wall (joins w e)
+icon: 12153
+
+id: marble_wall_4
+name: marble wall (joins s)
+icon: 12173
+
+id: marble_wall_5
+name: marble wall (joins s e)
+icon: 12152
+
+id: marble_wall_6
+name: marble wall (joins s w)
+icon: 12154
+
+id: marble_wall_7
+name: marble wall (joins s w e)
+icon: 12156
+
+id: marble_wall_8
+name: marble wall (joins n)
+icon: 12173
+
+id: marble_wall_9
+name: marble wall (joins n e)
+icon: 12194
+
+id: marble_wall_10
+name: marble wall (joins n w)
+icon: 12196
+
+id: marble_wall_11
+name: marble wall (joins n w e)
+icon: 12198
+
+id: marble_wall_12
+name: marble wall (joins n s)
+icon: 12173
+
+id: marble_wall_13
+name: marble wall (joins n s e)
+icon: 12176
+
+id: marble_wall_14
+name: marble wall (joins n s w)
+icon: 12178
+
+id: marble_wall_15
+name: marble wall (joins n s w e)
+icon: 12177
+
+id: black_marble_wall_0
+name: black marble wall (joins none)
+icon: 11789
+
+id: black_marble_wall_1
+name: black marble wall (joins e)
+icon: 11768
+
+id: black_marble_wall_2
+name: black marble wall (joins w)
+icon: 11768
+
+id: black_marble_wall_3
+name: black marble wall (joins w e)
+icon: 11768
+
+id: black_marble_wall_4
+name: black marble wall (joins s)
+icon: 11788
+
+id: black_marble_wall_5
+name: black marble wall (joins s e)
+icon: 11767
+
+id: black_marble_wall_6
+name: black marble wall (joins s w)
+icon: 11769
+
+id: black_marble_wall_7
+name: black marble wall (joins s w e)
+icon: 11771
+
+id: black_marble_wall_8
+name: black marble wall (joins n)
+icon: 11788
+
+id: black_marble_wall_9
+name: black marble wall (joins n e)
+icon: 11809
+
+id: black_marble_wall_10
+name: black marble wall (joins n w)
+icon: 11811
+
+id: black_marble_wall_11
+name: black marble wall (joins n w e)
+icon: 11813
+
+id: black_marble_wall_12
+name: black marble wall (joins n s)
+icon: 11788
+
+id: black_marble_wall_13
+name: black marble wall (joins n s e)
+icon: 11791
+
+id: black_marble_wall_14
+name: black marble wall (joins n s w)
+icon: 11793
+
+id: black_marble_wall_15
+name: black marble wall (joins n s w e)
+icon: 11792
+
+id: golden_fence_0
+name: golden fence (joins none)
+icon: 12097
+
+id: golden_fence_1
+name: golden fence (joins e)
+icon: 12076
+
+id: golden_fence_2
+name: golden fence (joins w)
+icon: 12076
+
+id: golden_fence_3
+name: golden fence (joins w e)
+icon: 12076
+
+id: golden_fence_4
+name: golden fence (joins s)
+icon: 12096
+
+id: golden_fence_5
+name: golden fence (joins s e)
+icon: 12075
+
+id: golden_fence_6
+name: golden fence (joins s w)
+icon: 12077
+
+id: golden_fence_7
+name: golden fence (joins s w e)
+icon: 12079
+
+id: golden_fence_8
+name: golden fence (joins n)
+icon: 12096
+
+id: golden_fence_9
+name: golden fence (joins n e)
+icon: 12117
+
+id: golden_fence_10
+name: golden fence (joins n w)
+icon: 12119
+
+id: golden_fence_11
+name: golden fence (joins n w e)
+icon: 12121
+
+id: golden_fence_12
+name: golden fence (joins n s)
+icon: 12096
+
+id: golden_fence_13
+name: golden fence (joins n s e)
+icon: 12099
+
+id: golden_fence_14
+name: golden fence (joins n s w)
+icon: 12101
+
+id: golden_fence_15
+name: golden fence (joins n s w e)
+icon: 12100
+
+id: teleport_white
+name: teleport white
+icon: 12332
+
+id: trap_magic_arrow
+name: magic arrow trap
+icon: 10422
+
+id: trap_fire_bolt
+name: fire bolt trap
+icon: 10417
+
+id: trap_acid_bolt
+name: acid bolt trap
+icon: 10416
+
+id: trap_teleport
+name: teleport trap
+icon: 10418
+
+id: trap_arrow
+name: arrow trap
+icon: 10395
+
+id: trap_pit
+name: pit trap
+icon: 10442
+
+id: trap_spear_pit
+name: spear pit trap
+icon: 10399
+
+id: up
+name: up (map object)
+icon: 10332
+
+id: down
+name: down (map object)
+icon: 10333
+
+id: door_open
+name: door open (map object)
+icon: 6909
+
+id: door_closed
+name: door closed (map object)
+icon: 6783
+
+id: teleport
+name: teleport (map object)
+icon: 10420
+
+id: altar
+name: altar (map object)
+icon: 6741
+
+id: grave
+name: grave (map object)
+icon: 6678
+
+id: trap
+name: trap (map object)
+icon: 10422
+
+id: herb_bush
+name: herb bush (map object)
+icon: 8673
+
+id: mushroom
+name: mushroom (map object)
+icon: 4831
+
+%rec: monster
+%doc: Monsters
+
+id: bat
+name: bat
+icon: 358
+
+id: huge_bat
+name: huge bat
+icon: 359
+
+id: mongbat
+name: mongbat
+icon: 360
+
+id: greater_mongbat
+name: greater mongbat
+icon: 357
+
+id: dog
+name: dog
+icon: 778
+
+id: large_dog
+name: large dog
+icon: 737
+
+id: rabid_dog
+name: rabid dog
+icon: 697
+
+id: wolf
+name: wolf
+icon: 714
+
+id: large_wolf
+name: large wolf
+icon: 715
+
+id: werewolf
+name: werewolf
+icon: 719
+
+id: cat
+name: cat
+icon: 463
+
+id: wild_cat
+name: wild cat
+icon: 442
+
+id: lemure
+name: lemure
+icon: 590
+
+id: dretch
+name: dretch
+icon: 526
+
+id: imp
+name: imp
+icon: 609
+
+id: quasit
+name: quasit
+icon: 610
+
+id: hell_hound
+name: hell hound
+icon: 799
+
+id: bearded_devil
+name: bearded devil
+icon: 504
+
+id: barbed_devil
+name: barbed devil
+icon: 504
+
+id: vrock
+name: vrock
+icon: 506
+
+id: bone_devil
+name: bone devil
+icon: 567
+
+id: horned_devil
+name: horned devil
+icon: 569
+
+id: starveling
+name: starveling
+icon: 3423
+
+id: wendigo
+name: wendigo
+icon: 1513
+
+id: goblin
+name: goblin
+icon: 2478
+
+id: goblin_warrior
+name: goblin warrior
+icon: 1470
+
+id: goblin_warmaster
+name: goblin warmaster
+icon: 2479
+
+id: goblin_chieftain
+name: goblin chieftain
+icon: 1472
+
+id: farmer
+name: farmer
+icon: 1262
+
+id: goodwife
+name: goodwife
+icon: 1263
+
+id: bandit
+name: bandit
+icon: 2208
+
+id: citizen
+name: citizen
+icon: 1262
+
+id: fcitizen
+name: fcitizen
+icon: 1263
+
+id: royal_guard
+name: royal guard
+icon: 1182
+
+id: royal_guard_elite
+name: royal guard elite
+icon: 1180
+
+id: death_knight
+name: death knight
+icon: 2269
+
+id: shopkeeper
+name: shopkeeper
+icon: 1117
+
+id: dwarf
+name: dwarf
+icon: 1282
+
+id: dwarf_guard
+name: dwarf guard
+icon: 2437
+
+id: spider
+name: spider
+icon: 1848
+
+id: giant_spider
+name: giant spider
+icon: 1849
+
+id: tarantula
+name: tarantula
+icon: 1995
+
+id: scorpion
+name: scorpion
+icon: 1851
+
+id: black_scorpion
+name: black scorpion
+icon: 1852
+
+id: pink_scorpion
+name: pink scorpion
+icon: 1851
+
+id: fire_beetle
+name: fire beetle
+icon: 2016
+
+id: frost_beetle
+name: frost beetle
+icon: 1809
+
+id: green_beetle
+name: green beetle
+icon: 1809
+
+id: killer_beetle
+name: killer beetle
+icon: 2017
+
+id: death_beetle
+name: death beetle
+icon: 2017
+
+id: giant_bee
+name: giant bee
+icon: 1832
+
+id: giant_wasp
+name: giant wasp
+icon: 1830
+
+id: centipede
+name: centipede
+icon: 1996
+
+id: stegocentipede
+name: stegocentipede
+icon: 1996
+
+id: dungeon_crawler
+name: dungeon crawler
+icon: 1829
+
+id: giant_crawler
+name: giant crawler
+icon: 1829
+
+id: carrion_crawler
+name: carrion crawler
+icon: 1829
+
+id: kobold
+name: kobold
+icon: 1680
+
+id: large_kobold
+name: large kobold
+icon: 1681
+
+id: chieftain_kobold
+name: chieftain kobold
+icon: 1683
+
+id: shaman_kobold
+name: shaman kobold
+icon: 1682
+
+id: gnoll
+name: gnoll
+icon: 1471
+
+id: gnoll_warmaster
+name: gnoll warmaster
+icon: 1512
+
+id: sheep
+name: sheep
+icon: 2584
+
+id: goat
+name: goat
+icon: 2565
+
+id: gray_ooze
+name: gray ooze
+icon: 3213
+
+id: gelatinous_cube
+name: gelatinous cube
+icon: 3236
+
+id: orc
+name: orc
+icon: 1155
+
+id: large_orc
+name: large orc
+icon: 2458
+
+id: hill_orc
+name: hill orc
+icon: 1156
+
+id: dark_orc
+name: dark orc
+icon: 2461
+
+id: lieutenant_orc
+name: lieutenant orc
+icon: 2459
+
+id: captain_orc
+name: captain orc
+icon: 2462
+
+id: chieftain_orc
+name: chieftain orc
+icon: 1160
+
+id: rat
+name: rat
+icon: 3129
+
+id: large_rat
+name: large rat
+icon: 3130
+
+id: black_rat
+name: black rat
+icon: 3131
+
+id: huge_rat
+name: huge rat
+icon: 3132
+
+id: small_snake
+name: small snake
+icon: 2856
+
+id: gray_snake
+name: gray snake
+icon: 2857
+
+id: brown_snake
+name: brown snake
+icon: 2857
+
+id: salamander
+name: salamander
+icon: 3005
+
+id: large_snake
+name: large snake
+icon: 2858
+
+id: cobra
+name: cobra
+icon: 2861
+
+id: king_cobra
+name: king cobra
+icon: 2861
+
+id: rattlesnake
+name: rattlesnake
+icon: 2860
+
+id: skeleton
+name: skeleton
+icon: 3339
+
+id: zombie
+name: zombie
+icon: 3302
+
+id: ghoul
+name: ghoul
+icon: 3465
+
+id: ghost
+name: ghost
+icon: 3383
+
+id: spectre
+name: spectre
+icon: 3423
+
+id: dread
+name: dread
+icon: 3342
+
+id: vampire
+name: vampire
+icon: 3360
+
+id: lich
+name: lich
+icon: 3343
+
+id: magnush
+name: magnush
+icon: 2506
+
+id: xshee_voo
+name: xshee voo
+icon: 1093
+
+id: ahkulan
+name: ahkulan
+icon: 2211
+
+id: beelzevile
+name: beelzevile
+icon: 568
+
+id: dwarf_cleric
+name: dwarf cleric
+icon: 2442
+
+id: elder_gridor
+name: elder gridor
+icon: 2226
+
+id: gefeon
+name: gefeon
+icon: 2211
+
+id: gekta
+name: gekta
+icon: 779
+
+id: highpriest
+name: highpriest
+icon: 2226
+
+id: jorgus
+name: jorgus
+icon: 2271
+
+id: ozorik
+name: ozorik
+icon: 2269
+
+id: roderik
+name: roderik
+icon: 2353
+
+id: rotmoth
+name: rotmoth
+icon: 2211
+
+id: giana
+name: giana
+icon: 2311
+
+id: brida
+name: brida
+icon: 2290
+
+id: todin
+name: todin
+icon: 1283
+
+id: torin
+name: torin
+icon: 1284
+
+id: yohjishiro
+name: yohjishiro
+icon: 1201
+
+id: any_rat
+name: any rat (monster class)
+icon: 3129
+
+id: any_bat
+name: any bat (monster class)
+icon: 358
+
+id: any_feline
+name: any feline (monster class)
+icon: 463
+
+id: any_canine
+name: any canine (monster class)
+icon: 736
+
+id: any_reptile
+name: any reptile (monster class)
+icon: 2857
+
+id: any_insect
+name: any insect (monster class)
+icon: 1809
+
+id: any_human
+name: any human (monster class)
+icon: 2206
+
+id: any_orc
+name: any orc (monster class)
+icon: 1155
+
+id: any_giant
+name: any giant (monster class)
+icon: 1073
+
+id: any_kobold
+name: any kobold (monster class)
+icon: 1680
+
+id: any_undead
+name: any undead (monster class)
+icon: 3339
+
+id: any_goblin
+name: any goblin (monster class)
+icon: 1470
+
+id: any_demon
+name: any demon (monster class)
+icon: 609
+
+id: any_humanoid
+name: any humanoid (monster class)
+icon: 1197
+
+id: any_blob
+name: any blob (monster class)
+icon: 3213
+
+id: any_other
+name: any other (monster class)
+icon: 3192
+
+id: hero_human
+name: you: human
+icon: 2206
+
+id: hero_half_elf
+name: you: half elf
+icon: 2207
+
+id: hero_high_elf
+name: you: high elf
+icon: 1197
+
+id: hero_halfling
+name: you: halfling
+icon: 1281
+
+id: hero_half_orc
+name: you: half orc
+icon: 1155
+
+id: hero_dwarf
+name: you: dwarf
+icon: 1282
+
+id: hero_gnome
+name: you: gnome
+icon: 1239
+
+%rec: object
+%doc: Items
+
+id: clothes
+name: clothes
+icon: 4243
+
+id: dress
+name: dress
+icon: 4243
+
+id: robe
+name: robe
+icon: 4242
+
+id: light_mail
+name: light mail
+icon: 4221
+
+id: scale_mail
+name: scale mail
+icon: 4224
+
+id: plate_mail
+name: plate mail
+icon: 4227
+
+id: chain_mail
+name: chain mail
+icon: 4265
+
+id: ring_mail
+name: ring mail
+icon: 4264
+
+id: sandals
+name: sandals
+icon: 4479
+
+id: light_boots
+name: light boots
+icon: 4475
+
+id: soft_boots
+name: soft boots
+icon: 4476
+
+id: hard_boots
+name: hard boots
+icon: 4495
+
+id: hat
+name: hat
+icon: 5020
+
+id: cap
+name: cap
+icon: 4998
+
+id: helmet
+name: helmet
+icon: 4982
+
+id: light_cloak
+name: light cloak
+icon: 4180
+
+id: cloak
+name: cloak
+icon: 4185
+
+id: shadow_cloak
+name: shadow cloak
+icon: 4186
+
+id: cape
+name: cape
+icon: 4179
+
+id: gloves
+name: gloves
+icon: 4957
+
+id: gauntlets
+name: gauntlets
+icon: 4956
+
+id: knuckles
+name: knuckles
+icon: 4959
+
+id: long_bow
+name: long bow
+icon: 3927
+
+id: short_bow
+name: short bow
+icon: 3929
+
+id: light_crossbow
+name: light crossbow
+icon: 3932
+
+id: crossbow
+name: crossbow
+icon: 3932
+
+id: heavy_crossbow
+name: heavy crossbow
+icon: 3932
+
+id: sling
+name: sling
+icon: 3931
+
+id: arrow
+name: arrow
+icon: 3949
+
+id: quarrel
+name: quarrel
+icon: 3952
+
+id: sling_bullet
+name: sling bullet
+icon: 5381
+
+id: rock
+name: rock
+icon: 5820
+
+id: shuriken
+name: shuriken
+icon: 3970
+
+id: small_shield
+name: small shield
+icon: 5985
+
+id: medium_shield
+name: medium shield
+icon: 5988
+
+id: large_shield
+name: large shield
+icon: 5989
+
+id: tower_shield
+name: tower shield
+icon: 5990
+
+id: club
+name: club
+icon: 6049
+
+id: war_hammer
+name: war hammer
+icon: 5229
+
+id: dagger
+name: dagger
+icon: 6006
+
+id: knife
+name: knife
+icon: 6012
+
+id: orcish_dagger
+name: orcish dagger
+icon: 6008
+
+id: long_dagger
+name: long dagger
+icon: 6027
+
+id: short_sword
+name: short sword
+icon: 5250
+
+id: long_sword
+name: long sword
+icon: 5126
+
+id: broad_sword
+name: broad sword
+icon: 5124
+
+id: rapier
+name: rapier
+icon: 5251
+
+id: scimitar
+name: scimitar
+icon: 5254
+
+id: katana
+name: katana
+icon: 5129
+
+id: wakizashi
+name: wakizashi
+icon: 5253
+
+id: small_axe
+name: small axe
+icon: 5271
+
+id: war_axe
+name: war axe
+icon: 5271
+
+id: battle_axe
+name: battle axe
+icon: 5272
+
+id: great_axe
+name: great axe
+icon: 5272
+
+id: orcish_axe
+name: orcish axe
+icon: 5271
+
+id: mace
+name: mace
+icon: 5191
+
+id: flail
+name: flail
+icon: 6091
+
+id: short_spear
+name: short spear
+icon: 5103
+
+id: long_spear
+name: long spear
+icon: 5104
+
+id: pitchfork
+name: pitchfork
+icon: 5109
+
+id: pike
+name: pike
+icon: 5188
+
+id: halberd
+name: halberd
+icon: 5168
+
+id: staff
+name: staff
+icon: 5189
+
+id: alchemy_set
+name: alchemy set
+icon: 6384
+
+id: cooking_set
+name: cooking set
+icon: 6133
+
+id: pickaxe
+name: pickaxe
+icon: 6070
+
+id: ancient_machine_part
+name: ancient machine part
+icon: 6136
+
+id: amulet
+name: amulet
+icon: 4033
+
+id: ring
+name: ring
+icon: 5755
+
+id: scroll
+name: scroll
+icon: 5967
+
+id: book
+name: book
+icon: 4438
+
+id: money
+name: money
+icon: 5313
+
+id: corpse
+name: corpse
+icon: 4641
+
+id: chest
+name: chest
+icon: 4515
+
+id: herb
+name: herb
+icon: 4895
+
+id: potion
+name: potion
+icon: 5675
+
+id: bone
+name: bone
+icon: 6574
+
+id: large_ration
+name: large ration
+icon: 4916
+
+id: ration
+name: ration
+icon: 4916
+
+id: small_ration
+name: small ration
+icon: 4917
+
+id: elvish_waybread
+name: elvish waybread
+icon: 4914
+
+id: ancient_machine_part_2
+name: ancient machine part
+icon: 6136
+
+id: pickaxe_2
+name: pickaxe
+icon: 6070
+
+id: alchemy_set_2
+name: alchemy set
+icon: 6384
+
+id: cooking_set_2
+name: cooking set
+icon: 6133
+
+id: eye_of_raa
+name: eye of raa
+icon: 5336
+
+id: black_club
+name: black club
+icon: 6049
+
+id: great_elemental_ring
+name: great elemental ring
+icon: 5759
+
+id: avanor_mitre
+name: avanor mitre
+icon: 5041
+
+id: glamdring
+name: glamdring
+icon: 5126
+
+id: death_hack
+name: death hack
+icon: 5272
+
+id: avanor_crown
+name: avanor crown
+icon: 5042
+
+id: avanor_scepter
+name: avanor scepter
+icon: 6239
+
+id: torin_axe
+name: torin axe
+icon: 5272
+
+id: torin_shield
+name: torin shield
+icon: 5990
+
+id: dwarf_crown
+name: dwarf crown
+icon: 5042
+
+id: rat_tail
+name: rat tail
+icon: 4706
+
+id: bat_wing
+name: bat wing
+icon: 4642
+
+id: avanor_defender
+name: avanor defender
+icon: 5986
+
+id: forest_brother_cloak
+name: forest brother cloak
+icon: 4179
+
+id: any_hat
+name: any hat (item kind)
+icon: 4982
+
+id: any_neck
+name: any neck (item kind)
+icon: 4033
+
+id: any_body
+name: any body (item kind)
+icon: 4221
+
+id: any_cloak
+name: any cloak (item kind)
+icon: 4185
+
+id: any_weapon
+name: any weapon (item kind)
+icon: 5126
+
+id: any_shield
+name: any shield (item kind)
+icon: 5985
+
+id: any_gloves
+name: any gloves (item kind)
+icon: 4957
+
+id: any_ring
+name: any ring (item kind)
+icon: 5755
+
+id: any_boots
+name: any boots (item kind)
+icon: 4475
+
+id: any_missilew
+name: any missilew (item kind)
+icon: 3929
+
+id: any_missile
+name: any missile (item kind)
+icon: 3949
+
+id: any_potion
+name: any potion (item kind)
+icon: 5675
+
+id: any_scroll
+name: any scroll (item kind)
+icon: 5967
+
+id: any_book
+name: any book (item kind)
+icon: 4438
+
+id: any_wand
+name: any wand (item kind)
+icon: 6179
+
+id: any_food
+name: any food (item kind)
+icon: 4916
+
+id: any_other
+name: any other (item kind)
+icon: 4557
+
+id: any_lightsource
+name: any lightsource (item kind)
+icon: 5085
+
+id: any_tool
+name: any tool (item kind)
+icon: 4557
+
+id: any_gem
+name: any gem (item kind)
+icon: 5399
+
+id: any_money
+name: any money (item kind)
+icon: 5313
+
+id: any_chest
+name: any chest (item kind)
+icon: 4515
+
+id: potion_clear
+name: clear potion
+icon: 5675
+
+id: potion_smoky
+name: smoky potion
+icon: 5614
+
+id: potion_green
+name: green potion
+icon: 5590
+
+id: potion_orange
+name: orange potion
+icon: 5588
+
+id: potion_yellow
+name: yellow potion
+icon: 5589
+
+id: potion_black
+name: black potion
+icon: 5630
+
+id: potion_blue
+name: blue potion
+icon: 5607
+
+id: potion_white
+name: white potion
+icon: 5635
+
+id: potion_cyan
+name: cyan potion
+icon: 5592
+
+id: potion_purple
+name: purple potion
+icon: 5610
+
+id: potion_haze
+name: haze potion
+icon: 5628
+
+id: potion_golden
+name: golden potion
+icon: 5631
+
+id: potion_silver
+name: silver potion
+icon: 5629
+
+id: potion_azure
+name: azure potion
+icon: 5593
+
+id: potion_murky
+name: murky potion
+icon: 5649
+
+id: potion_red
+name: red potion
+icon: 5586
+
+id: potion_glowing
+name: glowing potion
+icon: 5652
+
+id: potion_mottled
+name: mottled potion
+icon: 5612
+
+id: potion_blobby
+name: blobby potion
+icon: 5613
+
+id: potion_pink
+name: pink potion
+icon: 5587
+
+id: potion_mouldy
+name: mouldy potion
+icon: 5654
+
+id: potion_gray
+name: gray potion
+icon: 5653
+
+id: potion_mercury
+name: mercury potion
+icon: 5651
+
+id: potion_oily
+name: oily potion
+icon: 5650
+
+id: potion_viscous
+name: viscous potion
+icon: 5673
+
+id: potion_dark_red
+name: dark red potion
+icon: 5676
+
+id: potion_light_red
+name: light red potion
+icon: 5609
+
+id: potion_dark_blue
+name: dark blue potion
+icon: 5677
+
+id: potion_light_blue
+name: light blue potion
+icon: 5633
+
+id: potion_brown
+name: brown potion
+icon: 5632
+
+id: potion_light_gray
+name: light gray potion
+icon: 5611
+
+id: potion_dark_gray
+name: dark gray potion
+icon: 5634
+
+id: potion_dark_green
+name: dark green potion
+icon: 5591
+
+id: potion_light_green
+name: light green potion
+icon: 5670
+
+id: potion_beige
+name: beige potion
+icon: 5674
+
+id: potion_aquamarine
+name: aquamarine potion
+icon: 5592
+
+id: potion_coral
+name: coral potion
+icon: 5587
+
+id: potion_ivory
+name: ivory potion
+icon: 5635
+
+id: potion_maroon
+name: maroon potion
+icon: 5676
+
+id: potion_tan
+name: tan potion
+icon: 5632
+
+id: potion_turquoise
+name: turquoise potion
+icon: 5671
+
+id: potion_violet
+name: violet potion
+icon: 5608
+
+id: plant_valeriana_root
+name: valeriana root (plant)
+icon: 8720
+
+id: plant_stellaria_leave
+name: stellaria leave (plant)
+icon: 4897
+
+id: plant_trifolium_leave
+name: trifolium leave (plant)
+icon: 8715
+
+id: plant_trifolium_flower
+name: trifolium flower (plant)
+icon: 8694
+
+id: plant_urtica_leave
+name: urtica leave (plant)
+icon: 8716
+
+id: plant_convallaria_flower
+name: convallaria flower (plant)
+icon: 8695
+
+id: plant_tussilago_leave
+name: tussilago leave (plant)
+icon: 8736
+
+id: plant_melissa_leave
+name: melissa leave (plant)
+icon: 8737
+
+id: plant_mentha_leave
+name: mentha leave (plant)
+icon: 4895
+
+id: plant_taraxacum_flower
+name: taraxacum flower (plant)
+icon: 8698
+
+id: plant_paeonia_root
+name: paeonia root (plant)
+icon: 8719
+
+id: plant_plantago_leave
+name: plantago leave (plant)
+icon: 4857
+
+id: plant_chamomilla_flower
+name: chamomilla flower (plant)
+icon: 8699
+
+id: plant_red_mushroom
+name: red mushroom (plant)
+icon: 4830
+
+id: plant_green_mushroom
+name: green mushroom (plant)
+icon: 4834
+
+id: plant_blue_mushroom
+name: blue mushroom (plant)
+icon: 4833
+
+id: plant_yellow_mushroom
+name: yellow mushroom (plant)
+icon: 4832
+
+id: plant_white_mushroom
+name: white mushroom (plant)
+icon: 4855
