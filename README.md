@@ -1,3 +1,5 @@
+> **Web port (RVIP):** this is [memmaker/avanor](https://github.com/memmaker/avanor), a browser port of [jaydg/avanor @ 20a0f59](https://github.com/jaydg/avanor/tree/20a0f59) (Avanor 0.6.0, "Two more random mines"). Play it at https://ruzzoli.de/roguelikes/avanor/. All our changes: [compare 20a0f59...main](https://github.com/memmaker/avanor/compare/20a0f59...main). The upstream README follows.
+
 # Avanor: The Land of Mystery
 
 *Avanor: The Land of Mystery* is a classic roguelike role-playing game originally developed in the early 2000s. After being abandoned for over two decades, the project has been revived and is currently being modernized for a new release.
