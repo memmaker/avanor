@@ -102,7 +102,7 @@
   Saves: `HOME_DIR` = `/avanor/` under Emscripten = `RvipApp.dir` (IDBFS
   `RvipApp.mount`); `XArchive::StoreGame` writes `.tmp` + rename, then
   `be_saved()` → sync. Autosave: quiet `StoreGame()` before `>` on stairs
-  down (web only). Death deletes the save (web only, `XGame::Run`). Game end:
+  down (web only). A reported end (death, quit, win) deletes the save (web only, `XGame::Run`). Game end:
   `vFinit` → `av.exit` → sync → reload after 1 s. Sync also every 15 s,
   on hide/pagehide.
   Tested in the pane: title/birth pop-ups, map with tiles following the
@@ -206,5 +206,5 @@
   held in outbox on 503 with id/at, sent on reload with 204; death
   (killer=farmer, score = hiscore number) and win (score = "You scored").
 - Killer art: `roguelikes-index/killers/make.py avanor()` → 110 PNGs.
-- Open: `Q` and wins leave the autosave (only deaths delete it), so a
-  reload can resume a quit/won run.
+- Fixed: any reported end (death, quit, win) sets `be_run_over` in
+  `be_run_end`; `XGame::Run` then deletes the autosave. Quit tested.
