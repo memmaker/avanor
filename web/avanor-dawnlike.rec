@@ -83,7 +83,7 @@ icon: 7971
 
 id: tree
 name: tree
-icon: 12327
+icon: 10566
 
 id: sand_0
 name: sand (border none)
@@ -663,7 +663,7 @@ icon: 11659
 
 id: water
 name: water
-icon: 8782
+icon: 10313
 
 id: deep_water
 name: deep water
@@ -671,7 +671,7 @@ icon: 10312
 
 id: lava
 name: lava
-icon: 8784
+icon: 10316
 
 id: hill_0
 name: hill (border none)
@@ -1207,15 +1207,15 @@ icon: 12332
 
 id: trap_magic_arrow
 name: magic arrow trap
-icon: 10422
+icon: 10395
 
 id: trap_fire_bolt
 name: fire bolt trap
-icon: 10417
+icon: 10397
 
 id: trap_acid_bolt
 name: acid bolt trap
-icon: 10416
+icon: 10396
 
 id: trap_teleport
 name: teleport trap
@@ -2125,7 +2125,7 @@ icon: 5675
 
 id: bone
 name: bone
-icon: 6574
+icon: 6595
 
 id: large_ration
 name: large ration
@@ -2229,7 +2229,7 @@ icon: 4033
 
 id: any_body
 name: any body (item kind)
-icon: 4221
+icon: 3617
 
 id: any_cloak
 name: any cloak (item kind)
