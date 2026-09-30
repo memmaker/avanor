@@ -182,3 +182,11 @@
   2000" (development start, not release). og tags live.
 - Stale branch claude/loving-hawking-5x9q75 deleted (ancestor of main).
 - Next: stage 8 (shrine), then 9.
+
+### Stage 8 (shrine) - done
+- `roguelikes-index/shrine/avanor.html`; manual (`manual/*`, GPLv2+) copied
+  to `shrine/avanor/`. Linked from card Info, tree ✦, game page `#bar h1`.
+- Trivia from avanor.sourceforge.net news + RogueBasin only. No walkthrough
+  found (rules of thumb + links). Cheats: `--god` exists upstream but the
+  web build passes no command-line options, so not available.
+- Next: stage 9 (graveyard + leaderboard).
